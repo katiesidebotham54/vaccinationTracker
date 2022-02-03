@@ -1,8 +1,3 @@
-public class Location {
-    /*
-    public enum Location {
-
+public enum Location {
+        Bridgewater, Piscataway, Princeton, Morristown, Union;
     }
-
-     */
-}

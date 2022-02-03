@@ -1,5 +1,5 @@
 public class Schedule {
-    /*
+
     private Appointment[] appointments;
     private int numAppts;
 
@@ -17,5 +17,4 @@ public class Schedule {
     public void printByPatient() { //sort by patient and print }
 
     }
-    */
 }
