@@ -1,24 +1,21 @@
 public enum Month {
-    JANUARY("1"),
-    FEBRUARY("2"),
-    MARCH("3"),
-    APRIL("4"),
-    MAY("5"),
-    JUNE("6"),
-    JULY("7"),
-    AUGUST("8"),
-    SEPTEMBER("9"),
-    OCTOBER("10"),
-    NOVEMBER("11"),
-    DECEMBER("12");
+    JANUARY(31),
+    FEBRUARY(28),
+    MARCH(31),
+    APRIL(30),
+    MAY(31),
+    JUNE(30),
+    JULY(31),
+    AUGUST(31),
+    SEPTEMBER(30),
+    OCTOBER(31),
+    NOVEMBER(30),
+    DECEMBER(31);
 
-    private final String month;
-    public static final int QUADRENNIAL = 4;
-    public static final int CENTENNIAL = 100;
-    public static final int QUATERCENTENNIAL = 400;
+    private final int days;
 
-    Month(String month) {
-        this.month = month;
+    Month(int days) {
+        this.days = days;
     }
 
 }
