@@ -9,7 +9,7 @@ public class Date implements Comparable<Date> {
         this.day = day;
     }
     public Date(String date) {
-
+        Object newDate = date;
     } //take “mm/dd/yyyy” and create a Date object
     public Date() {
 
