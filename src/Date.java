@@ -11,10 +11,11 @@ public class Date implements Comparable<Date> {
         this.day = day;
     }
     public Date(String date) {
-        date.useDelimiter("/");
-
-
-        Date date = new Date();
+        String[] parts = date.split("/");
+        String month = parts[0];
+        String day = parts[1];
+        String year = parts[2];
+        Date currDate = new Date(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)); // fix name ltr
     } //take “mm/dd/yyyy” and create a Date object
     public Date() {
         Calendar c = Calendar.getInstance();
