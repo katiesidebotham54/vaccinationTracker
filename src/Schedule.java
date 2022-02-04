@@ -12,9 +12,16 @@ public class Schedule {
     private int find(Appointment appt) {
 
     } //return the index, or NOT_FOUND
-    private void grow() {} //increase the capacity of the container by 4
-    public boolean add(Appointment appt) {
+    private void grow() {
 
+    } //increase the capacity of the container by 4
+    public boolean add(Appointment appt) {
+        if(numAppts == appointments.length){
+            grow();
+        }
+        //if same patient doing multiple appointments, make sure appointments aren't on same day
+
+        numAppts++;
     }
     public boolean remove(Appointment appt) {
 
