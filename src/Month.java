@@ -13,6 +13,9 @@ public enum Month {
     DECEMBER("12");
 
     private final String month;
+    public static final int QUADRENNIAL = 4;
+    public static final int CENTENNIAL = 100;
+    public static final int QUATERCENTENNIAL = 400;
 
     Month(String month) {
         this.month = month;

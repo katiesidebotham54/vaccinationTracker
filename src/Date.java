@@ -15,7 +15,6 @@ public class Date implements Comparable<Date> {
 
     } //create an object with today’s date (see Calendar class)
     public boolean isValid() {
-
     }
     @Override
     public int compareTo(Date date) {
