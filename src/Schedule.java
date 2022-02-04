@@ -1,4 +1,12 @@
 public class Schedule {
+
+    Schedule(Patient patient, Date date, Time time, Location location){
+        this.patient = patient;
+        this.date = date;
+        this.time = time;
+        this.location = location;
+    }
+
     private Appointment [] appointments;
     private int numAppts;
     private int find(Appointment appt) {
