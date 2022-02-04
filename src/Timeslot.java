@@ -3,7 +3,7 @@ public class Timeslot implements Comparable<Timeslot> {
     private Time time;
     @Override
     public String toString() { // check if correct format or not
-        return timeslot.date + ":" + timeslot.time;
+        return timeslot.date + " " + timeslot.time;
     }
     @Override
     public int compareTo(Timeslot slot) {

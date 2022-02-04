@@ -24,6 +24,9 @@ public class Time implements Comparable<Time> {
     }
     @Override
     public int compareTo(Time time) {
+       //if this = time return 0
+       //if this > time return 1
+       //if this < time return -1
 
     }
 }

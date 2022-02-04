@@ -4,13 +4,8 @@ public class Kiosk {
         Schedule schedule = new Schedule();
         while(sc.hasNext()){
             command = sc.next();
-            if( command = "B"){
-                schedule.add();
-            } else if( command == "C"){
-                schedule.remove();
-            } else if(command == "CP"){
 
-            } else if(command == "P"){
+            if(command == "P"){
                 schedule.print();
             } else if(command == "PZ"){
                 schedule.printByZip();
@@ -19,7 +14,23 @@ public class Kiosk {
             } else if(command == "Q"){
                 sc.close();
                 System.out.println("Kiosk session ended.");
-            } else{
+            }
+            patientDOB = sc.next();
+            patientF = sc.next();
+            patientL = sc.next();
+            if(command == "CP"){
+
+            }
+            date = sc.next();
+            time = sc.next();
+            county = sc.next();
+
+            if( command = "B"){
+                Patient patient = new Patient()
+                schedule.add();
+            } else if( command == "C"){
+                schedule.remove();
+            }  else{
                 // invalid input
             }
         }
