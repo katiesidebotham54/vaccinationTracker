@@ -3,7 +3,7 @@ public class Appointment {
     private Timeslot slot;
     private Location location;
 
-    public Appointment(Patient patient, Timeslot slot, Location location){
+    Appointment(Patient patient, Timeslot slot, Location location){
         this.patient = patient;
         this.slot = slot;
         this.location = location;

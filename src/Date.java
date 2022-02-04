@@ -2,6 +2,7 @@ public class Date implements Comparable<Date> {
     private int year;
     private int month;
     private int day;
+
     public Date(String date) {
 
     } //take “mm/dd/yyyy” and create a Date object
