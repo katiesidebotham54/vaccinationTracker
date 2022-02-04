@@ -4,7 +4,6 @@ public class Kiosk {
         Schedule schedule = new Schedule();
         while(sc.hasNext()){
             command = sc.next();
-
             if(command == "P"){
                 schedule.print();
             } else if(command == "PZ"){
@@ -26,7 +25,9 @@ public class Kiosk {
             county = sc.next();
 
             if( command = "B"){
-                Patient patient = new Patient()
+                Patient patient = new Patient(patientF, patientL, patientDOB);
+                Timeslot slot = new Timeslot(date, time);
+
                 schedule.add();
             } else if( command == "C"){
                 schedule.remove();
