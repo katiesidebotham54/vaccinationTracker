@@ -27,8 +27,9 @@ public class Kiosk {
             if( command = "B"){
                 Patient patient = new Patient(patientF, patientL, patientDOB);
                 Timeslot slot = new Timeslot(date, time);
-
-                schedule.add();
+                Location location = new Location(county);
+                Appointment appt = new Appointment(patient, slot, location);
+                schedule.add(appt);
             } else if( command == "C"){
                 schedule.remove();
             }  else{
