@@ -3,6 +3,11 @@ public class Patient implements Comparable<Patient> {
     private String lname;
     private Date dob;
 
+    Patient(String fname, String lname, Date dob) {
+        this.fname = fname;
+        this.lname = lname;
+        this.dob = dob;
+    }
     // Getter
     public String getDob() {
         return patient.dob;
