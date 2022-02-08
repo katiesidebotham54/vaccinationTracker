@@ -1,3 +1,7 @@
+/*
+
+authors: @kevinarbito @katiesidebotham
+ */
 public class Time implements Comparable<Time> {
     private int hour;
     private int minute;
@@ -21,6 +25,17 @@ public class Time implements Comparable<Time> {
     }
     @Override
     public int compareTo(Time time) {
-
+        if(this == time){
+            return 0;
+        } else if(this.hour > time.hour){
+           return 1;
+        } else if(this.hour == time.hour){
+           if(this.minute > time.minute){
+               return 1;
+           }
+        } else{
+            return -1;
+        }
+        return -1;
     }
 }

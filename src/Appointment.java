@@ -1,3 +1,7 @@
+/*
+
+authors: @katiesidebotham @kevinarbito
+ */
 public class Appointment {
     private Patient patient;
     private Timeslot slot;
