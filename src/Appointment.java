@@ -22,6 +22,7 @@ public class Appointment {
 
     @Override
     public boolean equals(Object obj) {
+        //check if an appointment with the same patient, timeslot and location is already in the schedule
         if(obj == this){
             return true;
         }

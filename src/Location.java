@@ -2,6 +2,7 @@
 
 authors: @kevinarbito @katiesidebotham
  */
+// Done
 public enum Location {
     SOMERSET("Bridgewater", "08807", "Somerset County"),
     MIDDLESEX("Piscataway", "08854", "Middlesex County"),
