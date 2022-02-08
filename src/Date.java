@@ -14,6 +14,11 @@ public class Date implements Comparable<Date> {
         this.month = month;
         this.day = day;
     }
+    //Getter for today's date
+    public void getToday(){
+        return today;
+    }
+
     public Date(String date) {
         String[] parts = date.split("/");
         String month = parts[0];
@@ -24,22 +29,18 @@ public class Date implements Comparable<Date> {
     public Date() {
         Calendar c = Calendar.getInstance();
         Date today = new Date(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE));
-        System.out.println(today);
     } //create an object with today’s date (see Calendar class)
     public boolean isValid() {
         //must be valid calendar date
 
-        //check if date of birth is today or future date
-        // check the month then check the day to validate it
-        if(this >= today ){
-            return false;
+        if(this.month == 2){ // may not work since feb is 1 in enum class
+            if(isLeapYear()){
+                return (this.day <= 29);
+            } else{
+                return (this.day <= 28);
+            }
         }
-        if(this <= today || this > )
-
-
-        //date of birth is not today or future date
-        //date cannot be today, day before today, date beyond one year
-        //
+        return true;
     }
     @Override
     public int compareTo(Date date) {
