@@ -2,6 +2,7 @@
 
 authors: @katiesidebotham @kevinarbito
  */
+// Done
 public class Appointment {
     private Patient patient;
     private Timeslot slot;
@@ -13,15 +14,9 @@ public class Appointment {
         this.location = location;
     }
 
-    public boolean isScheduled(Appointment appt){
-        //check if an appointment with the same patient, timeslot and location is already in the schedule
-        if(this.patient == appt.patient && this.slot == appt.slot && this.location == appt.location){
-            return true
-        }
-    }
-
     @Override
     public boolean equals(Object obj) {
+        //check if an appointment with the same patient, timeslot and location is already in the schedule
         if(obj == this){
             return true;
         }
