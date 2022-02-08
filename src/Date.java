@@ -32,6 +32,7 @@ public class Date implements Comparable<Date> {
     public Date() {
         Calendar c = Calendar.getInstance();
         Date today = new Date(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE));
+
     } //create an object with today’s date (see Calendar class)
 
     /*
