@@ -1,3 +1,7 @@
+/*
+
+authors: @katiesidebotham @kevinarbito
+ */
 public class Patient implements Comparable<Patient> {
     private String fname;
     private String lname;

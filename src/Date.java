@@ -1,3 +1,7 @@
+/*
+
+authors: @kevinarbito @katiesidebotham
+ */
 import java.util.Calendar;
 
 public class Date implements Comparable<Date> {
@@ -20,12 +24,14 @@ public class Date implements Comparable<Date> {
     public Date() {
         Calendar c = Calendar.getInstance();
         Date today = new Date(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE));
+        System.out.println(today);
     } //create an object with today’s date (see Calendar class)
     public boolean isValid() {
         //must be valid calendar date
 
         //check if date of birth is today or future date
-        if(this >= today){
+        // check the month then check the day to validate it
+        if(this >= today ){
             return false;
         }
         if(this <= today || this > )

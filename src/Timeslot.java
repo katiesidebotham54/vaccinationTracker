@@ -1,3 +1,7 @@
+/*
+
+authors: @kevinarbito @katiesidebotham
+ */
 public class Timeslot implements Comparable<Timeslot> {
     private Date date;
     private Time time;

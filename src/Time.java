@@ -1,3 +1,7 @@
+/*
+
+authors: @kevinarbito @katiesidebotham
+ */
 public class Time implements Comparable<Time> {
     private int hour;
     private int minute;
@@ -32,6 +36,6 @@ public class Time implements Comparable<Time> {
         } else{
             return -1;
         }
-
+        return -1;
     }
 }

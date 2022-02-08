@@ -1,3 +1,7 @@
+/*
+
+authors: @katiesidebotham @kevinarbito
+ */
 public class Schedule {
 
     Schedule(Patient patient, Date date, Time time, Location location){
