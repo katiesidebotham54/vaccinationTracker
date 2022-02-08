@@ -17,10 +17,17 @@ public class Patient implements Comparable<Patient> {
     public String getDob() {
         return patient.dob;
     }
-
     // Setter
-    public void setDob(newDob) {
+    public void setDob(Date newDob) {
         this.dob = newDob;
+    }
+
+    public boolean isValidDOB(){
+        //check if date of birth is today or future date
+        if(this.dob >= today){
+            return false;
+        }
+        return true;
     }
 
     @Override
