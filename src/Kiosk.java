@@ -57,6 +57,7 @@ public class Kiosk {
         }
     }
 
+        // must implement a way to check for these
     public void checkForErrors() {
         System.out.println("Same appointment exists in the schedule");
         System.out.println("Same patient cannot book an appointment with the same date");
