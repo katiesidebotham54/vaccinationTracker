@@ -7,6 +7,7 @@ public class Schedule {
     private Appointment [] appointments;
     private int numAppts;
     public final int NOT_FOUND = -1;
+    public int addError;
 
     private int find(Appointment appt) {
         for(int i = 0; i < appointments.length; i++) {
@@ -26,23 +27,26 @@ public class Schedule {
         }
         appointments = temp;
     } //increase the capacity of the container by 4
+
     public boolean add(Appointment appt) {
         if(find(appt) == NOT_FOUND){
             return false;
         } else{
             for(Appointment a: appointments){
-                if(a.getPatient() == appt.getPatient() && a.getLocation() == appt.getLocation()){
-                    if(a.getSlot().getDate().getDay() == appt.getSlot().getDate().getDay()){
+                if(a.getPatient().compareTo(appt.getPatient())== 0 && a.getLocation() == appt.getLocation()){
+                    if(a.getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
+                        addError = 0;
                         return false;
                     }
                 }
-                if(a.getSlot() == appt.getSlot() && a.getLocation() == appt.getLocation()){
+                if(a.getSlot().compareTo(appt.getSlot()) == 0 && a.getLocation() == appt.getLocation()){
+                    addError = 1;
                     return false;
                 }
-                if(a.getPatient() == appt.getPatient() && a.getSlot().getDate() == appt.getSlot().getDate() && a.getLocation() != appt.getLocation()){
-
+                if(a.getPatient().compareTo(appt.getPatient()) == 0 && a.getSlot().getDate() == appt.getSlot().getDate() && a.getLocation() != appt.getLocation()){
+                    addError = 2;
+                    return false;
                 }
-
             }
         }
         if(numAppts == appointments.length){
@@ -50,7 +54,7 @@ public class Schedule {
         }
         appointments[numAppts] = appt;
         numAppts++;
-        return true; // retunr statement needed
+        return true; // return statement needed
     }
 
     public boolean remove(Appointment appt) {
