@@ -71,8 +71,8 @@ public class Schedule {
     public void printZip(Location county) {
         // get the order of the zip codes locations, and print the ones with the highest Zip codes. UNION, MORRIS, MERCER, SOMERSET, MIDDLESEX
         for(int i = 0; i < numAppts; i++){
-            if(appointments[i].getLocation().getZipCode().equals(county.getZipCode())) {
-                System.out.println(appointments.toString());
+            if(appointments[i].getLocation().getZipCode().equals(county.getZipCode())) { // could also just check the location tbh
+                System.out.println(appointments[i].toString());
             }
         }
     }
