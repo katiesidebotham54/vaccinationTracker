@@ -59,10 +59,15 @@ public class Date implements Comparable<Date> {
         return this.day;
     }
 
+    @Override
+    public String toString() {
+        return this.month + "/" + this.day + "/" + this.year;
+    }
+
 
     public boolean isValid() {
         //check if valid input (mm/dd/yyyy)
-        if(!this.matches("(\\d{4})/(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])")){
+        if(!this.toString().matches("(\\d{4})/(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])")){
             return false;
         }
         //must be valid calendar date
