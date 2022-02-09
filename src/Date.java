@@ -55,6 +55,10 @@ public class Date implements Comparable<Date> {
         return this.year;
     }
 
+    public int getDay() {
+        return this.day;
+    }
+
 
     public boolean isValid() {
         //check if valid input (mm/dd/yyyy)

@@ -13,7 +13,6 @@ public class Patient implements Comparable<Patient> {
         this.lname = lname;
         this.dob = dob;
     }
-
     // Getter
     public Date getDob() {
         return this.dob;

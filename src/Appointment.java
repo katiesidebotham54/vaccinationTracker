@@ -34,10 +34,20 @@ public class Appointment {
         return false;
     }
 
+    public Patient getPatient(){
+        return this.patient;
+    }
+
+    public Location getLocation(){
+        return this.location;
+    }
+
+    public Timeslot getSlot(){
+        return this.slot;
+    }
+
     @Override
     public boolean equals(Object obj) {
-        //check if an appointment with the same patient, timeslot and location is already in the schedule
-
         if(obj == this){
             return true;
         }
@@ -46,6 +56,6 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return patient.fname + " " + patient.lname + ", DOB: " + patient.dob + " , Appointment detail: " + slot.date + ", " + slot.time + ", ";
+        return patient.fname + " " + patient.lname + ", DOB: " + patient.dob + " , Appointment detail: " + slot.date + ", " + slot.time + ", " + location.getCity() + " " + location.getZipCode() + ", " + location.getCounty();
     }
 }

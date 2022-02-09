@@ -4,10 +4,6 @@ authors: @katiesidebotham @kevinarbito
  */
 public class Schedule {
 
-    Schedule(){
-
-    }
-
     private Appointment [] appointments;
     private int numAppts;
     public final int NOT_FOUND = -1;
@@ -34,9 +30,20 @@ public class Schedule {
         if(find(appt) == NOT_FOUND){
             return false;
         } else{
-            //check if same patient doing multiple appointments, make sure appointments aren't on same day
-            //if patient = appt.patient
-            //
+            for(Appointment a: appointments){
+                if(a.getPatient() == appt.getPatient() && a.getLocation() == appt.getLocation()){
+                    if(a.getSlot().getDate().getDay() == appt.getSlot().getDate().getDay()){
+                        return false;
+                    }
+                }
+                if(a.getSlot() == appt.getSlot() && a.getLocation() == appt.getLocation()){
+                    return false;
+                }
+                if(a.getPatient() == appt.getPatient() && a.getSlot().getDate() == appt.getSlot().getDate() && a.getLocation() != appt.getLocation()){
+
+                }
+
+            }
         }
         if(numAppts == appointments.length){
             grow();
@@ -65,7 +72,15 @@ public class Schedule {
 
     }
     public void printByZip() {
-
+        for(int i = 0; i < numAppts; i++){
+            for(int j = i + 1; j < numAppts; j++){
+                if(appointments[i].location.getZipCode() > appointments[j].location.getZipCode()){
+                    temp = a[i];
+                    a[i] = a[j];
+                    a[j] = temp;
+                }
+            }
+        }
     } //sort by zip codes and print
 
     public void sortByPatient(){
@@ -73,5 +88,5 @@ public class Schedule {
     }
     public void printByPatient() {
 
-    } //sort by patient and print }
+    } //sort by patient and print
 }
