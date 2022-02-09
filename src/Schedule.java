@@ -10,7 +10,7 @@ public class Schedule {
     public int addError;
 
     private int find(Appointment appt) {
-        for(int i = 0; i < appointments.length; i++) {
+        for(int i = 0; i < numAppts; i++) {
             if(appt == appointments[i]) {
                 return i;
             } else {
@@ -110,10 +110,14 @@ public class Schedule {
 
     public void sortByPatient(){
         for(int i = 1; i < numAppts; i++){
-            if(appointments[i-1].getPatient().compareTo(appointments[i].getPatient()) == 0){
-                int tmp = appointments[i-1];
+            //if patient at spot before is greater than swap that and the one after
+            if(appointments[i-1].getPatient().compareTo(appointments[i].getPatient()) > 0){
+                Appointment tmp = appointments[i-1];
                 appointments[i-1] = appointments[i];
                 appointments[i] = tmp;
+            }
+            if(appointments[i-1].getPatient().compareTo(appointments[i].getPatient()) > 0) {
+                continue;
             }
         }
     }

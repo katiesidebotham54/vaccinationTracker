@@ -42,8 +42,7 @@ public class Patient implements Comparable<Patient> {
     }
     @Override
     public int compareTo(Patient patient) {
-
- //if last name is the same
+        //if last name is the same
          if(this.lname.compareTo(patient.lname) == 0){
         //check if first name is the same
             if( this.fname.compareTo(patient.fname) == 0){
@@ -53,7 +52,7 @@ public class Patient implements Comparable<Patient> {
                     return 0;
                 } else {
                     if(this.dob.compareTo(patient.dob) == 1){
-                        return -1; //patient is bigget
+                        return -1; //patient is bigger
                     } else {
                         return 1;// this is bigger
                     }
@@ -67,9 +66,9 @@ public class Patient implements Comparable<Patient> {
             }
         } else {
             if(this.lname.compareTo(patient.lname) > 0){
-                return -1; //patient obj goes first
+                return 1; //this last name is bigger
             } else {
-                return 1; //this obj goes first
+                return -1; //patient last name is bigger
             }
         }
     }
