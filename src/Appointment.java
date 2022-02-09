@@ -1,3 +1,5 @@
+import java.util.Calendar;
+
 /*
 
 authors: @katiesidebotham @kevinarbito
@@ -14,9 +16,28 @@ public class Appointment {
         this.location = location;
     }
 
+    public boolean isValidApptDate(){
+        //checks if appt date is today, day before, or date beyond this year
+        if(this.slot.getDate() >= today || this.slot.getDate() > today.add(Calendar.DATE, -1) || this.slot.getDate().getYear() > today.get(Calendar.YEAR)){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidLocation(){
+        //check if the location with the county name is a valid location
+        for(Location l : Location.values()){
+            if(this.location.getCounty() == l.getCounty()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object obj) {
         //check if an appointment with the same patient, timeslot and location is already in the schedule
+
         if(obj == this){
             return true;
         }

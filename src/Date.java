@@ -51,6 +51,11 @@ public class Date implements Comparable<Date> {
             return false;
     }
 
+    public int getYear(){
+        return this.year;
+    }
+
+
     public boolean isValid() {
         //check if valid input (mm/dd/yyyy)
         if(!this.matches("(\\d{4})/(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])")){
@@ -78,6 +83,17 @@ public class Date implements Comparable<Date> {
     }
     @Override
     public int compareTo(Date date) {
-        return 1;
+        if(this == date){
+            return 0;
+        } else if(this.year > date.year){
+            return 1;
+        } else if(this.month == date.month){
+            if(this.day > date.day){
+                return 1;
+            }
+        } else{
+            return -1;
+        }
+        return -1;
     }
 }

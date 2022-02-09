@@ -11,11 +11,11 @@ public class Patient implements Comparable<Patient> {
         this.fname = fname;
         this.lname = lname;
         this.dob = dob;
-
     }
+
     // Getter
-    public String getDob() {
-        return patient.dob;
+    public Date getDob() {
+        return this.dob;
     }
     // Setter
     public void setDob(Date newDob) {
@@ -37,34 +37,34 @@ public class Patient implements Comparable<Patient> {
     @Override
     public int compareTo(Patient patient) {
         //last name, first name, dob
-        int lnameCompare = compareString(this.lname, patient.lname);
+        int lnameCompare = compareName(this.lname, patient.lname);
         int fnameCompare;
         int dobCompare;
         if(lnameCompare == 0){
-            fnameCompare = compareString(this.fname, patient.fname);
+            fnameCompare = compareName(this.fname, patient.fname);
             if(fnameCompare == 0){
                 dobCompare = this.dob.compareTo(patient.dob);
                 if(dobCompare == 0){
-                    //it's the same person -- it's a match (ref find() method)
+                    return 0;
                 } else {
                     if(dobCompare == 1){
-                        //patient obj would go first
+                        return -1; //patient obj would go first
                     } else {
-                        //this obj would go first
+                        return 1;//this obj would go first
                     }
                 }
             } else {
                 if(fnameCompare > 0){
-                    //patient obj goes first
+                    return -1; //patient obj goes first
                 } else{
-                    //this obj goes first
+                    return 1; //this obj goes first
                 }
             }
         } else {
             if(lnameCompare > 0){
-                //patient obj goes first
+                return -1; //patient obj goes first
             } else {
-                //this obj goes first
+                return 1; //this obj goes first
             }
         }
     }

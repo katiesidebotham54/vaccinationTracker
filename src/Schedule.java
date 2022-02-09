@@ -13,6 +13,7 @@ public class Schedule {
 
     private Appointment [] appointments;
     private int numAppts;
+
     private int find(Appointment appt) {
 
     } //return the index, or NOT_FOUND
