@@ -17,10 +17,6 @@ public class Date implements Comparable<Date> {
         this.month = month;
         this.day = day;
     }
-    //Getter for today's date
-    public void getToday(){
-        return today;
-    }
 
     public Date(String date) {
         String[] parts = date.split("/");
