@@ -51,7 +51,7 @@ public class Patient implements Comparable<Patient> {
                         //they are the same patient
                     return 0;
                 } else {
-                    if(this.dob.compareTo(patient.dob) == 1){
+                    if(this.dob.compareTo(patient.dob) > 0){
                         return -1; //patient is bigger
                     } else {
                         return 1;// this is bigger

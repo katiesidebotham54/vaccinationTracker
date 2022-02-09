@@ -49,7 +49,7 @@ public class Kiosk {
         Appointment appt = new Appointment(patient, slot, location);
         checkForErrors();
         if(schedule.add(appt)){
-            System.out.println("Appointment booked and added to the schedule.")
+            System.out.println("Appointment booked and added to the schedule.");
         }
     }
 
