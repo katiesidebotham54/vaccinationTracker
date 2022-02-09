@@ -72,10 +72,15 @@ public class Kiosk {
         if(!dob.isValid()){
             System.out.println("Invalid date of birth!");
         }
-        System.out.println("Same appointment exists in the schedule");
-        System.out.println("Same patient cannot book an appointment with the same date");
-        System.out.println("Time slot has been taken at this location.");
-
+        if(addError == 0 || addError == 2){
+            System.out.println("Same patient cannot book an appointment with the same date");
+        }
+        if(find(appt) != -1){
+            System.out.println("Same appointment exists in the schedule");
+        }
+        if(addError == 1){
+            System.out.println("Time slot has been taken at this location.");
+        }
     }
 
 
