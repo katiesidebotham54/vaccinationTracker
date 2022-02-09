@@ -98,15 +98,9 @@ public class Schedule {
          */
     }
 
-    public void printTheZip(Appointment appointments[]) {
-        for (Appointment a : appointments) {
-            System.out.println();
-        }
-    }
-
     public void printByZip() {
         sortZip(appointments);
-        printTheZip(appointments);
+        print();
         /*
         printZip(Location.UNION);
         printZip(Location.MORRIS);
@@ -118,7 +112,13 @@ public class Schedule {
     } //sort by zip codes and print
 
     public void sortByPatient(){
-
+        for(int i = 1; i < numAppts; i++){
+            if(appointments[i-1].getPatient().compareTo(appointments[i].getPatient()) == 0){
+                int tmp = appointments[i-1];
+                appointments[i-1] = appointments[i];
+                appointments[i] = tmp;
+            }
+        }
     }
     public void printByPatient() {
         sortByPatient();
