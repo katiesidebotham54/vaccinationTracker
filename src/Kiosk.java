@@ -1,13 +1,15 @@
+import java.util.Scanner;
 /*
 
 authors: @katiesidebotham @kevinarbito
  */
 public class Kiosk {
     public void run(){
+        System.out.print("Kiosk running. Ready to process transactions.");
         Scanner sc = new Scanner(System.in);
         Schedule schedule = new Schedule();
         while(sc.hasNext()){
-            command = sc.next();
+            String command = sc.next();
             if(command == "P"){
                 schedule.print();
             } else if(command == "PZ"){
@@ -24,9 +26,9 @@ public class Kiosk {
             if(command == "CP"){
 
             }
-            date = sc.next();
-            time = sc.next();
-            county = sc.next();
+            String date = sc.next();
+            String time = sc.next();
+            String county = sc.next();
 
             if( command = "B"){
                 Patient patient = new Patient(patientF, patientL, patientDOB);
