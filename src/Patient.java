@@ -21,6 +21,12 @@ public class Patient implements Comparable<Patient> {
     public void setDob(Date newDob) {
         this.dob = newDob;
     }
+    public String getFname(){
+        return this.fname;
+    }
+    public String getLname(){
+        return this.lname;
+    }
 
     public boolean isValidDOB(){
         //check if date of birth is today or future date
@@ -36,58 +42,35 @@ public class Patient implements Comparable<Patient> {
     }
     @Override
     public int compareTo(Patient patient) {
-        //last name, first name, dob
-        int lnameCompare = compareName(this.lname, patient.lname);
-        int fnameCompare;
-        int dobCompare;
-        if(lnameCompare == 0){
-            fnameCompare = compareName(this.fname, patient.fname);
-            if(fnameCompare == 0){
-                dobCompare = this.dob.compareTo(patient.dob);
-                if(dobCompare == 0){
+
+ //if last name is the same
+         if(this.lname.compareTo(patient.lname) == 0){
+        //check if first name is the same
+            if( this.fname.compareTo(patient.fname) == 0){
+                    //check if date of birth is same
+                if(this.dob.compareTo(patient.dob) == 0){
+                        //they are the same patient
                     return 0;
                 } else {
-                    if(dobCompare == 1){
-                        return -1; //patient obj would go first
+                    if(this.dob.compareTo(patient.dob) == 1){
+                        return -1; //patient is bigget
                     } else {
-                        return 1;//this obj would go first
+                        return 1;// this is bigger
                     }
                 }
             } else {
-                if(fnameCompare > 0){
+                if( this.fname.compareTo(patient.fname) > 0){
                     return -1; //patient obj goes first
                 } else{
                     return 1; //this obj goes first
                 }
             }
         } else {
-            if(lnameCompare > 0){
+            if(this.lname.compareTo(patient.lname) > 0){
                 return -1; //patient obj goes first
             } else {
                 return 1; //this obj goes first
             }
-        }
-    }
-    public int compareName(String str1, String str2){
-        for (int i = 0; i < str1.length() &&
-                i < str2.length(); i++) {
-            if ((int)str1.charAt(i) ==
-                    (int)str2.charAt(i)) {
-                continue;
-            }
-            else {
-                return (int)str1.charAt(i) -
-                        (int)str2.charAt(i);
-            }
-        }
-        if (str1.length() < str2.length()) {
-            return (str1.length()-str2.length());
-        }
-        else if (str1.length() > str2.length()) {
-            return (str1.length()-str2.length());
-        }
-        else {
-            return 0;
         }
     }
 }

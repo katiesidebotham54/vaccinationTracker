@@ -73,7 +73,6 @@ public class Schedule {
         }
     } //print all the appointments in current order
 
-
     //insertion sort for appointment
     public void sortZip (Appointment appointments[]) {
         for(int i = 1; i < numAppts; i++) {
@@ -86,7 +85,6 @@ public class Schedule {
             }
             appointments[j + 1] = appointments[i]; // am i wrong here?
         }
-
         /*
         // get the order of the zip codes locations, and print the ones with the highest Zip codes. UNION, MORRIS, MERCER, SOMERSET, MIDDLESEX
         for(int i = 0; i < numAppts; i++){
@@ -94,7 +92,6 @@ public class Schedule {
                 System.out.println(appointments[i].toString());
             }
         }
-
          */
     }
 
@@ -122,5 +119,6 @@ public class Schedule {
     }
     public void printByPatient() {
         sortByPatient();
+        print();
     } //sort by patient and print
 }
