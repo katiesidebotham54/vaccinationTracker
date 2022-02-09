@@ -46,33 +46,34 @@ public class Kiosk {
 
     public void runB(){
         Patient patient = new Patient(patientF, patientL, dob);
-        if(!patient.isValidDOB()) {
-            System.out.println("Date of birth invalid -> it is a future date");
-        }
         Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = new Location(county);
         Appointment appt = new Appointment(patient, slot, location);
+        checkForErrors();
         if(schedule.add(appt)){
             System.out.println("Appointment booked and added to the schedule.")
-        } else{
-            checkForErrors();
         }
     }
 
-        // must implement a way to check for these
     public void checkForErrors() {
         if(!apptTime.isValid()){
-                        System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
+            System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
         }
         if(!appt.isValidApptDate()){
+            System.out.println("Appointment date invalid -> must be future date.");
 
+        }
+        if(!patient.isValidDOB()) {
+            System.out.println("Date of birth invalid -> it is a future date");
+        }
+        if(!appt.isValidLocation()){
+            System.out.println("Invalid location!");
+        }
+        if(!dob.isValid()){
+            System.out.println("Invalid date of birth!");
         }
         System.out.println("Same appointment exists in the schedule");
         System.out.println("Same patient cannot book an appointment with the same date");
-        System.out.println("Appointment date invalid -> must be future date.");
-
-        System.out.println("Invalid location!");
-        System.out.println("Invalid date of birth!");
         System.out.println("Time slot has been taken at this location.");
 
     }
@@ -83,6 +84,7 @@ public class Kiosk {
         Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = new Location(county);
         Appointment appt = new Appointment(patient, slot, location);
+        checkForErrors();
         if(schedule.remove(appt)) {
             System.out.println("Appointment Cancelled");
         } else{
