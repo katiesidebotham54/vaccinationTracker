@@ -68,7 +68,7 @@ public class Patient implements Comparable<Patient> {
             }
         }
     }
-    public int compareString(String str1, String str2){
+    public int compareName(String str1, String str2){
         for (int i = 0; i < str1.length() &&
                 i < str2.length(); i++) {
             if ((int)str1.charAt(i) ==

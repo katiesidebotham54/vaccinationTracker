@@ -53,8 +53,11 @@ public class Kiosk {
         if(schedule.add(appt)){
             System.out.println("Appointment booked and added to the schedule.")
         } else{
-
+            checkForErrors();
         }
+    }
+
+    public void checkForErrors() {
         System.out.println("Same appointment exists in the schedule");
         System.out.println("Same patient cannot book an appointment with the same date");
         System.out.println("Appointment date invalid -> must be future date.");
