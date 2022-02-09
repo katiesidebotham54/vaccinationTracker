@@ -21,13 +21,16 @@ public class Kiosk {
                 System.out.println("Kiosk session ended.");
             }
             String patientDOB = sc.next();
+            Date dob = new Date(patientDOB);
             String patientF = sc.next();
             String patientL = sc.next();
             if(command == "CP"){
                 System.out.println("All appointments for " + patient.toString() + " have been cancelled");
             }
             String date = sc.next();
+            Date apptDate = new Date(date);
             String time = sc.next();
+            Time apptTime = new Time(time)
             String county = sc.next();
 
             if(command == "B"){
@@ -42,12 +45,11 @@ public class Kiosk {
     }
 
     public void runB(){
-        Patient patient = new Patient(patientF, patientL, patientDOB);
-        if(!patient.isValidDOB()){
+        Patient patient = new Patient(patientF, patientL, dob);
+        if(!patient.isValidDOB()) {
             System.out.println("Date of birth invalid -> it is a future date");
         }
-        if(!patientDOB.isValid())
-        Timeslot slot = new Timeslot(date, time);
+        Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = new Location(county);
         Appointment appt = new Appointment(patient, slot, location);
         if(schedule.add(appt)){
@@ -59,10 +61,16 @@ public class Kiosk {
 
         // must implement a way to check for these
     public void checkForErrors() {
+        if(!apptTime.isValid()){
+                        System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
+        }
+        if(!appt.isValidApptDate()){
+
+        }
         System.out.println("Same appointment exists in the schedule");
         System.out.println("Same patient cannot book an appointment with the same date");
         System.out.println("Appointment date invalid -> must be future date.");
-        System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
+
         System.out.println("Invalid location!");
         System.out.println("Invalid date of birth!");
         System.out.println("Time slot has been taken at this location.");
@@ -71,8 +79,8 @@ public class Kiosk {
 
 
     public void runC(){
-        Patient patient = new Patient(patientF, patientL, patientDOB);
-        Timeslot slot = new Timeslot(date, time);
+        Patient patient = new Patient(patientF, patientL, dob);
+        Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = new Location(county);
         Appointment appt = new Appointment(patient, slot, location);
         if(schedule.remove(appt)) {

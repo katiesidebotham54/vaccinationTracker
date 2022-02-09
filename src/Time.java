@@ -7,6 +7,16 @@ public class Time implements Comparable<Time> {
     private int hour;
     private int minute;
 
+    public Time(int hour, int minute) {
+        this.hour = hour;
+        this.minute = minute;
+    }
+    public Time(String time) {
+        String[] parts = time.split(":");
+        String hour = parts[0];
+        String minute = parts[1];
+        Time t = new Time(Integer.parseInt(hour), Integer.parseInt(minute));
+    } //take “hh:mm” and create a Time object
 
     public boolean isValid() {
         if((hour >= 9 && hour <= 16)) {

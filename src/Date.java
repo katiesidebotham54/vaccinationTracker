@@ -31,13 +31,7 @@ public class Date implements Comparable<Date> {
 
     } //create an object with today’s date (see Calendar class)
 
-    /*
-    Step 1. If the year is evenly divisible by 4, check if it is evenly divisible by 100. Otherwise, return false.
-    Step 2. If the year is evenly divisible by 100, check if it is divisible by 400. Otherwise, return true.
-    Step 3. If the year is evenly divisible by 400, return true . Otherwise, return false.
-    Step 4. The year is a leap year == false.
-    Step 5. The year is not a leap year == true.
-     */
+
     public boolean isLeapYear(){
             if(this.year % QUADRENNIAL == 0){
                 if(this.year % CENTENNIAL == 0) {
