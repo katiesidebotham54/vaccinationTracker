@@ -14,6 +14,7 @@ public class Timeslot implements Comparable<Timeslot> {
         this.time = time;
     }
 
+    // getter
     public Date getDate(){
         return this.date;
     }

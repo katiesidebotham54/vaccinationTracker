@@ -68,19 +68,20 @@ public class Schedule {
             System.out.println(a.toString());
         }
     } //print all the appointments in current order
-    public void sortByZip(){
-
-    }
-    public void printByZip() {
+    public void printZip(Location county) {
+        // get the order of the zip codes locations, and print the ones with the highest Zip codes. UNION, MORRIS, MERCER, SOMERSET, MIDDLESEX
         for(int i = 0; i < numAppts; i++){
-            for(int j = i + 1; j < numAppts; j++){
-                if(appointments[i].location.getZipCode() > appointments[j].location.getZipCode()){
-                    temp = a[i];
-                    a[i] = a[j];
-                    a[j] = temp;
-                }
+            if(appointments[i].getLocation().getZipCode().equals(county.getZipCode())) {
+                System.out.println(appointments.toString());
             }
         }
+    }
+    public void printByZip() {
+        printZip(Location.UNION);
+        printZip(Location.MORRIS);
+        printZip(Location.MERCER);
+        printZip(Location.SOMERSET);
+        printZip(Location.MIDDLESEX);
     } //sort by zip codes and print
 
     public void sortByPatient(){
