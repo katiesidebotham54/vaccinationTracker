@@ -54,7 +54,7 @@ public class Date implements Comparable<Date> {
     public int getMonth() {return this.month;};
 
     public Date getToday(){
-        return today;
+        return this.today;
     }
 
     @Override

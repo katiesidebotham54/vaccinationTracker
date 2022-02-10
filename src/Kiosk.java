@@ -49,7 +49,7 @@ public class Kiosk {
             case "B" -> {
                 runB(inputs, schedule, appt, patient);
             }
-            case "C" -> runC(inputs, schedule, appt);
+            case "C" -> runC(inputs, schedule, , patient);
             default -> System.out.println("Invalid command!");
         }
     }
@@ -92,8 +92,8 @@ public class Kiosk {
     }
 
 
-    public void runC(String[] inputs, Schedule schedule, Appointment appt){
-        checkForErrors(inputs, schedule);
+    public void runC(String[] inputs, Schedule schedule, Appointment appt, Patient patient){
+        checkForErrors(inputs, schedule, appt, patient);
         if(schedule.remove(appt)) {
             System.out.println("Appointment Cancelled");
         } else{
