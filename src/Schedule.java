@@ -13,8 +13,6 @@ public class Schedule {
         for(int i = 0; i < numAppts; i++) {
             if(appt == appointments[i]) {
                 return i;
-            } else {
-                return NOT_FOUND;
             }
         }
         return NOT_FOUND;
@@ -74,7 +72,7 @@ public class Schedule {
     } //print all the appointments in current order
 
     //insertion sort for appointment
-    public void sortZip (Appointment appointments[]) {
+    public void sortZip (Appointment[] appointments) {
         for(int i = 1; i < numAppts; i++) {
             int check = Integer.parseInt(appointments[i].getLocation().getZipCode());
             int j = i - 1;
