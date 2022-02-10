@@ -33,9 +33,7 @@ public class Date implements Comparable<Date> {
     public boolean isLeapYear(){
             if(this.year % QUADRENNIAL == 0){
                 if(this.year % CENTENNIAL == 0) {
-                    if (this.year % QUATERCENTENNIAL == 0) {
-                        return true;
-                    }
+                    return this.year % QUATERCENTENNIAL == 0;
                 } else{
                     return true;
                 }
@@ -51,11 +49,10 @@ public class Date implements Comparable<Date> {
         return this.day;
     }
 
-    public int getMonth() {return this.month;};
+    public int getMonth() {return this.month;}
 
     public Date getToday(){
-        Date today =  new Date();
-        return today;
+        return new Date();
     }
 
     @Override
