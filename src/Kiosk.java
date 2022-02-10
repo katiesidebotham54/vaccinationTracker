@@ -47,30 +47,24 @@ public class Kiosk {
             }
             case "CP" -> System.out.println("All appointments for " + patient.toString() + " have been cancelled");
             case "B" -> {
-                runB(inputs, schedule, appt);
+                runB(inputs, schedule, appt, patient);
             }
             case "C" -> runC(inputs, schedule, appt);
             default -> System.out.println("Invalid command!");
         }
     }
 
-    public void runB(String[] inputs, Schedule schedule, Appointment appt){
-        checkForErrors(inputs, schedule);
+    public void runB(String[] inputs, Schedule schedule, Appointment appt, Patient patient){
+        checkForErrors(inputs, schedule, appt, patient);
         if(schedule.add(appt)){
             System.out.println("Appointment booked and added to the schedule.");
         }
     }
 
 
-    public void checkForErrors(String[] inputs, Schedule schedule) {
+    public void checkForErrors(String[] inputs, Schedule schedule, Appointment appt, Patient patient) {
         Date dob = new Date(inputs[1]);
-        Date date = new Date(inputs[4]);
-        Time time = new Time(inputs[5]);
         Time apptTime = new Time(inputs[5]);
-        Patient patient = new Patient(inputs[2], inputs[3], dob);
-        Timeslot slot = new Timeslot(date, time);
-        Location location = Location.valueOf(inputs[6].toUpperCase());
-        Appointment appt = new Appointment(patient, slot, location);
         if(!apptTime.isValid()){
             System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
         }
