@@ -15,9 +15,10 @@ public class Time implements Comparable<Time> {
     }
     public Time(String time) {
         String[] parts = time.split(":");
-        String hour = parts[0];
-        String minute = parts[1];
-        Time t = new Time(Integer.parseInt(hour), Integer.parseInt(minute));
+        int hour =  Integer.parseInt(parts[0]);
+        int minute = Integer.parseInt(parts[1]);
+        this.hour = hour;
+        this.minute = minute;
     } //take “hh:mm” and create a Time object
 
     public boolean isValid() {

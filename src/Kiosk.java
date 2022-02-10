@@ -12,19 +12,25 @@ public class Kiosk {
         String[] inputs = new String[7];
         Scanner sc = new Scanner(System.in);
         Schedule schedule = new Schedule();
-        while (sc.hasNext()) {
-            StringTokenizer st = new StringTokenizer(sc.next());
+        while (sc.hasNextLine()) {
+            StringTokenizer st = new StringTokenizer(sc.nextLine());
             while(st.hasMoreTokens()){
                 for (int i = 0; i < inputs.length; i++) {
                     inputs[i] = st.nextToken();
                 }
             }
             String command = inputs[0];
+//            System.out.println(command);
             String birthdate = inputs[1];
+//            System.out.println(birthdate);
             String fname = inputs[2];
+//            System.out.println(fname);
             String lname = inputs[3];
+//            System.out.println(lname);
             String apptDate = inputs[4];
+//            System.out.println(apptDate);
             String apptTime = inputs[5];
+//            System.out.println(apptTime);
             String county = inputs[6].toUpperCase();
             Location location = Location.valueOf(county); // valueOf documentation should work (confirm tmrw)
             Date dob = new Date(birthdate);
@@ -33,12 +39,12 @@ public class Kiosk {
             Patient patient = new Patient(fname, lname, dob);
             Timeslot slot = new Timeslot(date, time);
             Appointment appt = new Appointment(patient, slot, location);
-            switcher(command, schedule, sc, inputs, patient, appt);
+            switcher(schedule, sc, inputs, patient, appt);
         }
     }
 
-    public void switcher(String command, Schedule schedule, Scanner sc, String[] inputs, Patient patient, Appointment appt) {
-        switch (command) {
+    public void switcher(Schedule schedule, Scanner sc, String[] inputs, Patient patient, Appointment appt) {
+        switch (inputs[0]) {
             case "P" -> schedule.print();
             case "PZ" -> schedule.printByZip();
             case "PP" -> schedule.printByPatient();

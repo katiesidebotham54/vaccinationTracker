@@ -20,10 +20,11 @@ public class Date implements Comparable<Date> {
 
     public Date(String date) {
         String[] parts = date.split("/");
-        String month = parts[0];
-        String day = parts[1];
-        String year = parts[2];
-        Date d = new Date(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)); // fix name ltr
+        this.month = Integer.parseInt(parts[0]);
+        this.day = Integer.parseInt(parts[1]);
+        this.year = Integer.parseInt(parts[2]);
+//      Date d = new Date(year, month, day);
+//      System.out.println(d.toString());
     } //take “mm/dd/yyyy” and create a Date object
     public Date() {
         Calendar c = Calendar.getInstance();
