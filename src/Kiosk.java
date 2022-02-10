@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.StringTokenizer;
+
 /*
 
 authors: @katiesidebotham @kevinarbito
@@ -10,53 +12,59 @@ public class Kiosk {
         Scanner sc = new Scanner(System.in);
         Schedule schedule = new Schedule();
         while (sc.hasNext()) {
-            for (int i = 0; i < inputs.length; i++) {
-                inputs[i] = sc.next();
+            StringTokenizer st = new StringTokenizer(sc.next());
+            while(st.hasMoreTokens()){
+                for (int i = 0; i < inputs.length; i++) {
+                    inputs[i] = st.nextToken();
+                }
             }
             String command = inputs[0];
-            String dob = inputs[1];
-            String fname = inputs[2];
-            String lname = inputs[3];
-            String apptDate = inputs[4];
-            String apptTime = inputs[5];
-            String county = inputs[6];
-            if (command == "P") {
-                schedule.print();
-            } else if (command == "PZ") {
-                schedule.printByZip();
-            } else if (command == "PP") {
-                schedule.printByPatient();
-            } else if (command == "Q") {
-                sc.close();
-                System.out.println("Kiosk session ended.");
-            } else if (command == "CP") {
-                System.out.println("All appointments for " + patient.toString() + " have been cancelled");
-            } else if (command == "B") {
-                runB();
-            } else if (command == "C") {
-                runC();
-            } else {
-                System.out.println("Invalid command!");
+            switch (command) {
+                case "P" -> schedule.print();
+                case "PZ" -> schedule.printByZip();
+                case "PP" -> schedule.printByPatient();
+                case "Q" -> {
+                    sc.close();
+                    System.out.println("Kiosk session ended.");
+                }
+                case "CP" -> System.out.println("All appointments for " + patient.toString() + " have been cancelled");
+                case "B" -> {
+                    runB(inputs, schedule);
+                }
+                case "C" -> runC(inputs, schedule);
+                default -> System.out.println("Invalid command!");
             }
         }
     }
 
-
-    public void runB(){
-        Date dob = new Date(dob);
-        Date apptDate = new Date(date);
-        Time apptTime = new Time(time);
-        Patient patient = new Patient(patientF, patientL, dob);
-        Timeslot slot = new Timeslot(apptDate, apptTime);
-        Location location = new Location(county);
+    public void runB(String[] inputs, Schedule schedule){
+        String birthdate = inputs[1];
+        String fname = inputs[2];
+        String lname = inputs[3];
+        String apptDate = inputs[4];
+        String apptTime = inputs[5];
+        String county = inputs[6];
+        Date dob = new Date(birthdate);
+        Date date = new Date(apptDate);
+        Time time = new Time(apptTime);
+        Patient patient = new Patient(fname, lname, dob);
+        Timeslot slot = new Timeslot(date, time);
         Appointment appt = new Appointment(patient, slot, location);
-        checkForErrors();
+        checkForErrors(inputs, schedule);
         if(schedule.add(appt)){
             System.out.println("Appointment booked and added to the schedule.");
         }
     }
 
-    public void checkForErrors() {
+
+    public void checkForErrors(String[] inputs, Schedule schedule) {
+        Date dob = new Date(inputs[1]);
+        Date date = new Date(inputs[4]);
+        Time time = new Time(inputs[5]);
+        Time apptTime = new Time(inputs[5]);
+        Patient patient = new Patient(inputs[2], inputs[3], dob);
+        Timeslot slot = new Timeslot(date, time);
+        Appointment appt = new Appointment(patient, slot, location);
         if(!apptTime.isValid()){
             System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
         }
@@ -75,7 +83,7 @@ public class Kiosk {
         if(addError == 0 || addError == 2){
             System.out.println("Same patient cannot book an appointment with the same date");
         }
-        if(find(appt) != -1){
+        if(schedule.find(appt) != -1){
             System.out.println("Same appointment exists in the schedule");
         }
         if(addError == 1){
@@ -84,13 +92,18 @@ public class Kiosk {
     }
 
 
-    public void runC(){
-        Date dob = new Date(patientDOB);
-        Date apptDate = new Date(date);
-        Time apptTime = new Time(time);
-        Patient patient = new Patient(patientF, patientL, dob);
-        Timeslot slot = new Timeslot(apptDate, apptTime);
-        Location location = new Location(county);
+    public void runC(String[] inputs, Schedule schedule){
+        String birthdate = inputs[1];
+        String fname = inputs[2];
+        String lname = inputs[3];
+        String apptDate = inputs[4];
+        String apptTime = inputs[5];
+        String county = inputs[6];
+        Date dob = new Date(birthdate);
+        Date date = new Date(apptDate);
+        Time time = new Time(apptTime);
+        Patient patient = new Patient(fname, lname, dob);
+        Timeslot slot = new Timeslot(date, time);
         Appointment appt = new Appointment(patient, slot, location);
         checkForErrors();
         if(schedule.remove(appt)) {

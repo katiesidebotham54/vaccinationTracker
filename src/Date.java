@@ -28,9 +28,7 @@ public class Date implements Comparable<Date> {
     public Date() {
         Calendar c = Calendar.getInstance();
         Date today = new Date(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE));
-
     } //create an object with today’s date (see Calendar class)
-
 
     public boolean isLeapYear(){
             if(this.year % QUADRENNIAL == 0){
@@ -53,7 +51,7 @@ public class Date implements Comparable<Date> {
         return this.day;
     }
 
-    public int getMonth() {return this.month};
+    public int getMonth() {return this.month;};
 
     public Date getToday(){
         return today;
