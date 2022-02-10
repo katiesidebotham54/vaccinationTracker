@@ -53,6 +53,8 @@ public class Date implements Comparable<Date> {
         return this.day;
     }
 
+    public int getMonth() {return this.month};
+
     public Date getToday(){
         return today;
     }

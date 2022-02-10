@@ -21,19 +21,15 @@ public class Patient implements Comparable<Patient> {
     public void setDob(Date newDob) {
         this.dob = newDob;
     }
+
     public String getFname(){
         return this.fname;
-    }
-    public String getLname(){
-        return this.lname;
     }
 
     public String getLname(){
         return this.lname;
     }
-    public String getFname(){
-        return this.fname;
-    }
+
 
     public boolean isValidDOB(){
         //check if date of birth is today or future date
