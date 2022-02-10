@@ -17,6 +17,7 @@ public class Appointment {
     }
 
     public boolean isValidApptDate(){
+        Date today = new Date();
         //checks if appt date is today, day before, or date beyond this year
         if(this.slot.getDate() >= today || this.slot.getDate() > today.add(Calendar.DATE, -1) || this.slot.getDate().getYear() > today.get(Calendar.YEAR)){
             return false;

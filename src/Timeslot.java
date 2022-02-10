@@ -1,5 +1,3 @@
-import java.util.Calendar;
-
 /*
 
 authors: @kevinarbito @katiesidebotham
@@ -21,15 +19,15 @@ public class Timeslot implements Comparable<Timeslot> {
 
     @Override
     public String toString() { // check if correct format or not
-        return timeslot.date + " " + timeslot.time;
+        return this.date + " " + this.time;
     }
     @Override
     public int compareTo(Timeslot slot) {
         if(this == slot){
             return 0;
-        } else if(this.date.compareTo(slot.date) == 1) {
+        } else if(this.date.compareTo(slot.date) > 0) {
             return -1;
-        } else if(this.date.compareTo(slot.date) == -1) {
+        } else if(this.date.compareTo(slot.date) < 0) {
             return 1;
         } else if(this.date.compareTo(slot.date) == 0){
             if(this.time.compareTo(slot.time) == 0){

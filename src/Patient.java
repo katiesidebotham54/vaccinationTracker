@@ -22,17 +22,21 @@ public class Patient implements Comparable<Patient> {
         this.dob = newDob;
     }
 
+    public String getLname(){
+        return this.lname;
+    }
+    public String getFname(){
+        return this.fname;
+    }
+
     public boolean isValidDOB(){
         //check if date of birth is today or future date
-        if(this.dob >= today){
-            return false;
-        }
-        return true;
+        return this.dob < today;
     }
 
     @Override
     public String toString() {
-        return patient.fname + " " + patient.lname + " " + patient.dob;
+        return this.fname + " " + this.lname + " " + this.dob;
     }
     @Override
     public int compareTo(Patient patient) {
