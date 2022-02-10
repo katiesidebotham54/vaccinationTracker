@@ -17,8 +17,9 @@ public class Time implements Comparable<Time> {
         String[] parts = time.split(":");
         int hour =  Integer.parseInt(parts[0]);
         int minute = Integer.parseInt(parts[1]);
+        int check = Integer.parseInt(String.format("%02d", minute));
         this.hour = hour;
-        this.minute = minute;
+        this.minute = check;
     } //take “hh:mm” and create a Time object
 
     public boolean isValid() {
@@ -32,7 +33,7 @@ public class Time implements Comparable<Time> {
 
     @Override
     public String toString() {
-        return this.hour + ":" + this.minute;
+        return (String.format("%02d", this.hour) + ":" + String.format("%02d", this.minute));
     }
     @Override
     public int compareTo(Time time) {
