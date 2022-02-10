@@ -19,39 +19,42 @@ public class Kiosk {
                 }
             }
             String command = inputs[0];
-            switch (command) {
-                case "P" -> schedule.print();
-                case "PZ" -> schedule.printByZip();
-                case "PP" -> schedule.printByPatient();
-                case "Q" -> {
-                    sc.close();
-                    System.out.println("Kiosk session ended.");
-                }
-                case "CP" -> System.out.println("All appointments for " + patient.toString() + " have been cancelled");
-                case "B" -> {
-                    runB(inputs, schedule);
-                }
-                case "C" -> runC(inputs, schedule);
-                default -> System.out.println("Invalid command!");
-            }
+            String birthdate = inputs[1];
+            String fname = inputs[2];
+            String lname = inputs[3];
+            String apptDate = inputs[4];
+            String apptTime = inputs[5];
+            String county = inputs[6].toUpperCase();
+            Location location = Location.valueOf(county); // valueOf documentation should work (confirm tmrw)
+            Date dob = new Date(birthdate);
+            Date date = new Date(apptDate);
+            Time time = new Time(apptTime);
+            Patient patient = new Patient(fname, lname, dob);
+            Timeslot slot = new Timeslot(date, time);
+            Appointment appt = new Appointment(patient, slot, location);
+            switcher(command, schedule, sc, inputs, patient, appt);
         }
     }
 
+    public void switcher(String command, Schedule schedule, Scanner sc, String[] inputs, Patient patient, Appointment appt) {
+        switch (command) {
+            case "P" -> schedule.print();
+            case "PZ" -> schedule.printByZip();
+            case "PP" -> schedule.printByPatient();
+            case "Q" -> {
+                sc.close();
+                System.out.println("Kiosk session ended.");
+            }
+            case "CP" -> System.out.println("All appointments for " + patient.toString() + " have been cancelled");
+            case "B" -> {
+                runB(inputs, schedule, appt);
+            }
+            case "C" -> runC(inputs, schedule, appt);
+            default -> System.out.println("Invalid command!");
+        }
+    }
 
-    public void runB(String[] inputs, Schedule schedule){
-        String birthdate = inputs[1];
-        String fname = inputs[2];
-        String lname = inputs[3];
-        String apptDate = inputs[4];
-        String apptTime = inputs[5];
-        String county = inputs[6].toUpperCase();
-        Location location = Location.valueOf(county); // valueOf documentation should work (confirm tmrw)
-        Date dob = new Date(birthdate);
-        Date date = new Date(apptDate);
-        Time time = new Time(apptTime);
-        Patient patient = new Patient(fname, lname, dob);
-        Timeslot slot = new Timeslot(date, time);
-        Appointment appt = new Appointment(patient, slot, location);
+    public void runB(String[] inputs, Schedule schedule, Appointment appt){
         checkForErrors(inputs, schedule);
         if(schedule.add(appt)){
             System.out.println("Appointment booked and added to the schedule.");
@@ -86,7 +89,7 @@ public class Kiosk {
         if(addError == 0 || addError == 2){
             System.out.println("Same patient cannot book an appointment with the same date");
         }
-        if(schedule.find(appt) != -1){
+        if(schedule.checkifExist(appt) != -1){
             System.out.println("Same appointment exists in the schedule");
         }
         if(addError == 1){
@@ -95,21 +98,8 @@ public class Kiosk {
     }
 
 
-    public void runC(String[] inputs, Schedule schedule){
-        String birthdate = inputs[1];
-        String fname = inputs[2];
-        String lname = inputs[3];
-        String apptDate = inputs[4];
-        String apptTime = inputs[5];
-        String county = inputs[6].toUpperCase();
-        Location location = Location.valueOf(county);
-        Date dob = new Date(birthdate);
-        Date date = new Date(apptDate);
-        Time time = new Time(apptTime);
-        Patient patient = new Patient(fname, lname, dob);
-        Timeslot slot = new Timeslot(date, time);
-        Appointment appt = new Appointment(patient, slot, location);
-        checkForErrors();
+    public void runC(String[] inputs, Schedule schedule, Appointment appt){
+        checkForErrors(inputs, schedule);
         if(schedule.remove(appt)) {
             System.out.println("Appointment Cancelled");
         } else{

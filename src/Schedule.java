@@ -18,6 +18,15 @@ public class Schedule {
         return NOT_FOUND;
     } //return the index, or NOT_FOUND
 
+    public int checkifExist(Appointment appt) {
+        for(int i = 0; i < numAppts; i++) {
+            if(appt == appointments[i]) {
+                return i;
+            }
+        }
+        return NOT_FOUND;
+    } // return the index, or found
+
     private void grow() {
         Appointment[] temp = new Appointment[numAppts + 4];
         for (int i = 0; i < numAppts; i++){
