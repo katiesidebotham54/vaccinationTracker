@@ -29,7 +29,7 @@ public class Timeslot implements Comparable<Timeslot> {
             return -1;
         } else if(this.date.compareTo(slot.date) < 0) {
             return 1;
-        } else if(this.date.compareTo(slot.date) == 0){
+        } else if(this.date.compareTo(slot.date) == 0) {
             if(this.time.compareTo(slot.time) == 0){
                 return -1;
             } else{

@@ -37,13 +37,15 @@ public class Kiosk {
         }
     }
 
+
     public void runB(String[] inputs, Schedule schedule){
         String birthdate = inputs[1];
         String fname = inputs[2];
         String lname = inputs[3];
         String apptDate = inputs[4];
         String apptTime = inputs[5];
-        String county = inputs[6];
+        String county = inputs[6].toUpperCase();
+        Location location = Location.valueOf(county); // valueOf documentation should work (confirm tmrw)
         Date dob = new Date(birthdate);
         Date date = new Date(apptDate);
         Time time = new Time(apptTime);
@@ -64,6 +66,7 @@ public class Kiosk {
         Time apptTime = new Time(inputs[5]);
         Patient patient = new Patient(inputs[2], inputs[3], dob);
         Timeslot slot = new Timeslot(date, time);
+        Location location = Location.valueOf(inputs[6].toUpperCase());
         Appointment appt = new Appointment(patient, slot, location);
         if(!apptTime.isValid()){
             System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
@@ -98,7 +101,8 @@ public class Kiosk {
         String lname = inputs[3];
         String apptDate = inputs[4];
         String apptTime = inputs[5];
-        String county = inputs[6];
+        String county = inputs[6].toUpperCase();
+        Location location = Location.valueOf(county);
         Date dob = new Date(birthdate);
         Date date = new Date(apptDate);
         Time time = new Time(apptTime);

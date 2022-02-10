@@ -19,7 +19,7 @@ public enum Location {
         this.zipCode = zipCode;
         this.county = county;
     }
-
+    
     public String getCity() { return city; }
 
     public String getZipCode() { return zipCode; }
