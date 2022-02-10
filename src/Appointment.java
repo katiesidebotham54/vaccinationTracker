@@ -17,7 +17,8 @@ public class Appointment {
     }
 
     public boolean isValidApptDate(){
-        Date today = new Date(Calendar.getInstance().toString());
+        Date today;
+        today = new Date(Calendar.getInstance().toString());
         //checks if appt date is today, day before, or date beyond this year
         if(this.slot.getDate().getYear() == today.getYear() && this.slot.getDate().getMonth() == today.getMonth() && this.slot.getDate().getDay() == today.getDay()) {
             return false;

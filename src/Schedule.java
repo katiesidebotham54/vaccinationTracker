@@ -124,7 +124,6 @@ public class Schedule {
                 appointments[i] = tmp;
             }
             if(appointments[i-1].getPatient().compareTo(appointments[i].getPatient()) > 0) {
-                continue;
             }
         }
     }

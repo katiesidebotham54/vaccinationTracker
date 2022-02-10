@@ -8,6 +8,7 @@ authors: @katiesidebotham @kevinarbito
 public class Kiosk {
     public void run() {
         System.out.print("Kiosk running. Ready to process transactions.");
+        System.out.println();
         String[] inputs = new String[7];
         Scanner sc = new Scanner(System.in);
         Schedule schedule = new Schedule();
