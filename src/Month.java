@@ -17,7 +17,6 @@ public enum Month {
     DECEMBER(31);
 
     private final int days;
-
     Month(int days) {
         this.days = days;
     }

@@ -46,9 +46,7 @@ public class Kiosk {
                 System.out.println("Kiosk session ended.");
             }
             case "CP" -> System.out.println("All appointments for " + patient.toString() + " have been cancelled");
-            case "B" -> {
-                runB(inputs, schedule, appt, patient);
-            }
+            case "B" -> runB(inputs, schedule, appt, patient);
             case "C" -> runC(inputs, schedule, appt, patient);
             default -> System.out.println("Invalid command!");
         }
