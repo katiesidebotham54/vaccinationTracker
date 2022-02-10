@@ -4,43 +4,46 @@ import java.util.Scanner;
 authors: @katiesidebotham @kevinarbito
  */
 public class Kiosk {
-    public void run(){
+    public void run() {
         System.out.print("Kiosk running. Ready to process transactions.");
+        String[] inputs = new String[6];
         Scanner sc = new Scanner(System.in);
         Schedule schedule = new Schedule();
-        while(sc.hasNext()){
-            String command = sc.next();
-            if(command == "P"){
+        while (sc.hasNext()) {
+            for (int i = 0; i < inputs.length; i++) {
+                inputs[i] = sc.next();
+            }
+            String command = inputs[0];
+            String dob = inputs[1];
+            String fname = inputs[2];
+            String lname = inputs[3];
+            String apptDate = inputs[4];
+            String apptTime = inputs[5];
+            String county = inputs[6];
+            if (command == "P") {
                 schedule.print();
-            } else if(command == "PZ"){
+            } else if (command == "PZ") {
                 schedule.printByZip();
-            } else if(command == "PP"){
+            } else if (command == "PP") {
                 schedule.printByPatient();
-            } else if(command == "Q"){
+            } else if (command == "Q") {
                 sc.close();
                 System.out.println("Kiosk session ended.");
-            }
-            String patientDOB = sc.next();
-            String patientF = sc.next();
-            String patientL = sc.next();
-            if(command == "CP"){
+            } else if (command == "CP") {
                 System.out.println("All appointments for " + patient.toString() + " have been cancelled");
-            }
-            String date = sc.next();
-            String time = sc.next();
-            String county = sc.next();
-            if(command == "B"){
-               runB();
-            } else if( command == "C"){
+            } else if (command == "B") {
+                runB();
+            } else if (command == "C") {
                 runC();
-            }  else{
+            } else {
                 System.out.println("Invalid command!");
             }
         }
     }
 
+
     public void runB(){
-        Date dob = new Date(patientDOB);
+        Date dob = new Date(dob);
         Date apptDate = new Date(date);
         Time apptTime = new Time(time);
         Patient patient = new Patient(patientF, patientL, dob);
