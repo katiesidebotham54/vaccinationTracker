@@ -17,6 +17,10 @@ public class Timeslot implements Comparable<Timeslot> {
         return this.date;
     }
 
+    public Time getTime() {
+        return this.time;
+    }
+
     @Override
     public String toString() { // check if correct format or not
         return this.date + " " + this.time;
