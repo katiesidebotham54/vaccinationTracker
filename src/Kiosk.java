@@ -49,7 +49,7 @@ public class Kiosk {
             case "B" -> {
                 runB(inputs, schedule, appt, patient);
             }
-            case "C" -> runC(inputs, schedule, , patient);
+            case "C" -> runC(inputs, schedule, appt, patient);
             default -> System.out.println("Invalid command!");
         }
     }
@@ -80,13 +80,13 @@ public class Kiosk {
         if(!dob.isValid()){
             System.out.println("Invalid date of birth!");
         }
-        if(addError == 0 || addError == 2){
+        if(schedule.addError == 0 || schedule.addError == 2){
             System.out.println("Same patient cannot book an appointment with the same date");
         }
         if(schedule.checkifExist(appt) != -1){
             System.out.println("Same appointment exists in the schedule");
         }
-        if(addError == 1){
+        if(schedule.addError == 1){
             System.out.println("Time slot has been taken at this location.");
         }
     }
