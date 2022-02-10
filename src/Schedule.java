@@ -7,9 +7,10 @@ public class Schedule {
     private Appointment [] appointments;
     private int numAppts;
     public final int NOT_FOUND = -1;
+    public int addError;
 
     private int find(Appointment appt) {
-        for(int i = 0; i < appointments.length; i++) {
+        for(int i = 0; i < numAppts; i++) {
             if(appt == appointments[i]) {
                 return i;
             } else {
@@ -26,23 +27,26 @@ public class Schedule {
         }
         appointments = temp;
     } //increase the capacity of the container by 4
+
     public boolean add(Appointment appt) {
         if(find(appt) == NOT_FOUND){
             return false;
         } else{
             for(Appointment a: appointments){
-                if(a.getPatient() == appt.getPatient() && a.getLocation() == appt.getLocation()){
-                    if(a.getSlot().getDate().getDay() == appt.getSlot().getDate().getDay()){
+                if(a.getPatient().compareTo(appt.getPatient())== 0 && a.getLocation() == appt.getLocation()){
+                    if(a.getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
+                        addError = 0;
                         return false;
                     }
                 }
-                if(a.getSlot() == appt.getSlot() && a.getLocation() == appt.getLocation()){
+                if(a.getSlot().compareTo(appt.getSlot()) == 0 && a.getLocation() == appt.getLocation()){
+                    addError = 1;
                     return false;
                 }
-                if(a.getPatient() == appt.getPatient() && a.getSlot().getDate() == appt.getSlot().getDate() && a.getLocation() != appt.getLocation()){
-
+                if(a.getPatient().compareTo(appt.getPatient()) == 0 && a.getSlot().getDate() == appt.getSlot().getDate() && a.getLocation() != appt.getLocation()){
+                    addError = 2;
+                    return false;
                 }
-
             }
         }
         if(numAppts == appointments.length){
@@ -50,7 +54,7 @@ public class Schedule {
         }
         appointments[numAppts] = appt;
         numAppts++;
-        return true; // retunr statement needed
+        return true; // return statement needed
     }
 
     public boolean remove(Appointment appt) {
@@ -68,9 +72,18 @@ public class Schedule {
             System.out.println(a.toString());
         }
     } //print all the appointments in current order
-    public void sortZip (Location county) {
-        for(int i = 1; i < numAppts; i++) {
 
+    //insertion sort for appointment
+    public void sortZip (Appointment appointments[]) {
+        for(int i = 1; i < numAppts; i++) {
+            int check = Integer.parseInt(appointments[i].getLocation().getZipCode());
+            int j = i - 1;
+
+            while(j >= 0 && Integer.parseInt(appointments[j].getLocation().getZipCode()) > check) {
+                appointments[j + 1] = appointments[j];
+                j = j - 1;
+            }
+            appointments[j + 1] = appointments[i]; // am i wrong here?
         }
         /*
         // get the order of the zip codes locations, and print the ones with the highest Zip codes. UNION, MORRIS, MERCER, SOMERSET, MIDDLESEX
@@ -79,13 +92,12 @@ public class Schedule {
                 System.out.println(appointments[i].toString());
             }
         }
-
          */
     }
 
     public void printByZip() {
-
-
+        sortZip(appointments);
+        print();
         /*
         printZip(Location.UNION);
         printZip(Location.MORRIS);
@@ -97,9 +109,20 @@ public class Schedule {
     } //sort by zip codes and print
 
     public void sortByPatient(){
-
+        for(int i = 1; i < numAppts; i++){
+            //if patient at spot before is greater than swap that and the one after
+            if(appointments[i-1].getPatient().compareTo(appointments[i].getPatient()) > 0){
+                Appointment tmp = appointments[i-1];
+                appointments[i-1] = appointments[i];
+                appointments[i] = tmp;
+            }
+            if(appointments[i-1].getPatient().compareTo(appointments[i].getPatient()) > 0) {
+                continue;
+            }
+        }
     }
     public void printByPatient() {
         sortByPatient();
+        print();
     } //sort by patient and print
 }
