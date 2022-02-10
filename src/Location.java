@@ -1,3 +1,8 @@
+/*
+
+authors: @kevinarbito @katiesidebotham
+ */
+// Done
 public enum Location {
     SOMERSET("Bridgewater", "08807", "Somerset County"),
     MIDDLESEX("Piscataway", "08854", "Middlesex County"),
@@ -14,4 +19,11 @@ public enum Location {
         this.zipCode = zipCode;
         this.county = county;
     }
+    
+    public String getCity() { return city; }
+
+    public String getZipCode() { return zipCode; }
+
+    public String getCounty() { return county; }
+
 }
