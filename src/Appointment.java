@@ -23,10 +23,7 @@ public class Appointment {
             return false;
         } else if (this.slot.getDate().getYear() == today.getYear() && this.slot.getDate().getMonth() == today.getMonth() && this.slot.getDate().getDay() - 1 == today.getDay() - 1) {
             return false;
-        } else if (this.slot.getDate().getYear() != today.getYear()) {
-            return false;
-        }
-        return true;
+        } else return this.slot.getDate().getYear() == today.getYear();
     }
 
     public boolean isValidLocation(){
@@ -53,10 +50,7 @@ public class Appointment {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj == this){
-            return true;
-        }
-        return false;
+        return obj == this;
     }
 
     @Override
