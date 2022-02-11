@@ -65,9 +65,7 @@ public class Date implements Comparable<Date> {
 
     public boolean isValid() {
         //check if valid input (mm/dd/yyyy)
-        //System.out.println(this.toString());
-        if(this.toString().matches("\\d{1}/\\d{1}/\\d{4}") || this.toString().matches("\\d{2}/\\d{2}/\\d{4}") ) { // has to check for m/m/yyyy because it is // in integer form
-            //must be valid calendar date
+        if(this.toString().matches("\\d{1}/\\d{1}/\\d{4}") || this.toString().matches("\\d{2}/\\d{2}/\\d{4}") || this.toString().matches("\\d{1}/\\d{2}/\\d{4}") || this.toString().matches("\\d{2}/\\d{1}/\\d{4}") ) { // has to check for m/m/yyyy because it is // in integer form
             if (this.year > 9999 || this.year < 1800) {
                 return false;
             }
@@ -78,7 +76,7 @@ public class Date implements Comparable<Date> {
                 return false;
             }
 
-            if (this.month == 2) { // may not work since feb is 1 in enum class
+            if (this.month == 1) { // may not work since feb is 1 in enum class
                 if (isLeapYear()) {
                     return (this.day <= 29);
                 } else {
@@ -86,7 +84,6 @@ public class Date implements Comparable<Date> {
                 }
             }
         } else {
-            //System.out.println("hi");
             return false;
         }
         return true;
