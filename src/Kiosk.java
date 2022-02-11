@@ -16,6 +16,7 @@ public class Kiosk {
             String line = sc.nextLine();
             String[] tokens = line.split(" ");
             if(tokens[0].equals("Q")){
+                System.out.println("Kiosk Session Ended");
                 break;
             }
             for(int i = 0; i< tokens.length; i++){
