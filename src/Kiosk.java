@@ -15,7 +15,7 @@ public class Kiosk {
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             String[] tokens = line.split(" ");
-            if(tokens.length == 1){
+            if(tokens[0].equals("Q")){
                 break;
             }
             for(int i = 0; i< tokens.length; i++){

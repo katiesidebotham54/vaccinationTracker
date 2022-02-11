@@ -37,6 +37,10 @@ public class Schedule {
 
     public boolean add(Appointment appt) {
         if(find(appt) == NOT_FOUND){
+            System.out.println(appt);
+//            appointments[numAppts] = appt;
+//            System.out.println(appointments[numAppts]);
+            numAppts++;
             return true;
         } else{
             for(Appointment a: this.appointments){
@@ -59,8 +63,6 @@ public class Schedule {
         if(numAppts == appointments.length){
             grow();
         }
-        appointments[numAppts] = appt;
-        numAppts++;
         return true; // return statement needed
     }
 
@@ -75,8 +77,9 @@ public class Schedule {
     }
 
     public void print() {
+        System.out.println(appointments);
         for(Appointment a: appointments){
-            System.out.println(a.toString());
+            System.out.println(a);
         }
     } //print all the appointments in current order
 
