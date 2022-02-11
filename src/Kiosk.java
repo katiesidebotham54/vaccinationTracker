@@ -13,17 +13,14 @@ public class Kiosk {
         Scanner sc = new Scanner(System.in);
         Schedule schedule = new Schedule();
         while (sc.hasNextLine()) {
-            StringTokenizer st = new StringTokenizer(sc.nextLine());
-            System.out.println(st.nextToken());
-            if(st.nextToken().equals("Q")){
-                System.out.println(st.nextToken());
-                sc.close();
+            String line = sc.nextLine();
+            String[] tokens = line.split(" ");
+            if(tokens.length == 1){
                 break;
             }
-            while(st.hasMoreElements()){
-                for (int i = 0; i < inputs.length; i++) {
-                    inputs[i] = st.nextToken();
-                }
+            for(int i = 0; i< tokens.length; i++){
+                inputs[i] = tokens[i];
+                System.out.println(inputs[i]);
             }
             String birthdate = inputs[1];
             String fname = inputs[2];
