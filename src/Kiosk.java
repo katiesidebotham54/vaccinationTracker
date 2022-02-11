@@ -14,7 +14,13 @@ public class Kiosk {
         Schedule schedule = new Schedule();
         while (sc.hasNextLine()) {
             StringTokenizer st = new StringTokenizer(sc.nextLine());
-            while(st.hasMoreTokens()){
+            System.out.println(st.nextToken());
+            if(st.nextToken().equals("Q")){
+                System.out.println(st.nextToken());
+                sc.close();
+                break;
+            }
+            while(st.hasMoreElements()){
                 for (int i = 0; i < inputs.length; i++) {
                     inputs[i] = st.nextToken();
                 }
