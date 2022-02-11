@@ -64,6 +64,7 @@ public class Kiosk {
     public void checkForErrors(String[] inputs, Schedule schedule, Appointment appt, Patient patient) {
         Date dob = new Date(inputs[1]);
         Time apptTime = new Time(inputs[5]);
+        System.out.println(schedule.addError);
         if(!apptTime.isValid()){
             System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
         }
