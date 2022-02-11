@@ -86,7 +86,12 @@ public class Schedule {
             int check = Integer.parseInt(appointments[i].getLocation().getZipCode());
             int j = i - 1;
 
-            while(j >= 0 && Integer.parseInt(appointments[j].getLocation().getZipCode()) > check) {
+            while(j >= 0 && Integer.parseInt(appointments[j].getLocation().getZipCode()) >= check) {
+                if(Integer.parseInt(appointments[j].getLocation().getZipCode()) == check) {
+                    if(Integer.parseInt(appointments[j].getSlot().toString()) < Integer.parseInt(appointments[i].getSlot().toString())){
+                        continue;
+                    }
+                }
                 appointments[j + 1] = appointments[j];
                 j = j - 1;
             }
