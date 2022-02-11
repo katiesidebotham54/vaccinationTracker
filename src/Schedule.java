@@ -37,9 +37,9 @@ public class Schedule {
 
     public boolean add(Appointment appt) {
         if(find(appt) == NOT_FOUND){
-            return false;
+            return true;
         } else{
-            for(Appointment a: appointments){
+            for(Appointment a: this.appointments){
                 if(a.getPatient().compareTo(appt.getPatient())== 0 && a.getLocation() == appt.getLocation()){
                     if(a.getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
                         addError = 0;
@@ -90,40 +90,21 @@ public class Schedule {
                 appointments[j + 1] = appointments[j];
                 j = j - 1;
             }
-            appointments[j + 1] = appointments[i]; // am i wrong here?
+            appointments[j + 1] = appointments[i];
         }
-        /*
-        // get the order of the zip codes locations, and print the ones with the highest Zip codes. UNION, MORRIS, MERCER, SOMERSET, MIDDLESEX
-        for(int i = 0; i < numAppts; i++){
-            if(appointments[i].getLocation().getZipCode().equals(county.getZipCode())) { // could also just check the location tbh
-                System.out.println(appointments[i].toString());
-            }
-        }
-         */
     }
 
     public void printByZip() {
         sortZip(appointments);
         print();
-        /*
-        printZip(Location.UNION);
-        printZip(Location.MORRIS);
-        printZip(Location.MERCER);
-        printZip(Location.SOMERSET);
-        printZip(Location.MIDDLESEX);
-
-         */
     } //sort by zip codes and print
 
     public void sortByPatient(){
         for(int i = 1; i < numAppts; i++){
-            //if patient at spot before is greater than swap that and the one after
             if(appointments[i-1].getPatient().compareTo(appointments[i].getPatient()) > 0){
                 Appointment tmp = appointments[i-1];
                 appointments[i-1] = appointments[i];
                 appointments[i] = tmp;
-            }
-            if(appointments[i-1].getPatient().compareTo(appointments[i].getPatient()) > 0) {
             }
         }
     }

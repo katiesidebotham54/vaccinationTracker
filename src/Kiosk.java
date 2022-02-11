@@ -19,18 +19,11 @@ public class Kiosk {
                     inputs[i] = st.nextToken();
                 }
             }
-            String command = inputs[0];
-//            System.out.println(command);
             String birthdate = inputs[1];
-//            System.out.println(birthdate);
             String fname = inputs[2];
-//            System.out.println(fname);
             String lname = inputs[3];
-//            System.out.println(lname);
             String apptDate = inputs[4];
-//            System.out.println(apptDate);
             String apptTime = inputs[5];
-//            System.out.println(apptTime);
             String county = inputs[6].toUpperCase();
             Location location = Location.valueOf(county); // valueOf documentation should work (confirm tmrw)
             Date dob = new Date(birthdate);
@@ -60,6 +53,7 @@ public class Kiosk {
     }
 
     public void runB(String[] inputs, Schedule schedule, Appointment appt, Patient patient){
+
         checkForErrors(inputs, schedule, appt, patient);
         if(schedule.add(appt)){
             System.out.println("Appointment booked and added to the schedule.");

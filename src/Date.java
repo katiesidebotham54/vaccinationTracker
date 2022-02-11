@@ -23,12 +23,13 @@ public class Date implements Comparable<Date> {
         this.month = Integer.parseInt(parts[0]);
         this.day = Integer.parseInt(parts[1]);
         this.year = Integer.parseInt(parts[2]);
-//      Date d = new Date(year, month, day);
-//      System.out.println(d.toString());
     } //take “mm/dd/yyyy” and create a Date object
+
     public Date() {
         Calendar c = Calendar.getInstance();
-        Date today = new Date(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE));
+        this.month = c.get(Calendar.MONTH);
+        this.day = c.get(Calendar.DATE);
+        this.year = c.get(Calendar.YEAR);
     } //create an object with today’s date (see Calendar class)
 
     public boolean isLeapYear(){
@@ -64,6 +65,7 @@ public class Date implements Comparable<Date> {
 
     public boolean isValid() {
         //check if valid input (mm/dd/yyyy)
+        System.out.println("Accessing isValid method");
         if(!this.toString().matches("(\\d{4})/(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])")){
             return false;
         }
@@ -98,8 +100,6 @@ public class Date implements Comparable<Date> {
             if(this.day > date.day){
                 return 1;
             }
-        } else{
-            return -1;
         }
         return -1;
     }
