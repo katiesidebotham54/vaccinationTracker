@@ -80,7 +80,7 @@ public class Kiosk {
         if(!dob.isValid()){
             System.out.println("Invalid date of birth!");
         }
-        if(schedule.addError == 0 || schedule.addError == 2){
+        if(schedule.addError == 2 || schedule.addError == 3){
             System.out.println("Same patient cannot book an appointment with the same date");
         }
         if(schedule.checkifExist(appt) != -1){

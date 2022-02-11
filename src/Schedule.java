@@ -42,7 +42,7 @@ public class Schedule {
             for(Appointment a: this.appointments){
                 if(a.getPatient().compareTo(appt.getPatient())== 0 && a.getLocation() == appt.getLocation()){
                     if(a.getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
-                        addError = 0;
+                        addError = 3;
                         return false;
                     }
                 }
