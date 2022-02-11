@@ -28,7 +28,7 @@ public class Schedule {
     } // return the index, or found
 
     private void grow() {
-        Appointment[] temp = new Appointment[numAppts + 4];
+        Appointment[] temp = new Appointment[numAppts += 4];
         for (int i = 0; i < numAppts; i++){
             temp[i] = appointments[i];
         }
@@ -36,13 +36,16 @@ public class Schedule {
     } //increase the capacity of the container by 4
 
     public boolean add(Appointment appt) {
+        if(appointments == null) {
+            appointments = new Appointment[4];
+        }
         if(find(appt) == NOT_FOUND){
-            System.out.println(appt);
+            //System.out.println(appt);
             this.appointments[numAppts] = appt;
             System.out.println(appointments[numAppts]);
             numAppts++;
             return true;
-        } else{
+        } else {
             for(Appointment a: this.appointments){
                 if(a.getPatient().compareTo(appt.getPatient())== 0 && a.getLocation() == appt.getLocation()){
                     if(a.getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){

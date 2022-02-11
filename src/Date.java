@@ -66,7 +66,7 @@ public class Date implements Comparable<Date> {
     public boolean isValid() {
         //check if valid input (mm/dd/yyyy)
         if(this.toString().matches("\\d{1}/\\d{1}/\\d{4}") || this.toString().matches("\\d{2}/\\d{2}/\\d{4}") || this.toString().matches("\\d{1}/\\d{2}/\\d{4}") || this.toString().matches("\\d{2}/\\d{1}/\\d{4}") ) { // has to check for m/m/yyyy because it is // in integer form
-            if (this.year > 9999 || this.year < 1800) {
+            if (this.year > 2022 || this.year < 1800) {
                 return false;
             }
             if (this.month > 12 || this.month < 1) {
