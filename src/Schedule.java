@@ -90,6 +90,7 @@ public class Schedule {
                 if(Integer.parseInt(appointments[j].getLocation().getZipCode()) == check) {
                     if(Integer.parseInt(appointments[j].getSlot().toString()) < Integer.parseInt(appointments[i].getSlot().toString())){
                         continue;
+                        // revise here
                     }
                 }
                 appointments[j + 1] = appointments[j];
