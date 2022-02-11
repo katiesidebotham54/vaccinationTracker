@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 /*
 
@@ -57,50 +56,61 @@ public class Kiosk {
 
     public void runB(String[] inputs, Schedule schedule, Appointment appt, Patient patient){
 
-        checkForErrors(inputs, schedule, appt, patient);
-        if(schedule.add(appt)){
-            System.out.println("Appointment booked and added to the schedule.");
+        if(checkForErrors(inputs, schedule, appt, patient)) {
+            if (schedule.add(appt)) {
+                System.out.println("Appointment booked and added to the schedule.");
+            }
         }
     }
 
 
-    public void checkForErrors(String[] inputs, Schedule schedule, Appointment appt, Patient patient) {
+    public boolean checkForErrors(String[] inputs, Schedule schedule, Appointment appt, Patient patient) {
         Date dob = new Date(inputs[1]);
         Time apptTime = new Time(inputs[5]);
         if(!apptTime.isValid()){
             System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
+            return false;
         }
         if(!appt.isValidApptDate()){
             System.out.println("Appointment date invalid -> must be future date.");
+            return false;
         }
-        if(!patient.isValidDOB()) {
+        if(!patient.isValidDOB()) { // may be wrong
             System.out.println("Date of birth invalid -> it is a future date");
+            return false;
         }
         if(!appt.isValidLocation()){
             System.out.println("Invalid location!");
+            return false;
         }
         if(!dob.isValid()){
             System.out.println(dob);
             System.out.println("Invalid date of birth!");
+            return false;
         }
         if(schedule.addError == 2 || schedule.addError == 3){
             System.out.println("Same patient cannot book an appointment with the same date");
+            return false;
         }
         if(schedule.checkifExist(appt) != -1){
             System.out.println("Same appointment exists in the schedule");
+            return false;
         }
         if(schedule.addError == 1){
             System.out.println("Time slot has been taken at this location.");
+            return false;
         }
+        return true;
     }
 
 
     public void runC(String[] inputs, Schedule schedule, Appointment appt, Patient patient){
-        checkForErrors(inputs, schedule, appt, patient);
-        if(schedule.remove(appt)) {
-            System.out.println("Appointment Cancelled");
-        } else{
-            System.out.println("Not cancelled, appointment does not exist");
+        if(checkForErrors(inputs, schedule, appt, patient)) {
+            if (schedule.remove(appt)) {
+                System.out.println("Appointment Cancelled");
+            } else {
+                System.out.println("Not cancelled, appointment does not exist");
+            }
         }
     }
 }

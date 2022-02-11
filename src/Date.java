@@ -93,13 +93,23 @@ public class Date implements Comparable<Date> {
     public int compareTo(Date date) {
         if(this == date){
             return 0;
-        } else if(this.year > date.year){
+        } else if(this.year > date.year) {
             return 1;
-        } else if(this.month == date.month){
-            if(this.day > date.day){
+        } else if(this.year < date.year) {
+            return -1;
+        } else {
+            if(this.month < date.month) {
+                return -1;
+            } else if(this.month > date.month) {
                 return 1;
+            } else {
+                if(this.day < date.day) {
+                    return -1;
+                } else if(this.day > date.day) {
+                    return 1;
+                }
             }
         }
-        return -1;
+        return 0;
     }
 }

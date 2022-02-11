@@ -24,11 +24,12 @@ public class Time implements Comparable<Time> {
 
     public boolean isValid() {
         if((hour >= 9 && hour <= 16)) {
-            if(hour == 16 && minute > 45) {
+            if(minute > 45) {
                 return false;
             } else return minute % 15 == 0;
+        } else {
+            return false;
         }
-        return true;
     }
 
     @Override
