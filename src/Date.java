@@ -65,7 +65,7 @@ public class Date implements Comparable<Date> {
 
     public boolean isValid() {
         //check if valid input (mm/dd/yyyy)
-        System.out.println(this.toString());
+        //System.out.println(this.toString());
         if(this.toString().matches("\\d{1}/\\d{1}/\\d{4}") || this.toString().matches("\\d{2}/\\d{2}/\\d{4}") ) { // has to check for m/m/yyyy because it is // in integer form
             //must be valid calendar date
             if (this.year > 9999 || this.year < 1800) {
@@ -86,7 +86,7 @@ public class Date implements Comparable<Date> {
                 }
             }
         } else {
-            System.out.println("hi");
+            //System.out.println("hi");
             return false;
         }
         return true;
