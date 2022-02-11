@@ -34,9 +34,6 @@ public class Patient implements Comparable<Patient> {
     public boolean isValidDOB(){
         //check if date of birth is today or future date
         Date today = new Date();
-        System.out.println("Today is: " + today);
-        System.out.println("Date of birth is: " + dob);
-        System.out.println(this.dob.compareTo(today));
         if(this.dob.compareTo(today) > 0){
             return false;
         }

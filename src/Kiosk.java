@@ -20,7 +20,6 @@ public class Kiosk {
             }
             for(int i = 0; i< tokens.length; i++){
                 inputs[i] = tokens[i];
-                System.out.println(inputs[i]);
             }
             String birthdate = inputs[1];
             String fname = inputs[2];
@@ -67,7 +66,6 @@ public class Kiosk {
     public void checkForErrors(String[] inputs, Schedule schedule, Appointment appt, Patient patient) {
         Date dob = new Date(inputs[1]);
         Time apptTime = new Time(inputs[5]);
-        System.out.println(schedule.addError);
         if(!apptTime.isValid()){
             System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
         }
@@ -81,6 +79,7 @@ public class Kiosk {
             System.out.println("Invalid location!");
         }
         if(!dob.isValid()){
+            System.out.println(dob);
             System.out.println("Invalid date of birth!");
         }
         if(schedule.addError == 2 || schedule.addError == 3){
