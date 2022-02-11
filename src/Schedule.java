@@ -38,8 +38,8 @@ public class Schedule {
     public boolean add(Appointment appt) {
         if(find(appt) == NOT_FOUND){
             System.out.println(appt);
-//            appointments[numAppts] = appt;
-//            System.out.println(appointments[numAppts]);
+            this.appointments[numAppts] = appt;
+            System.out.println(appointments[numAppts]);
             numAppts++;
             return true;
         } else{
