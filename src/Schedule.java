@@ -10,9 +10,9 @@ public class Schedule {
     public int addError;
 
     private int find(Appointment appt) {
-        for(int i = 0; i < numAppts; i++) {
-            if(appt == appointments[i]) {
-                return i;
+        for(int i = 0; i < numAppts; i++){
+            if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation().compareTo(appt.getLocation()) == 0){
+                        return i;
             }
         }
         return NOT_FOUND;
@@ -30,7 +30,7 @@ public class Schedule {
     private void grow() {
         Appointment[] temp = new Appointment[numAppts += 4];
         for (int i = 0; i < numAppts; i++){
-            temp[i] = appointments[i];
+            temp[i] = this.appointments[i];
         }
         appointments = temp;
     } //increase the capacity of the container by 4
@@ -39,7 +39,11 @@ public class Schedule {
         if(appointments == null) {
             appointments = new Appointment[4];
         }
-        if(find(appt) == NOT_FOUND){
+        if(numAppts == appointments.length){
+            grow();
+            //System.out.println(numAppts);
+        }
+        if(find(appt) == NOT_FOUND){ // changed (katie)
             //System.out.println(appt);
             this.appointments[numAppts] = appt;
             System.out.println(appointments[numAppts]);

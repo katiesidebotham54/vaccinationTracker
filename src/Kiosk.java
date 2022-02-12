@@ -41,18 +41,15 @@ public class Kiosk {
             Patient patient = new Patient(fname, lname, dob);
             Timeslot slot = new Timeslot(date, time);
             Appointment appt = new Appointment(patient, slot, location);
-            switcher(schedule, sc, inputs, patient, appt);
+            switcher(schedule, inputs, patient, appt);
         }
     }
 
-    public void switcher(Schedule schedule, Scanner sc, String[] inputs, Patient patient, Appointment appt) {
+    public void switcher(Schedule schedule, String[] inputs, Patient patient, Appointment appt) {
         switch (inputs[0]) {
             case "P" -> schedule.print();
             case "PZ" -> schedule.printByZip();
             case "PP" -> schedule.printByPatient();
-            case "Q" -> {
-                sc.close();
-            }
             case "CP" -> System.out.println("All appointments for " + patient.toString() + " have been cancelled");
             case "B" -> runB(inputs, schedule, appt, patient);
             case "C" -> runC(inputs, schedule, appt, patient);
@@ -114,3 +111,6 @@ public class Kiosk {
         }
     }
 }
+
+
+
