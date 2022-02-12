@@ -32,6 +32,7 @@ public class Time implements Comparable<Time> {
         }
     }
 
+
     @Override
     public String toString() {
         return (String.format("%02d", this.hour) + ":" + String.format("%02d", this.minute));

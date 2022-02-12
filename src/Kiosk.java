@@ -15,7 +15,7 @@ public class Kiosk {
             String line = sc.nextLine();
             String[] tokens = line.split(" ");
             if(tokens[0].equals("Q")){
-                System.out.println("Kiosk Session Ended");
+                System.out.println("Kiosk session ended");
                 break;
             }
             for(int i = 0; i< tokens.length; i++){
@@ -27,7 +27,14 @@ public class Kiosk {
             String apptDate = inputs[4];
             String apptTime = inputs[5];
             String county = inputs[6].toUpperCase();
-            Location location = Location.valueOf(county); // valueOf documentation should work (confirm tmrw)
+            Location location;
+            try {
+                location = Location.valueOf(county);
+            } catch (Exception ex) {
+                System.out.println("Invalid location!");
+                continue;
+            }
+//            Location location = Location.valueOf(county); // valueOf documentation should work (confirm tmrw)
             Date dob = new Date(birthdate);
             Date date = new Date(apptDate);
             Time time = new Time(apptTime);
@@ -45,7 +52,6 @@ public class Kiosk {
             case "PP" -> schedule.printByPatient();
             case "Q" -> {
                 sc.close();
-                System.out.println("Kiosk session ended.");
             }
             case "CP" -> System.out.println("All appointments for " + patient.toString() + " have been cancelled");
             case "B" -> runB(inputs, schedule, appt, patient);
@@ -62,8 +68,6 @@ public class Kiosk {
             }
         }
     }
-
-
     public boolean checkForErrors(String[] inputs, Schedule schedule, Appointment appt, Patient patient) {
         Date dob = new Date(inputs[1]);
         Time apptTime = new Time(inputs[5]);
@@ -77,10 +81,6 @@ public class Kiosk {
         }
         if(!patient.isValidDOB()) { // may be wrong
             System.out.println("Date of birth invalid -> it is a future date");
-            return false;
-        }
-        if(!appt.isValidLocation()){
-            System.out.println("Invalid location!");
             return false;
         }
         if(!dob.isValid()){

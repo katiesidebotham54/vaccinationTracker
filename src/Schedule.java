@@ -70,6 +70,7 @@ public class Schedule {
     }
 
     public boolean remove(Appointment appt) {
+            System.out.println(appt);
         if(find(appt) == NOT_FOUND){
             return false;
         } else{
