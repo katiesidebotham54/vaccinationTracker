@@ -18,9 +18,13 @@ public class Schedule {
         return NOT_FOUND;
     } //return the index, or NOT_FOUND
 
+    public boolean checkIfEmpty(){
+        return numAppts==0;
+    }
+
     public int checkifExist(Appointment appt) {
-        for(int i = 0; i < numAppts; i++) {
-            if(appt == appointments[i]) {
+        for(int i = 0; i < numAppts; i++){
+            if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation().compareTo(appt.getLocation()) == 0){
                 return i;
             }
         }
@@ -46,12 +50,12 @@ public class Schedule {
         if(find(appt) == NOT_FOUND){ // changed (katie)
             //System.out.println(appt);
             this.appointments[numAppts] = appt;
-            System.out.println(appointments[numAppts]);
+            //System.out.println(appointments[numAppts]);
             numAppts++;
             return true;
         } else {
             for(Appointment a: this.appointments){
-                if(a.getPatient().compareTo(appt.getPatient())== 0 && a.getLocation() == appt.getLocation()){
+                if(a.getPatient().compareTo(appt.getPatient()) == 0 && a.getLocation() == appt.getLocation()){
                     if(a.getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
                         addError = 3;
                         return false;
@@ -67,9 +71,6 @@ public class Schedule {
                 }
             }
         }
-        if(numAppts == appointments.length){
-            grow();
-        }
         return true; // return statement needed
     }
 
@@ -78,7 +79,9 @@ public class Schedule {
         if(find(appt) == NOT_FOUND){
             return false;
         } else{
-            appointments[find(appt)] = appointments[find(appt) + 1];
+            for(int i = find(appt); i < appointments.length; i++){
+                appointments[find(appt)] = appointments[find(appt) +  1];
+            }
             numAppts--;
             return true;
         }

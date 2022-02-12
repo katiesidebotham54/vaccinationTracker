@@ -18,6 +18,10 @@ public class Kiosk {
                 System.out.println("Kiosk session ended");
                 break;
             }
+            if((tokens[0].equals("P") || tokens[0].equals("PZ") || tokens[0].equals("PP")  ||  tokens[0].equals("C") || tokens[0].equals("CP")) && schedule.checkIfEmpty()){
+                System.out.println("Schedule is empty!");
+                continue;
+            }
             for(int i = 0; i< tokens.length; i++){
                 inputs[i] = tokens[i];
             }
