@@ -18,20 +18,14 @@ public class Kiosk {
     }
 
     public void commandHelper(String[] tokens, Schedule schedule) {
-        if(tokens[0].equals("P")) {
-            schedule.print();
-        } else if(tokens[0].equals("PZ")) {
-            schedule.printByZip();
-        } else if(tokens[0].equals("PP")) {
-            schedule.printByPatient();
-        } else if(tokens[0].equals("Q")) {
-            System.out.println("Kiosk Session Ended");
-        } else if(tokens[0].equals("CP") || tokens[0].equals("C")) {
-            cancel(schedule, tokens);
-        } else if(tokens[0].equals("B")) {
-            bookAppointment(schedule, tokens);
-        } else {
-            System.out.println("Invalid Command");
+        switch (tokens[0]) {
+            case "P" -> schedule.print();
+            case "PZ" -> schedule.printByZip();
+            case "PP" -> schedule.printByPatient();
+            case "Q" -> System.out.println("Kiosk Session Ended");
+            case "CP", "C" -> cancel(schedule, tokens);
+            case "B" -> bookAppointment(schedule, tokens);
+            default -> System.out.println("Invalid Command");
         }
     }
 
