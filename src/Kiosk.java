@@ -8,98 +8,89 @@ public class Kiosk {
     public void run() {
         System.out.print("Kiosk running. Ready to process transactions.");
         System.out.println();
-        String[] inputs = new String[7];
         Scanner sc = new Scanner(System.in);
         Schedule schedule = new Schedule();
-        while (sc.hasNextLine()) {
+        while(sc.hasNextLine()) {
             String line = sc.nextLine();
             String[] tokens = line.split(" ");
-            char[] charArray = tokens[0].toCharArray();
-                for (int i = 0; i < charArray.length; i++) {
-                    //if any character is in upper case, return false
-                    if (Character.isLowerCase(charArray[i])) {
-                        System.out.println("Invalid Command");
-                        continue;
-                    }
-                }
-            if(tokens.length == 1){ // test case for 1 input at start
-                if(tokens[0].equals("C") || tokens[0].equals("B")) {
-                    System.out.println("Not enough inputs");
-                    continue;
-                } else if(tokens[0].equals("Q")){
-                    System.out.println("Kiosk session ended");
-                    break;
-                }
-            }
-            if((tokens[0].equals("P") || tokens[0].equals("PZ") || tokens[0].equals("PP")  ||  tokens[0].equals("C") || tokens[0].equals("CP")) && schedule.checkIfEmpty()){
-                System.out.println("Schedule is empty!");
-                continue;
-            }
-            for(int i = 0; i< tokens.length; i++){
-                inputs[i] = tokens[i];
-            }
-            String birthdate = inputs[1];
-            String fname = inputs[2];
-            String lname = inputs[3];
-            String apptDate = inputs[4];
-            String apptTime = inputs[5];
-            String county = "";
-            if(apptTime != null) {
-                county = inputs[6].toUpperCase();
-            }
-            Location location;
-            try {
-                location = Location.valueOf(county);
-            } catch (Exception ex) {
-                System.out.println("Invalid location!");
-                continue;
-            }
-//            Location location = Location.valueOf(county); // valueOf documentation should work (confirm tmrw)
-            Date dob = new Date(birthdate);
-            Date date = new Date(apptDate);
-            Time time = new Time(apptTime);
-            Patient patient = new Patient(fname, lname, dob);
-            Timeslot slot = new Timeslot(date, time);
-            Appointment appt = new Appointment(patient, slot, location);
-            switcher(schedule, inputs, patient, appt);
+            commandHelper(tokens, schedule);
         }
     }
 
-    public void checkLowercase(String[] tokens){
-        char[] charArray = tokens[0].toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            //if any character is in upper case, return false
-            if (Character.isLowerCase(charArray[i])) {
-                System.out.println("Invalid Command");
-                continue;
-            }
-        }
-
-    }
-
-    public void switcher(Schedule schedule, String[] inputs, Patient patient, Appointment appt) {
-        switch (inputs[0]) {
-            case "P" -> schedule.print();
-            case "PZ" -> schedule.printByZip();
-            case "PP" -> schedule.printByPatient();
-            case "CP" -> System.out.println("All appointments for " + patient.toString() + " have been cancelled");
-            case "B" -> runB(inputs, schedule, appt, patient);
-            case "C" -> runC(inputs, schedule, appt, patient);
-            default -> System.out.println("Invalid command!");
+    public void commandHelper(String[] tokens, Schedule schedule) {
+        if(tokens[0].equals("P")) {
+            schedule.print();
+        } else if(tokens[0].equals("PZ")) {
+            schedule.printByZip();
+        } else if(tokens[0].equals("PP")) {
+            schedule.printByPatient();
+        } else if(tokens[0].equals("Q")) {
+            System.out.println("Kiosk Session Ended");
+        } else if(tokens[0].equals("CP") || tokens[0].equals("C")) {
+            cancel(schedule, tokens);
+        } else if(tokens[0].equals("B")) {
+            bookAppointment(schedule, tokens);
+        } else {
+            System.out.println("Invalid Command");
         }
     }
 
-    public void runB(String[] inputs, Schedule schedule, Appointment appt, Patient patient){
-
-        if(checkForErrors(inputs, schedule, appt, patient)) {
-            if (schedule.add(appt)) {
-                System.out.println("Appointment booked and added to the schedule.");
-            }
+    public void bookAppointment(Schedule schedule, String[] tokens) {
+        if(checkErrors(tokens, schedule)) {
+            addHelper(tokens, schedule);
         }
     }
-    public boolean checkForErrors(String[] inputs, Schedule schedule, Appointment appt, Patient patient) {
-        Date dob = new Date(inputs[1]);
-        Time apptTime = new Time(inputs[5]);
+
+    public void addHelper(String[] tokens, Schedule schedule) {
+        Date dob = new Date(tokens[1]);
+        Date apptDate = new Date(tokens[4]);
+        Patient patient = new Patient(tokens[2], tokens[3],dob);
+        Time apptTime = new Time(tokens[5]);
+        Timeslot slot = new Timeslot(apptDate, apptTime);
+        Location location = Location.valueOf(tokens[6].toUpperCase());
+        Appointment appt = new Appointment(patient, slot, location);
+        schedule.add(appt);
+        System.out.println("Appointment booked and added to the schedule.");
+    }
+    public void cancel(Schedule schedule, String[] tokens){
+        if(checkErrors(tokens, schedule)) {
+            removeHelper(tokens, schedule);
+        }
+    }
+
+    public void removeHelper(String[] tokens, Schedule schedule) {
+        Date dob = new Date(tokens[1]);
+        Date apptDate = new Date(tokens[4]);
+        Patient patient = new Patient(tokens[2], tokens[3],dob);
+        Time apptTime = new Time(tokens[5]);
+        Timeslot slot = new Timeslot(apptDate, apptTime);
+        Location location = Location.valueOf(tokens[6].toUpperCase());
+        Appointment appt = new Appointment(patient, slot, location);
+        if(schedule.remove(appt)) {
+            System.out.println("Appointment Cancelled");
+        } else {
+            System.out.println("Not cancelled, appointment does not exist");
+        }
+    }
+
+    public boolean checkErrors(String[] tokens, Schedule schedule){
+        if(tokens.length == 1 && schedule.checkIfEmpty()){
+            System.out.println("Schedule is empty!");
+            return false;
+        }
+        Date dob = new Date(tokens[1]);
+        Date apptDate = new Date(tokens[4]);
+        Patient patient = new Patient(tokens[2], tokens[3],dob);
+        Time apptTime = new Time(tokens[5]);
+        Timeslot slot = new Timeslot(apptDate, apptTime);
+        Location location;
+        if(!tokens[6].equalsIgnoreCase("MORRIS") && !tokens[6].equalsIgnoreCase("SOMERSET") && !tokens[6].equalsIgnoreCase("UNION")  && !tokens[6].equalsIgnoreCase("MIDDLESEX")
+        && !tokens[6].equalsIgnoreCase("MERCER")) {
+            System.out.println("Invalid Location");
+            return false;
+        }
+        location = Location.valueOf(tokens[6].toUpperCase());
+        Appointment appt = new Appointment(patient, slot, location);
         if(!apptTime.isValid()){
             System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
             return false;
@@ -130,17 +121,6 @@ public class Kiosk {
             return false;
         }
         return true;
-    }
-
-
-    public void runC(String[] inputs, Schedule schedule, Appointment appt, Patient patient){
-        if(checkForErrors(inputs, schedule, appt, patient)) {
-            if (schedule.remove(appt)) {
-                System.out.println("Appointment Cancelled");
-            } else {
-                System.out.println("Not cancelled, appointment does not exist");
-            }
-        }
     }
 }
 

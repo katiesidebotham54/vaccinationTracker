@@ -16,7 +16,7 @@ public class Appointment {
         this.location = location;
     }
 
-    public boolean isValidApptDate() {
+    public boolean isValidApptDate() { // not working correctly failed : B 12/1/1999 John Doe 3/32/2022 9:45 SOMERSET
         Date today;
         today = new Date();
         if (this.slot.getDate().getYear() == today.getYear() && this.slot.getDate().getMonth() == today.getMonth() && this.slot.getDate().getDay() == today.getDay()) {
