@@ -36,9 +36,14 @@ public class Kiosk {
     }
 
     public void bookAppointment(Schedule schedule, String[] tokens) {
-        if(checkLocation(tokens, schedule) && checkEmptySchedule(tokens, schedule) && checkAddError(tokens, schedule)) {
+        checkLocation(tokens, schedule);
+        handleValidDate(tokens, schedule);
+        checkEmptySchedule(tokens, schedule);
+        checkAddError(tokens, schedule);
+        if(checkLocation(tokens, schedule) && checkEmptySchedule(tokens, schedule) && handleValidDate(tokens, schedule) && checkAddError(tokens, schedule)) {
             addHelper(tokens, schedule);
         }
+
     }
 
     public void addHelper(String[] tokens, Schedule schedule) {
@@ -54,7 +59,8 @@ public class Kiosk {
     }
 
     public void cancel(Schedule schedule, String[] tokens){
-        if(checkLocation(tokens, schedule) && checkEmptySchedule(tokens, schedule) && checkAddError(tokens, schedule)) {
+
+        if(checkLocation(tokens, schedule) && checkEmptySchedule(tokens, schedule) && handleValidDate(tokens, schedule)) {
             removeHelper(tokens, schedule);
         }
     }
