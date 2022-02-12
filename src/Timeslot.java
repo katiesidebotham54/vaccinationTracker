@@ -25,44 +25,22 @@ public class Timeslot implements Comparable<Timeslot> {
     public String toString() { // check if correct format or not
         return this.date + " " + this.time;
     }
+
     @Override
     public int compareTo(Timeslot slot) {
-        if(this == slot){
+        if(this == slot) {
             return 0;
-        } else if(this.date.compareTo(slot.date) > 0) {
-            return -1;
-        } else if(this.date.compareTo(slot.date) < 0) {
+        } else if(this.date.compareTo(slot.date) == 1) {
             return 1;
-        } else if(this.date.compareTo(slot.date) == 0) {
-            if(this.time.compareTo(slot.time) == 0){
-                return -1;
-            } else{
-                return 1;
-            }
-        }
-        return 0; // come back to ltr if doesn't work
-        /*
-        if(this == date){
-            return 0;
-        } else if(this.year > date.year) {
-            return 1;
-        } else if(this.year < date.year) {
+        } else if(this.date.compareTo(slot.date) == -1) {
             return -1;
         } else {
-            if(this.month < date.month) {
+            if(this.getTime().compareTo(slot.getTime()) == -1) {
                 return -1;
-            } else if(this.month > date.month) {
+            } else if(this.getTime().compareTo(slot.getTime()) == 1) {
                 return 1;
-            } else {
-                if(this.day < date.day) {
-                    return -1;
-                } else if(this.day > date.day) {
-                    return 1;
-                }
             }
         }
         return 0;
-    }
-         */
     }
 }

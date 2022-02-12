@@ -43,12 +43,21 @@ public class Schedule {
         if(appointments == null) {
             System.out.println("nothing in appointments");
             appointments = new Appointment[4];
+            appointments[numAppts] = appt;
+            numAppts++;
+            return true;
         }
         if(numAppts == appointments.length){
             System.out.println("I grew");
             grow();
         }
         if(find(appt) == NOT_FOUND){
+            //System.out.println("ERRPR: " + addError);
+            addError = checkIfSlotSame(appt); // this checks location, timeslot , appt date if theyre the same. Returns 2.
+            if(addError == 2) {
+                System.out.println(addError);
+                return false;
+            }
             for(int i = 0; i < numAppts; i++){
                 if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getLocation() == appt.getLocation()){
                     System.out.println("first if");
@@ -72,38 +81,19 @@ public class Schedule {
                 }
 
             }
-            /*
-            for(Appointment a: this.appointments){
-                System.out.println("Made it to for loop");
-                if(a.getPatient().compareTo(appt.getPatient()) == 0 && a.getLocation() == appt.getLocation()){
-                    if(a.getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
-                        addError = 3;
-                        return false;
-                    }
-                }// if the timeslots and locations of two appointments are the same, timeslot is already taken
-                else if(a.getPatient().compareTo(appt.getPatient()) != 0 && a.getSlot().compareTo(appt.getSlot()) == 0 && a.getLocation() == appt.getLocation()){
-                    System.out.println("a.getSlot() = " + a.getSlot());
-                    System.out.println("appt.getSlot() = " + appt.getSlot());
-                    System.out.println("a.getLocation() = " + a.getLocation());
-                    System.out.println("appt.getLocation() = " + appt.getLocation());
-                    addError = 1;
-                    return false;
-                }
-                else if(a.getPatient().compareTo(appt.getPatient()) == 0 && a.getSlot().getDate() == appt.getSlot().getDate() && a.getLocation() != appt.getLocation()){
-                    System.out.println("third if");
-                    System.out.println("a.getSlot() = " + a.getSlot());
-                    System.out.println("appt.getSlot() = " + appt.getSlot());
-                    System.out.println("a.getLocation() = " + a.getLocation());
-                    System.out.println("appt.getLocation() = " + appt.getLocation());
-                    addError = 2;
-                    return false;
-                }
-            }
-            */
         }
         appointments[numAppts] = appt;
         numAppts++;
         return true;
+    }
+
+    public int checkIfSlotSame(Appointment appt) { // used strings but might be diff
+        for(int i = 0; i < numAppts; i++){
+            if(appointments[i].getLocation().toString().equals(appt.getLocation().toString()) && appointments[i].getSlot().getDate().toString().equals(appt.getSlot().getDate().toString()) && appointments[i].getSlot().getTime().toString().equals(appt.getSlot().getTime().toString())){
+                return 2;
+            }
+        }
+        return NOT_FOUND;
     }
 
 

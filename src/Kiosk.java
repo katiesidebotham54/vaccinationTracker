@@ -56,8 +56,11 @@ public class Kiosk {
         Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = Location.valueOf(tokens[6].toUpperCase());
         Appointment appt = new Appointment(patient, slot, location);
-        schedule.add(appt);
-        System.out.println("Appointment booked and added to the schedule.");
+        if(schedule.add(appt)) {
+            System.out.println("Appointment booked and added to the schedule.");
+        } else {
+            System.out.println("OKOK");
+        }
     }
 
     public void cancel(Schedule schedule, String[] tokens){
