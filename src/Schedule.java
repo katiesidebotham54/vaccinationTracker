@@ -80,7 +80,9 @@ public class Schedule {
     }
 
     public void print() {
-        System.out.println(appointments);
+        if(appointments == null) {
+            System.out.println("Invalid Command");
+        }
         for(Appointment a: appointments){
             System.out.println(a);
         }
