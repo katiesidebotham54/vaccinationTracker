@@ -65,6 +65,18 @@ public class Kiosk {
         }
     }
 
+    public void checkLowercase(String[] tokens){
+        char[] charArray = tokens[0].toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            //if any character is in upper case, return false
+            if (Character.isLowerCase(charArray[i])) {
+                System.out.println("Invalid Command");
+                continue;
+            }
+        }
+
+    }
+
     public void switcher(Schedule schedule, String[] inputs, Patient patient, Appointment appt) {
         switch (inputs[0]) {
             case "P" -> schedule.print();

@@ -50,4 +50,5 @@ public class Appointment {
     public String toString() {
         return patient.getFname() + " " + patient.getLname() + ", DOB: " + patient.getDob() + " , Appointment detail: " + slot.getDate() + ", " + slot.getTime() + ", " + location.getCity() + " " + location.getZipCode() + ", " + location.getCounty();
     }
+
 }

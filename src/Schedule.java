@@ -11,8 +11,8 @@ public class Schedule {
 
     private int find(Appointment appt) {
         for(int i = 0; i < numAppts; i++){
-            if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation().compareTo(appt.getLocation()) == 0){
-                        return i;
+            if(appointments[i].equals(appt)){
+                return i;
             }
         }
         return NOT_FOUND;
@@ -24,7 +24,7 @@ public class Schedule {
 
     public int checkifExist(Appointment appt) {
         for(int i = 0; i < numAppts; i++){
-            if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation().compareTo(appt.getLocation()) == 0){
+            if(appointments[i].equals(appt)){
                 return i;
             }
         }
@@ -45,6 +45,7 @@ public class Schedule {
             appointments = new Appointment[4];
         }
         if(numAppts == appointments.length){
+            System.out.println("I grew");
             grow();
             //System.out.println(numAppts);
         }
@@ -53,6 +54,7 @@ public class Schedule {
             this.appointments[numAppts] = appt;
             //System.out.println(appointments[numAppts]);
             numAppts++;
+            System.out.println("NumAppts: " + numAppts);
             return true;
         } else {
             for(Appointment a: this.appointments){
@@ -84,6 +86,8 @@ public class Schedule {
                 appointments[find(appt)] = appointments[find(appt) +  1];
             }
             numAppts--;
+            System.out.println("NumAppts: " + numAppts);
+
             return true;
         }
     }
