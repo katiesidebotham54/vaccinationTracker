@@ -39,7 +39,7 @@ public class Time implements Comparable<Time> {
     }
     @Override
     public int compareTo(Time time) {
-        if(this == time){
+        if(this.equals(time)){
             return 0;
         } else if(this.hour > time.hour){
            return 1;
@@ -50,6 +50,6 @@ public class Time implements Comparable<Time> {
         } else{
             return -1;
         }
-        return -1;
+        return 0;
     }
 }

@@ -36,10 +36,6 @@ public class Kiosk {
     }
 
     public void bookAppointment(Schedule schedule, String[] tokens) {
-//        System.out.println("Check location: " + checkLocation(tokens, schedule));
-//        System.out.println("Check Empty: " + checkEmptySchedule(tokens, schedule));
-        //System.out.println("Check valid Date: " + handleValidDate(tokens, schedule));
-//        System.out.println("Check Add Error: " + checkAddError(tokens, schedule));
         if(checkLocation(tokens, schedule) && !checkEmptySchedule(tokens, schedule)) {
             if(handleValidDate(tokens, schedule) && checkAddError(tokens, schedule)) {
                 addHelper(tokens, schedule);
@@ -59,7 +55,7 @@ public class Kiosk {
         if(schedule.add(appt)) {
             System.out.println("Appointment booked and added to the schedule.");
         } else {
-            System.out.println("OKOK");
+            checkAddError(tokens, schedule);
         }
     }
 

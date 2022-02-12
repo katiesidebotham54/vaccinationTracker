@@ -45,8 +45,7 @@ public class Patient implements Comparable<Patient> {
     }
     @Override
     public int compareTo(Patient patient) {
-        //if last name is the same
-         if(this.lname.compareTo(patient.lname) == 0){
+        if(this.lname.compareTo(patient.lname) == 0){
         //check if first name is the same
             if( this.fname.compareTo(patient.fname) == 0){
                     //check if date of birth is same
