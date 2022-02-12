@@ -32,11 +32,12 @@ public class Schedule {
     } // return the index, or found
 
     private void grow() {
-        Appointment[] temp = new Appointment[numAppts += 4];
-        for (int i = 0; i < numAppts; i++){
-            temp[i] = this.appointments[i];
+        Appointment[] newArr = new Appointment[numAppts + 4];//Creating a new array with space for an extra element
+        for(int i = 0; i < numAppts; i++)
+        {
+            newArr[i] = appointments[i];//Copying the elements to the new array
         }
-        appointments = temp;
+        appointments = newArr;
     } //increase the capacity of the container by 4
 
     public boolean add(Appointment appt) {

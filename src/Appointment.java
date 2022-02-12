@@ -37,7 +37,13 @@ public class Appointment {
 
     @Override
     public boolean equals(Object obj) {
-        return obj == this;
+        Appointment appt = (Appointment) obj;
+        return this.patient.getFname().equals(appt.patient.getFname())
+                && this.patient.getLname().equals(appt.patient.getLname())
+                && this.patient.getDob().toString().equals(appt.patient.getDob().toString())
+                && this.slot.getDate().toString().equals(appt.slot.getDate().toString())
+                && this.slot.getTime().toString().equals(appt.slot.getTime().toString())
+                && this.location.equals(appt.location);
     }
 
     @Override

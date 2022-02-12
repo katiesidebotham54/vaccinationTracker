@@ -14,9 +14,22 @@ public class Kiosk {
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             String[] tokens = line.split(" ");
-            if(tokens[0].equals("Q")){
-                System.out.println("Kiosk session ended");
-                break;
+            char[] charArray = tokens[0].toCharArray();
+                for (int i = 0; i < charArray.length; i++) {
+                    //if any character is in upper case, return false
+                    if (Character.isLowerCase(charArray[i])) {
+                        System.out.println("Invalid Command");
+                        continue;
+                    }
+                }
+            if(tokens.length == 1){ // test case for 1 input at start
+                if(tokens[0].equals("C") || tokens[0].equals("B")) {
+                    System.out.println("Not enough inputs");
+                    continue;
+                } else if(tokens[0].equals("Q")){
+                    System.out.println("Kiosk session ended");
+                    break;
+                }
             }
             if((tokens[0].equals("P") || tokens[0].equals("PZ") || tokens[0].equals("PP")  ||  tokens[0].equals("C") || tokens[0].equals("CP")) && schedule.checkIfEmpty()){
                 System.out.println("Schedule is empty!");
@@ -30,7 +43,10 @@ public class Kiosk {
             String lname = inputs[3];
             String apptDate = inputs[4];
             String apptTime = inputs[5];
-            String county = inputs[6].toUpperCase();
+            String county = "";
+            if(apptTime != null) {
+                county = inputs[6].toUpperCase();
+            }
             Location location;
             try {
                 location = Location.valueOf(county);
