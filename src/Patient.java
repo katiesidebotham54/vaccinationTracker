@@ -30,7 +30,7 @@ public class Patient implements Comparable<Patient> {
     }
 
 
-    public boolean isValidDOB(){ // invalid dob, failed : B 11/31/1999 John Doe 3/31/2022 9:45 SOMERSET returned booked and scheduled
+    public boolean isValidDOB(){
         //check if date of birth is today or future date
         Date today = new Date();
         if(this.dob.compareTo(today) >= 0){

@@ -42,38 +42,49 @@ public class Schedule {
 
     public boolean add(Appointment appt) {
         if(appointments == null) {
+            System.out.println("nothing in appointments");
             appointments = new Appointment[4];
         }
         if(numAppts == appointments.length){
             System.out.println("I grew");
             grow();
-            //System.out.println(numAppts);
         }
-        if(find(appt) == NOT_FOUND){ // changed (katie)
-            //System.out.println(appt);
-            this.appointments[numAppts] = appt;
-            //System.out.println(appointments[numAppts]);
+        if(find(appt) == NOT_FOUND){
+            System.out.println("wasn't found ");
+            appointments[numAppts] = appt;
             numAppts++;
-            System.out.println("NumAppts: " + numAppts);
             return true;
         } else {
-            for(Appointment a: this.appointments){
+            for(Appointment a: appointments){ // does not reach here
+                System.out.println("Made it to for loop");
+                //if the patient and the location are the same
+                //then check if the date are the same --> patient cannot book another appointment on the same day
                 if(a.getPatient().compareTo(appt.getPatient()) == 0 && a.getLocation() == appt.getLocation()){
                     if(a.getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
                         addError = 3;
                         return false;
                     }
-                }
-                if(a.getSlot().compareTo(appt.getSlot()) == 0 && a.getLocation() == appt.getLocation()){
+                }// if the timeslots and locations of two appointments are the same, timeslot is already taken
+                else if(a.getPatient().compareTo(appt.getPatient()) != 0 && a.getSlot().compareTo(appt.getSlot()) == 0 && a.getLocation() == appt.getLocation()){
+                    System.out.println("a.getSlot() = " + a.getSlot());
+                    System.out.println("appt.getSlot() = " + appt.getSlot());
+                    System.out.println("a.getLocation() = " + a.getLocation());
+                    System.out.println("appt.getLocation() = " + appt.getLocation());
                     addError = 1;
                     return false;
                 }
-                if(a.getPatient().compareTo(appt.getPatient()) == 0 && a.getSlot().getDate() == appt.getSlot().getDate() && a.getLocation() != appt.getLocation()){
+                else if(a.getPatient().compareTo(appt.getPatient()) == 0 && a.getSlot().getDate() == appt.getSlot().getDate() && a.getLocation() != appt.getLocation()){
+                    System.out.println("third if");
+                    System.out.println("a.getSlot() = " + a.getSlot());
+                    System.out.println("appt.getSlot() = " + appt.getSlot());
+                    System.out.println("a.getLocation() = " + a.getLocation());
+                    System.out.println("appt.getLocation() = " + appt.getLocation());
                     addError = 2;
                     return false;
                 }
             }
         }
+        System.out.println("it was actually here");
         return true; // return statement needed
     }
 

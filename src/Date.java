@@ -63,6 +63,28 @@ public class Date implements Comparable<Date> {
         return new Date();
     }
 
+    public boolean checkDays(){
+        switch(this.month){
+            case 1, 3, 5, 7, 8, 10, 12 -> {
+                if(this.day <= MAXMONTH) return true;
+            }
+            case 4, 6, 9, 11 -> {
+                if(this.day <= MINMONTH) return true;
+            }
+            case 2 -> {
+                if(this.isLeapYear()){
+                    if(this.day <= FEBRUARYMAX) return true;
+                } else{
+                    if(this.day <= FEBRUARYMIN) return true;
+                }
+            }
+            default -> {
+                return false;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return this.month + "/" + this.day + "/" + this.year;

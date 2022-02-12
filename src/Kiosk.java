@@ -89,12 +89,11 @@ public class Kiosk {
     public boolean checkLocation(String[] tokens, Schedule schedule){
         if(!tokens[6].equalsIgnoreCase("MORRIS") && !tokens[6].equalsIgnoreCase("SOMERSET") && !tokens[6].equalsIgnoreCase("UNION")  && !tokens[6].equalsIgnoreCase("MIDDLESEX")
         && !tokens[6].equalsIgnoreCase("MERCER")) {
-            System.out.println("Invalid Location");
+            System.out.println("Invalid location!");
             return false;
         }
         return true;
     }
-
     public boolean handleValidDate(String[] tokens, Schedule schedule){
         Date dob = new Date(tokens[1]);
         Date apptDate = new Date(tokens[4]);
@@ -103,9 +102,12 @@ public class Kiosk {
         Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = Location.valueOf(tokens[6].toUpperCase());
         Appointment appt = new Appointment(patient, slot, location);
-        if(!dob.isValid()){
-            System.out.println(dob);
+        if(!dob.isValid() || !dob.checkDays()){
             System.out.println("Invalid date of birth!");
+            return false;
+        }
+        if(!apptDate.isValid() || !apptDate.checkDays()){
+            System.out.println("Invalid appointment date!");
             return false;
         }
         if(!appt.isValidApptDate()){
@@ -131,12 +133,13 @@ public class Kiosk {
         Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = Location.valueOf(tokens[6].toUpperCase());
         Appointment appt = new Appointment(patient, slot, location);
+        System.out.println("addError: " + schedule.addError);
         if(schedule.addError == 2 || schedule.addError == 3){
-            System.out.println("Same patient cannot book an appointment with the same date");
+            System.out.println("Same patient cannot book an appointment with the same date.");
             return false;
         }
         if(schedule.checkifExist(appt) != -1){
-            System.out.println("Same appointment exists in the schedule");
+            System.out.println("Same appointment exists in the schedule.");
             return false;
         }
         if(schedule.addError == 1){
