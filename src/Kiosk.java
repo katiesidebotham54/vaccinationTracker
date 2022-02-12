@@ -19,7 +19,13 @@ public class Kiosk {
 
     public void commandHelper(String[] tokens, Schedule schedule) {
         switch (tokens[0]) {
-            case "P" -> schedule.print();
+            case "P" -> {
+                if(checkEmptySchedule(tokens, schedule)){
+                    System.out.println("Invalid command");
+                } else{
+                    schedule.print();
+                }
+            }
             case "PZ" -> schedule.printByZip();
             case "PP" -> schedule.printByPatient();
             case "Q" -> System.out.println("Kiosk Session Ended");
@@ -30,7 +36,7 @@ public class Kiosk {
     }
 
     public void bookAppointment(Schedule schedule, String[] tokens) {
-        if(checkErrors(tokens, schedule)) {
+        if(checkLocation(tokens, schedule) && checkEmptySchedule(tokens, schedule) && checkAddError(tokens, schedule)) {
             addHelper(tokens, schedule);
         }
     }
@@ -46,8 +52,9 @@ public class Kiosk {
         schedule.add(appt);
         System.out.println("Appointment booked and added to the schedule.");
     }
+
     public void cancel(Schedule schedule, String[] tokens){
-        if(checkErrors(tokens, schedule)) {
+        if(checkLocation(tokens, schedule) && checkEmptySchedule(tokens, schedule) && checkAddError(tokens, schedule)) {
             removeHelper(tokens, schedule);
         }
     }
@@ -67,26 +74,30 @@ public class Kiosk {
         }
     }
 
-    public boolean checkErrors(String[] tokens, Schedule schedule){
-        if(tokens.length == 1 && schedule.checkIfEmpty()){
-            System.out.println("Schedule is empty!");
-            return false;
-        }
-        Date dob = new Date(tokens[1]);
-        Date apptDate = new Date(tokens[4]);
-        Patient patient = new Patient(tokens[2], tokens[3],dob);
-        Time apptTime = new Time(tokens[5]);
-        Timeslot slot = new Timeslot(apptDate, apptTime);
-        Location location;
+    public boolean checkEmptySchedule(String[] tokens, Schedule schedule){
+         return tokens.length == 1 && schedule.checkIfEmpty();
+    }
+
+    public boolean checkLocation(String[] tokens, Schedule schedule){
         if(!tokens[6].equalsIgnoreCase("MORRIS") && !tokens[6].equalsIgnoreCase("SOMERSET") && !tokens[6].equalsIgnoreCase("UNION")  && !tokens[6].equalsIgnoreCase("MIDDLESEX")
         && !tokens[6].equalsIgnoreCase("MERCER")) {
             System.out.println("Invalid Location");
             return false;
         }
-        location = Location.valueOf(tokens[6].toUpperCase());
+        return true;
+    }
+
+    public boolean handleValidDate(String[] tokens, Schedule schedule){
+        Date dob = new Date(tokens[1]);
+        Date apptDate = new Date(tokens[4]);
+        Time apptTime = new Time(tokens[5]);
+        Patient patient = new Patient(tokens[2], tokens[3],dob);
+        Timeslot slot = new Timeslot(apptDate, apptTime);
+        Location location = Location.valueOf(tokens[6].toUpperCase());
         Appointment appt = new Appointment(patient, slot, location);
-        if(!apptTime.isValid()){
-            System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
+        if(!dob.isValid()){
+            System.out.println(dob);
+            System.out.println("Invalid date of birth!");
             return false;
         }
         if(!appt.isValidApptDate()){
@@ -97,11 +108,21 @@ public class Kiosk {
             System.out.println("Date of birth invalid -> it is a future date");
             return false;
         }
-        if(!dob.isValid()){
-            System.out.println(dob);
-            System.out.println("Invalid date of birth!");
+        if(!apptTime.isValid()){
+            System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
             return false;
         }
+        return true;
+    }
+
+    public boolean checkAddError(String[] tokens,Schedule schedule){
+        Date dob = new Date(tokens[1]);
+        Date apptDate = new Date(tokens[4]);
+        Time apptTime = new Time(tokens[5]);
+        Patient patient = new Patient(tokens[2], tokens[3],dob);
+        Timeslot slot = new Timeslot(apptDate, apptTime);
+        Location location = Location.valueOf(tokens[6].toUpperCase());
+        Appointment appt = new Appointment(patient, slot, location);
         if(schedule.addError == 2 || schedule.addError == 3){
             System.out.println("Same patient cannot book an appointment with the same date");
             return false;

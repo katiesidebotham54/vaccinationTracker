@@ -93,9 +93,6 @@ public class Schedule {
     }
 
     public void print() {
-        if(appointments == null) {
-            System.out.println("Invalid Command");
-        }
         for(Appointment a: appointments){
             System.out.println(a);
         }
