@@ -11,7 +11,7 @@ public class Date implements Comparable<Date> {
     public static final int QUADRENNIAL = 4;
     public static final int CENTENNIAL = 100;
     public static final int QUATERCENTENNIAL = 400;
-    public static final int FIRSTDAYOFMONTH = 1;
+    //public static final int FIRSTDAYOFMONTH = 1;
     public static final int MINMONTH = 30;
     public static final int MAXMONTH = 31;
     public static final int FEBRUARYMAX = 29;

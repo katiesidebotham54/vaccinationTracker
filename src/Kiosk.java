@@ -133,7 +133,7 @@ public class Kiosk {
         Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = Location.valueOf(tokens[6].toUpperCase());
         Appointment appt = new Appointment(patient, slot, location);
-        System.out.println("addError: " + schedule.addError);
+        //System.out.println("addError: " + schedule.addError);
         if(schedule.addError == 2 || schedule.addError == 3){
             System.out.println("Same patient cannot book an appointment with the same date.");
             return false;

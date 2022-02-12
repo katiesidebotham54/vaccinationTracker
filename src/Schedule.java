@@ -30,7 +30,6 @@ public class Schedule {
         }
         return NOT_FOUND;
     } // return the index, or found
-
     private void grow() {
         Appointment[] newArr = new Appointment[numAppts + 4];//Creating a new array with space for an extra element
         for(int i = 0; i < numAppts; i++)
@@ -50,15 +49,32 @@ public class Schedule {
             grow();
         }
         if(find(appt) == NOT_FOUND){
-            System.out.println("wasn't found ");
-            appointments[numAppts] = appt;
-            numAppts++;
-            return true;
-        } else {
-            for(Appointment a: appointments){ // does not reach here
+            for(int i = 0; i < numAppts; i++){
+                if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getLocation() == appt.getLocation()){
+                    System.out.println("first if");
+                    if(appointments[i].getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
+                        addError = 3;
+                        return false;
+                    }
+                }// if the timeslots and locations of two appointments are the same, timeslot is already taken
+                else if(appointments[i].getPatient().compareTo(appt.getPatient()) != 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation() == appt.getLocation()){
+                    System.out.println("second if");
+                    System.out.println("a.getSlot() = " + appointments[i].getSlot());
+                    System.out.println("appt.getSlot() = " + appt.getSlot());
+                    System.out.println("a.getLocation() = " + appointments[i].getLocation());
+                    System.out.println("appt.getLocation() = " + appt.getLocation());
+                    addError = 1;
+                    return false;
+                }
+                else if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getSlot().getDate() == appt.getSlot().getDate() && appointments[i].getLocation() != appt.getLocation()){
+                    addError = 2;
+                    return false;
+                }
+
+            }
+            /*
+            for(Appointment a: this.appointments){
                 System.out.println("Made it to for loop");
-                //if the patient and the location are the same
-                //then check if the date are the same --> patient cannot book another appointment on the same day
                 if(a.getPatient().compareTo(appt.getPatient()) == 0 && a.getLocation() == appt.getLocation()){
                     if(a.getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
                         addError = 3;
@@ -83,10 +99,13 @@ public class Schedule {
                     return false;
                 }
             }
+            */
         }
-        System.out.println("it was actually here");
-        return true; // return statement needed
+        appointments[numAppts] = appt;
+        numAppts++;
+        return true;
     }
+
 
     public boolean remove(Appointment appt) {
             System.out.println(appt);

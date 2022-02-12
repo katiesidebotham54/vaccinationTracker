@@ -41,5 +41,28 @@ public class Timeslot implements Comparable<Timeslot> {
             }
         }
         return 0; // come back to ltr if doesn't work
+        /*
+        if(this == date){
+            return 0;
+        } else if(this.year > date.year) {
+            return 1;
+        } else if(this.year < date.year) {
+            return -1;
+        } else {
+            if(this.month < date.month) {
+                return -1;
+            } else if(this.month > date.month) {
+                return 1;
+            } else {
+                if(this.day < date.day) {
+                    return -1;
+                } else if(this.day > date.day) {
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+         */
     }
 }
