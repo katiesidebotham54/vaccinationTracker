@@ -46,32 +46,14 @@ public class Patient implements Comparable<Patient> {
     @Override
     public int compareTo(Patient patient) {
         if(this.lname.compareTo(patient.lname) == 0){
-        //check if first name is the same
-            if( this.fname.compareTo(patient.fname) == 0){
+            if(this.fname.compareTo(patient.fname) == 0){
                     //check if date of birth is same
-                if(this.dob.compareTo(patient.dob) == 0){
-                        //they are the same patient
-                    return 0;
-                } else {
-                    if(this.dob.compareTo(patient.dob) > 0){
-                        return 1; //patient is bigger
-                    } else {
-                        return -1;// this is bigger
-                    }
-                }
-            } else {
-                if( this.fname.compareTo(patient.fname) > 0){
-                    return 1; //patient obj goes first
-                } else{
-                    return -1; //this obj goes first
-                }
-            }
-        } else {
-            if(this.lname.compareTo(patient.lname) > 0){
-                return 1; //this last name is bigger // make somne changes here kevin
-            } else {
-                return -1; //patient last name is bigger
-            }
-        }
+                if(this.dob.compareTo(patient.dob) == 0)  return 0;
+                else if(this.dob.compareTo(patient.dob) > 0) return 1; //patient is bigger
+                else return -1;// this is bigger
+            } else if(this.fname.compareTo(patient.fname) > 0) return 1; //patient obj goes first
+            else return -1; //this obj goes first
+        } else if(this.lname.compareTo(patient.lname) > 0) return 1; //this last name is bigger // make somne changes here kevin{
+        else return -1; //patient last name is bigger
     }
 }
