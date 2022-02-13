@@ -8,6 +8,8 @@ public class Schedule {
     private int numAppts;
     public final int NOT_FOUND = -1;
     public int addError;
+    public int CURR = 0;
+
 
     /**
      * This method is used to traverse the entire array of appointments until the specific appointment that is being looked for
@@ -25,9 +27,12 @@ public class Schedule {
     } //return the index, or NOT_FOUND
 
     public Appointment findPatient(Appointment appt){
-        for(int i = 0; i < numAppts; i++){
-            if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0){
-                return appointments[i];
+        while (CURR < numAppts){
+            if(appointments[CURR].getPatient().compareTo(appt.getPatient()) == 0){
+                Appointment p = appointments[CURR];
+                CURR++;
+                System.out.println(CURR);
+                return p;
             }
         }
         return null;
@@ -134,7 +139,6 @@ public class Schedule {
             return true;
         }
     }
-
     public Appointment[] getAppt(){
         return appointments;
     }
