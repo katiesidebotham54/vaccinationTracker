@@ -120,18 +120,17 @@ public class Kiosk {
         Patient patient = new Patient(tokens[2], tokens[3], dob);
         Appointment appt = new Appointment(patient);
         Appointment[] patientArr = new Appointment[schedule.getNumAppts()];
-        System.out.println("made it here");
         for(int i = 0; i < patientArr.length; i++){
             if(schedule.findPatient(appt) != null){
                 patientArr[i] = schedule.findPatient(appt);
                 System.out.println(patientArr[i]);
             }
         }
-//        for(int i = 0; i < patientArr.length; i++){
-//            if(patientArr[i] != null){
-//                schedule.remove(patientArr[i]);
-//            } else break;
-//        }
+        for(int i = 0; i < patientArr.length; i++){
+            if(patientArr[i] != null){
+                schedule.removePatient(patientArr[i]);
+            } else break;
+        }
         System.out.println("All Appointments for " + patient.getFname() + " " + patient.getLname() + " DOB: " + patient.getDob() + " have been cancelled.");
     }
 

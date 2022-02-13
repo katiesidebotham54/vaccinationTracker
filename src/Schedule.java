@@ -138,6 +138,14 @@ public class Schedule {
             return true;
         }
     }
+    public boolean removePatient(Appointment appt){
+        for(int i = find(appt); i < numAppts; i++){
+            appointments[find(appt)] = appointments[find(appt) + 1];
+        }
+        numAppts--;
+        return true;
+    }
+
     public Appointment[] getAppt(){
         return appointments;
     }
