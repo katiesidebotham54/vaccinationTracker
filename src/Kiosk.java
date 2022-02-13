@@ -123,14 +123,14 @@ public class Kiosk {
         for(int i = 0; i < patientArr.length; i++){
             if(schedule.findPatient(appt) != null){
                 patientArr[i] = schedule.findPatient(appt);
+                System.out.println(patientArr[i]);
             }
         }
-        for(int i = 0; i < patientArr.length; i++){
-            if(patientArr[i] == null){
-                break;
-            }
-            schedule.remove(patientArr[i]);
-        }
+//        for(int i = 0; i < patientArr.length; i++){
+//            if(patientArr[i] != null){
+//                schedule.remove(patientArr[i]);
+//            } else break;
+//        }
         System.out.println("All Appointments for " + patient.getFname() + " " + patient.getLname() + " DOB: " + patient.getDob() + " have been cancelled.");
     }
 
