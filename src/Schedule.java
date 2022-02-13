@@ -107,12 +107,15 @@ public class Schedule {
 
     public void sortZip (Appointment[] appointments) {
         System.out.println("Entering sortZip method");
+        // insertion sort implementation
         for(int i = 1; i < numAppts; i++) {
-            int current = Integer.parseInt(appointments[i].getLocation().getZipCode());
+            String checkThis = appointments[i].getLocation().getZipCode();
             int next = i - 1;
-            while(next >= 0 && Integer.parseInt(appointments[next].getLocation().getZipCode()) > current) {
+            while(next >= 0 && appointments[next].getLocation().getZipCode().compareTo(checkThis) > 0) {
                 appointments[next + 1] = appointments[next];
+                next--;
             }
+            appointments[next + 1] = appointments[i];
         }
     }
 
