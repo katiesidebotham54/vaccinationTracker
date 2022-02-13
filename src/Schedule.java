@@ -92,7 +92,6 @@ public class Schedule {
             return false;
         } else{
             for(int i = findPatient(appt); i< numAppts; i++){
-                System.out.println("Removing one");
                 appointments[findPatient(appt)] = appointments[findPatient(appt) + 1];
             }
             numAppts--;
@@ -106,8 +105,8 @@ public class Schedule {
         }
     } //print all the appointments in current order
 
-    public void sortZip (Appointment[] appointments) {
-        // insertion sort implementation
+
+    public void printByZip() {
         for (int i = 0; i < numAppts; i++)
         {
             for (int j = i + 1; j < numAppts; j++)
@@ -127,39 +126,23 @@ public class Schedule {
                 }
             }
         }
-//        for (int i = 1; i < numAppts; i++) {
-//            String checkThis = appointments[i].getLocation().getZipCode();
-//            System.out.println(checkThis);
-//            int next = i - 1;
-//            System.out.println("Next: " + next);
-//            while (next >= 0 && appointments[next].getLocation().getZipCode().compareTo(checkThis) > 0) {
-//                appointments[next + 1] = appointments[next];
-//                next--;
-//            }
-//            if (appointments[next + 1].getLocation().getZipCode().compareTo(checkThis) == 0 && appointments[next + 1].getSlot().compareTo(appointments[i].getSlot()) > 0) {
-//                continue;
-//            } else {
-//                appointments[next + 1] = appointments[i];
-//            }
-//        }
-    }
-
-    public void printByZip() {
-        sortZip(appointments);
         print();
     } //sort by zip codes and print
 
-    public void sortByPatient(){
-        for(int i = 1; i < numAppts; i++){
-            if(appointments[i-1].getPatient().compareTo(appointments[i].getPatient()) > 0){
-                Appointment tmp = appointments[i-1];
-                appointments[i-1] = appointments[i];
-                appointments[i] = tmp;
+    public void printByPatient() {
+        for (int i = 0; i < numAppts; i++)
+        {
+            for (int j = i + 1; j < numAppts; j++)
+            {
+                Appointment tmp;
+                if (appointments[i].getPatient().compareTo(appointments[j].getPatient()) > 0)
+                {
+                    tmp = appointments[i];
+                    appointments[i] = appointments[j];
+                    appointments[j] = tmp;
+                }
             }
         }
-    }
-    public void printByPatient() {
-        sortByPatient();
         print();
     } //sort by patient and print
 }

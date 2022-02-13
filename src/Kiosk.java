@@ -24,11 +24,27 @@ public class Kiosk {
                 if(checkEmptySchedule(tokens, schedule)){
                     System.out.println("Invalid command");
                 } else{
+                    System.out.println();
+                    System.out.println("*list of appointments in the schedule*");
                     schedule.print();
+                    System.out.println("*end of schedule*");
+                    System.out.println();
                 }
             }
-            case "PZ" -> schedule.printByZip();
-            case "PP" -> schedule.printByPatient();
+            case "PZ" -> {
+                System.out.println();
+                System.out.println("*list of appointments by zip and time slot.");
+                schedule.printByZip();
+                System.out.println("*end of schedule.");
+                System.out.println();
+            }
+            case "PP" -> {
+                System.out.println();
+                System.out.println("*list of appointments by zip and time slot.");
+                schedule.printByPatient();
+                System.out.println("*end of list");
+                System.out.println();
+            }
             case "Q" -> System.out.println("Kiosk Session Ended");
             case "C" -> cancel(schedule, tokens);
             case "CP" -> {
@@ -74,7 +90,7 @@ public class Kiosk {
             if(schedule.removeByPatient(appt)) {
                 System.out.println("All Appointments for " + patient.getFname() + " " + patient.getFname() + " DOB: " + patient.getDob() + " have been cancelled.");
             } else {
-                System.out.println("Not cancelled, appointment(s) does not exist");
+                System.out.println("Not cancelled, appointment(s) does not exist.");
             }
         }
     }
@@ -89,9 +105,9 @@ public class Kiosk {
             Location location = Location.valueOf(tokens[6].toUpperCase());
             Appointment appt = new Appointment(patient, slot, location);
             if(schedule.remove(appt)) {
-                System.out.println("Appointment Cancelled");
+                System.out.println("Appointment cancelled.");
             } else {
-                System.out.println("Not cancelled, appointment does not exist");
+                System.out.println("Not cancelled, appointment does not exist.");
             }
         }
     }
