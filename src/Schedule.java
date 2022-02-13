@@ -89,9 +89,12 @@ public class Schedule {
 
     public boolean removeByPatient(Appointment appt){
         if(findPatient(appt) == NOT_FOUND){
+            System.out.println("not found ");
             return false;
         } else{
             for(int i = findPatient(appt); i < numAppts; i++){
+                System.out.println("appt "  + appointments[findPatient(appt)]);
+                System.out.println("appt +1 " + appointments[findPatient(appt) + 1]);
                 appointments[findPatient(appt)] = appointments[findPatient(appt) + 1];
             }
             numAppts--;
@@ -103,8 +106,7 @@ public class Schedule {
         for(int i = 0; i < numAppts; i++){
             System.out.println(appointments[i]);
         }
-    } //print all the appointments in current order
-
+    }
 
     public void printByZip() {
         for (int i = 0; i < numAppts; i++)
@@ -127,10 +129,8 @@ public class Schedule {
             }
         }
         print();
-    } //sort by zip codes and print
-
+    }
     public void printByPatient() {
-        //System.out.println("HERE");
         for(int i = 1; i < numAppts; i++) {
             Appointment temp = appointments[i];
             int j = i -1;
@@ -141,5 +141,5 @@ public class Schedule {
             appointments[j + 1] = temp;
         }
         print();
-    } //sort by patient and print
+    }
 }
