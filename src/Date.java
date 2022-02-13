@@ -1,9 +1,9 @@
-/**
- *
- */
-
 import java.util.Calendar;
 
+/**
+ *
+ * @author kevinarbito, katiesidebotham
+ */
 public class Date implements Comparable<Date> {
     private int year;
     private int month;
