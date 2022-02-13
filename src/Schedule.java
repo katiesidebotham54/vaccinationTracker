@@ -22,7 +22,7 @@ public class Schedule {
         return numAppts==0;
     }
 
-    public int checkifExist(Appointment appt) {
+    public int checkIfExist(Appointment appt) {
         for(int i = 0; i < numAppts; i++){
             if(appointments[i].equals(appt)){
                 return i;
@@ -79,6 +79,10 @@ public class Schedule {
         }
     }
 
+    public boolean removeByPatient(){
+
+    }
+
     public void print() {
         for(int i = 0; i < numAppts; i++){
             System.out.println(appointments[i]);
@@ -97,7 +101,6 @@ public class Schedule {
     }
 
     public void printByZip() {
-        System.out.println("Entering Print By Zip Method");
         sortZip(appointments);
         print();
     } //sort by zip codes and print

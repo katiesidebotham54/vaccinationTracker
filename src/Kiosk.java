@@ -29,7 +29,8 @@ public class Kiosk {
             case "PZ" -> schedule.printByZip();
             case "PP" -> schedule.printByPatient();
             case "Q" -> System.out.println("Kiosk Session Ended");
-            case "CP", "C" -> cancel(schedule, tokens);
+            case "C" -> cancel(schedule, tokens);
+            case "CP" -> cancelAll(schedule, tokens);
             case "B" -> bookAppointment(schedule, tokens);
             default -> System.out.println("Invalid Command");
         }
@@ -40,46 +41,54 @@ public class Kiosk {
 //            System.out.println("checkAddError: " + checkAddError(tokens, schedule));
             schedule.addError = 0;
             if(handleValidDate(tokens, schedule) && checkAddError(tokens, schedule)) {
-                addHelper(tokens, schedule);
+                Date dob = new Date(tokens[1]);
+                Date apptDate = new Date(tokens[4]);
+                Patient patient = new Patient(tokens[2], tokens[3],dob);
+                Time apptTime = new Time(tokens[5]);
+                Timeslot slot = new Timeslot(apptDate, apptTime);
+                Location location = Location.valueOf(tokens[6].toUpperCase());
+                Appointment appt = new Appointment(patient, slot, location);
+                if(schedule.add(appt)) {
+                    System.out.println("Appointment booked and added to the schedule.");
+                } else {
+                    checkAddError(tokens, schedule);
+                }
             }
         }
         return;
     }
 
-    public void addHelper(String[] tokens, Schedule schedule) {
-        Date dob = new Date(tokens[1]);
-        Date apptDate = new Date(tokens[4]);
-        Patient patient = new Patient(tokens[2], tokens[3],dob);
-        Time apptTime = new Time(tokens[5]);
-        Timeslot slot = new Timeslot(apptDate, apptTime);
-        Location location = Location.valueOf(tokens[6].toUpperCase());
-        Appointment appt = new Appointment(patient, slot, location);
-        if(schedule.add(appt)) {
-            System.out.println("Appointment booked and added to the schedule.");
-        } else {
-            checkAddError(tokens, schedule);
+    public void cancelAll(Schedule schedule, String[] tokens){
+        if(checkLocation(tokens, schedule) && !checkEmptySchedule(tokens, schedule) && handleValidDate(tokens, schedule)) {
+            Date dob = new Date(tokens[1]);
+            Date apptDate = new Date(tokens[4]);
+            Patient patient = new Patient(tokens[2], tokens[3],dob);
+            Time apptTime = new Time(tokens[5]);
+            Timeslot slot = new Timeslot(apptDate, apptTime);
+            Location location = Location.valueOf(tokens[6].toUpperCase());
+            Appointment appt = new Appointment(patient, slot, location);
+            if(schedule.remove(appt)) {
+                System.out.println("Appointment Cancelled");
+            } else {
+                System.out.println("Not cancelled, appointment does not exist");
+            }
         }
     }
 
     public void cancel(Schedule schedule, String[] tokens){
         if(checkLocation(tokens, schedule) && !checkEmptySchedule(tokens, schedule) && handleValidDate(tokens, schedule)) {
-            removeHelper(tokens, schedule);
-        }
-    }
-
-    public void removeHelper(String[] tokens, Schedule schedule) {
-
-        Date dob = new Date(tokens[1]);
-        Date apptDate = new Date(tokens[4]);
-        Patient patient = new Patient(tokens[2], tokens[3],dob);
-        Time apptTime = new Time(tokens[5]);
-        Timeslot slot = new Timeslot(apptDate, apptTime);
-        Location location = Location.valueOf(tokens[6].toUpperCase());
-        Appointment appt = new Appointment(patient, slot, location);
-        if(schedule.remove(appt)) {
-            System.out.println("Appointment Cancelled");
-        } else {
-            System.out.println("Not cancelled, appointment does not exist");
+            Date dob = new Date(tokens[1]);
+            Date apptDate = new Date(tokens[4]);
+            Patient patient = new Patient(tokens[2], tokens[3],dob);
+            Time apptTime = new Time(tokens[5]);
+            Timeslot slot = new Timeslot(apptDate, apptTime);
+            Location location = Location.valueOf(tokens[6].toUpperCase());
+            Appointment appt = new Appointment(patient, slot, location);
+            if(schedule.remove(appt)) {
+                System.out.println("Appointment Cancelled");
+            } else {
+                System.out.println("Not cancelled, appointment does not exist");
+            }
         }
     }
 
@@ -138,7 +147,7 @@ public class Kiosk {
             System.out.println("Same patient cannot book an appointment with the same date.");
             return false;
         }
-        if(schedule.checkifExist(appt) != -1){
+        if(schedule.checkIfExist(appt) != -1){
             System.out.println("Same appointment exists in the schedule.");
             return false;
         }
