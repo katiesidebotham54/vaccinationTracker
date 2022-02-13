@@ -27,12 +27,11 @@ public class Schedule {
     } //return the index, or NOT_FOUND
 
     public Appointment findPatient(Appointment appt){
-        while (CURR < numAppts){
-            if(appointments[CURR].getPatient().compareTo(appt.getPatient()) == 0){
-                Appointment p = appointments[CURR];
-                CURR++;
+        for(int i = CURR; i < numAppts; i++){
+            if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0){
                 System.out.println(CURR);
-                return p;
+                CURR++;
+                return appointments[i];
             }
         }
         return null;
