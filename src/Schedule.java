@@ -135,7 +135,7 @@ public class Schedule {
             for (int j = i + 1; j < numAppts; j++)
             {
                 Appointment tmp;
-                if (appointments[i].getPatient().compareTo(appointments[j].getPatient()) > 0)
+                if (appointments[i].getPatient().compareTo(appointments[j].getPatient()) >= 0)
                 {
                     tmp = appointments[i];
                     appointments[i] = appointments[j];

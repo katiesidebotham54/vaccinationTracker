@@ -40,7 +40,7 @@ public class Kiosk {
             }
             case "PP" -> {
                 System.out.println();
-                System.out.println("*list of appointments by zip and time slot.");
+                System.out.println("*list of appointments by patient.");
                 schedule.printByPatient();
                 System.out.println("*end of list");
                 System.out.println();
