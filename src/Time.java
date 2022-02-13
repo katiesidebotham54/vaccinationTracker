@@ -1,18 +1,21 @@
-import java.text.DecimalFormat;
-
-/*
-
-authors: @kevinarbito @katiesidebotham
+/**
+ *
+ * @author kevinarbito, katiesidebotham
  */
-// Done
 public class Time implements Comparable<Time> {
     private int hour;
     private int minute;
 
-    public Time(int hour, int minute) {
+    public Time(int hour, int minute) { // unecessary?
         this.hour = hour;
         this.minute = minute;
     }
+
+    /**
+     * This constructor takes in time as a string and splits it up into integers. it formats it, so it is in HH:MM time.
+     * it creates the time object within this constructor.
+     * @param time The time that must be formatted correctly and used to make a Time object.
+     */
     public Time(String time) {
         String[] parts = time.split(":");
         int hour =  Integer.parseInt(parts[0]);
@@ -22,6 +25,12 @@ public class Time implements Comparable<Time> {
         this.minute = check;
     } //take “hh:mm” and create a Time object
 
+    /**
+     * This method is called in order to check whether the time is valid.
+     * It makes sure that the hour is within the window provided.
+     * it checks that the minute is intervals of 15.
+     * @return Boolean: true if hour and minute are valid, false otherwise.
+     */
     public boolean isValid() {
         if((hour >= 9 && hour <= 16)) {
             if(minute > 45) {
@@ -32,11 +41,22 @@ public class Time implements Comparable<Time> {
         }
     }
 
-
+    /**
+     * This overrides and returns the string format of Time.
+     * @return String format of Time.
+     */
     @Override
     public String toString() {
         return (String.format("%02d", this.hour) + ":" + String.format("%02d", this.minute));
     }
+
+    /**
+     * This method overrides and compares two times to each other. It checks whether the times are the same, and if
+     * they are not it will return 1 or -1 based whether the hour is less than or greater than or the minute is less
+     * than or greater than.
+     * @param time Time to be compared.
+     * @return -1 is less than, 1 if greater than, 0 if equal
+     */
     @Override
     public int compareTo(Time time) {
         if(this.equals(time)){

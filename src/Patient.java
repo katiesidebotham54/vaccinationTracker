@@ -7,29 +7,40 @@ public class Patient implements Comparable<Patient> {
     private String lname;
     private Date dob;
 
+    /**
+     * This constructor holds the information of each patient. It holds the first name, last name, and date of birth
+     * (dob). This is made for easy access to what is within the object. It can be referenced within this class using
+     * this and this. for specific.
+     * @param fname First name of patient
+     * @param lname Last name of patient
+     * @param dob Date of birth of patient
+     */
     Patient(String fname, String lname, Date dob) {
         this.fname = fname;
         this.lname = lname;
         this.dob = dob;
     }
-    // Getter
+
+    // Getter for date of birth
     public Date getDob() {
         return this.dob;
     }
-    // Setter
-    public void setDob(Date newDob) {
-        this.dob = newDob;
-    }
 
+    // Getter for first name
     public String getFname(){
         return this.fname;
     }
 
+    //Getter for last name
     public String getLname(){
         return this.lname;
     }
 
-
+    /**
+     * This method is called in order to check whether the date of birth of a specific patient is today or
+     * a future date. If it is, it will return a boolean from where it was called.
+     * @return Boolean: true if date of birth is not today or future date, false otherwise.
+     */
     public boolean isValidDOB(){
         //check if date of birth is today or future date
         Date today = new Date();
@@ -39,10 +50,22 @@ public class Patient implements Comparable<Patient> {
         return true;
     }
 
+    /**
+     * This is called in order to return the information of the patient as a string.
+     * @return String format of patient information.
+     */
     @Override
     public String toString() {
         return this.fname + " " + this.lname + " " + this.dob;
     }
+
+    /**
+     * This method takes in the parameter patient and compares the patients name in order to see whether the name
+     * is the same, greater than, or less than in the alphabet. It compares whether the date of birth is the same,
+     * greater than, or less than and returns an integer value based on the condition that was met.
+     * @param patient information of the patient that is to be compared.
+     * @return integer value based on whether one of the conditions are met, (-1 = less, 0 = equals, 1 = greater)
+     */
     @Override
     public int compareTo(Patient patient) {
         if(this.lname.compareTo(patient.lname) == 0){

@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-/*
-
-authors: @katiesidebotham @kevinarbito
+/**
+ *
+ * @author kevinarbito, katiesidebotham
  */
 public class Kiosk {
     public static final int CP_MIN_LENGTH = 4;
@@ -222,7 +222,7 @@ public class Kiosk {
      * that returns an integer to specify what error occurred while adding. This method will print the error depending on what integer was return and ultimately
      * return false if an error was ran into, otherwise true.
      * @param tokens The command and appointment information are stored in tokens in order to create objects and to execute other methods
-     * @param schedule
+     * @param schedule The schedule object that holds all appointments
      * @return boolean true or false: true if there are no errors, false otherwise.
      */
     public boolean checkAddError(String[] tokens,Schedule schedule){
