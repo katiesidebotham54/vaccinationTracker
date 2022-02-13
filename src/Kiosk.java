@@ -70,6 +70,7 @@ public class Kiosk {
             Date dob = new Date(tokens[1]);
             Patient patient = new Patient(tokens[2], tokens[3], dob);
             Appointment appt = new Appointment(patient);
+            System.out.println(schedule.removeByPatient(appt));
             if(schedule.removeByPatient(appt)) {
                 System.out.println("All Appointments for " + patient.getFname() + " " + patient.getFname() + " DOB: " + patient.getDob() + " have been cancelled.");
             } else {

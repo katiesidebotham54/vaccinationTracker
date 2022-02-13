@@ -20,7 +20,7 @@ public class Schedule {
 
     public int findPatient(Appointment appt){
         for(int i = 0; i < numAppts; i++){
-            if(appointments[i].getPatient().equals(appt.getPatient())){
+            if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0){
                 return i;
             }
         }
@@ -92,6 +92,7 @@ public class Schedule {
             return false;
         } else{
             for(int i = findPatient(appt); i< numAppts; i++){
+                System.out.println("Removing one");
                 appointments[findPatient(appt)] = appointments[findPatient(appt) + 1];
             }
             numAppts--;
