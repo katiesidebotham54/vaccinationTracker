@@ -18,7 +18,15 @@ public class Schedule {
         return NOT_FOUND;
     } //return the index, or NOT_FOUND
 
-    public boolean checkIfEmpty(){
+    public int findPatient(Appointment appt){
+        for(int i = 0; i < numAppts; i++){
+            if(appointments[i].getPatient().equals(appt.getPatient())){
+                return i;
+            }
+        }
+        return NOT_FOUND;
+    }
+    public boolean checkNumAppts(){
         return numAppts==0;
     }
 
@@ -79,8 +87,16 @@ public class Schedule {
         }
     }
 
-    public boolean removeByPatient(){
-
+    public boolean removeByPatient(Appointment appt){
+        if(findPatient(appt) == NOT_FOUND){
+            return false;
+        } else{
+            for(int i = findPatient(appt); i< numAppts; i++){
+                appointments[findPatient(appt)] = appointments[findPatient(appt) + 1];
+            }
+            numAppts--;
+            return true;
+        }
     }
 
     public void print() {

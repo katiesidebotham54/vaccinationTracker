@@ -12,10 +12,10 @@ public class Date implements Comparable<Date> {
     public static final int CENTENNIAL = 100;
     public static final int QUATERCENTENNIAL = 400;
     //public static final int FIRSTDAYOFMONTH = 1;
-    public static final int MINMONTH = 30;
-    public static final int MAXMONTH = 31;
-    public static final int FEBRUARYMAX = 29;
-    public static final int FEBRUARYMIN= 28;
+    public static final int MIN_DAYS_IN_MONTH = 30;
+    public static final int MAX_DAYS_IN_MONTH = 31;
+    public static final int FEBRUARY_MAX = 29;
+    public static final int FEBRUARY_MIN= 28;
 
 
     Date(int year, int month, int day) {
@@ -66,16 +66,16 @@ public class Date implements Comparable<Date> {
     public boolean checkDays(){
         switch(this.month){
             case 1, 3, 5, 7, 8, 10, 12 -> {
-                if(this.day <= MAXMONTH) return true;
+                if(this.day <= MAX_DAYS_IN_MONTH) return true;
             }
             case 4, 6, 9, 11 -> {
-                if(this.day <= MINMONTH) return true;
+                if(this.day <= MIN_DAYS_IN_MONTH) return true;
             }
             case 2 -> {
                 if(this.isLeapYear()){
-                    if(this.day <= FEBRUARYMAX) return true;
+                    if(this.day <= FEBRUARY_MAX) return true;
                 } else{
-                    if(this.day <= FEBRUARYMIN) return true;
+                    if(this.day <= FEBRUARY_MIN) return true;
                 }
             }
             default -> {

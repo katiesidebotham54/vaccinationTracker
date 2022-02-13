@@ -5,6 +5,7 @@ import java.util.Scanner;
 authors: @katiesidebotham @kevinarbito
  */
 public class Kiosk {
+    public static final int CP_MIN_LENGTH = 4;
     public void run() {
         System.out.print("Kiosk running. Ready to process transactions.");
         System.out.println();
@@ -30,7 +31,13 @@ public class Kiosk {
             case "PP" -> schedule.printByPatient();
             case "Q" -> System.out.println("Kiosk Session Ended");
             case "C" -> cancel(schedule, tokens);
-            case "CP" -> cancelAll(schedule, tokens);
+            case "CP" -> {
+                if(checkEmptySchedule(tokens, schedule) || tokens.length < CP_MIN_LENGTH){
+                    System.out.println("Invalid command");
+                } else{
+                    cancelByPatient(schedule, tokens);
+                }
+            }
             case "B" -> bookAppointment(schedule, tokens);
             default -> System.out.println("Invalid Command");
         }
@@ -58,19 +65,15 @@ public class Kiosk {
         return;
     }
 
-    public void cancelAll(Schedule schedule, String[] tokens){
-        if(checkLocation(tokens, schedule) && !checkEmptySchedule(tokens, schedule) && handleValidDate(tokens, schedule)) {
+    public void cancelByPatient(Schedule schedule, String[] tokens){
+        if(!checkEmptySchedule(tokens, schedule)) {
             Date dob = new Date(tokens[1]);
-            Date apptDate = new Date(tokens[4]);
-            Patient patient = new Patient(tokens[2], tokens[3],dob);
-            Time apptTime = new Time(tokens[5]);
-            Timeslot slot = new Timeslot(apptDate, apptTime);
-            Location location = Location.valueOf(tokens[6].toUpperCase());
-            Appointment appt = new Appointment(patient, slot, location);
-            if(schedule.remove(appt)) {
-                System.out.println("Appointment Cancelled");
+            Patient patient = new Patient(tokens[2], tokens[3], dob);
+            Appointment appt = new Appointment(patient);
+            if(schedule.removeByPatient(appt)) {
+                System.out.println("All Appointments for " + patient.getFname() + " " + patient.getFname() + " DOB: " + patient.getDob() + " have been cancelled.");
             } else {
-                System.out.println("Not cancelled, appointment does not exist");
+                System.out.println("Not cancelled, appointment(s) does not exist");
             }
         }
     }
@@ -93,7 +96,7 @@ public class Kiosk {
     }
 
     public boolean checkEmptySchedule(String[] tokens, Schedule schedule){
-         return tokens.length == 1 && schedule.checkIfEmpty();
+         return tokens.length == 1 && schedule.checkNumAppts();
     }
 
     public boolean checkLocation(String[] tokens, Schedule schedule){

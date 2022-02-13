@@ -15,6 +15,9 @@ public class Appointment {
         this.slot = slot;
         this.location = location;
     }
+    Appointment(Patient patient){
+        this.patient = patient;
+    }
 
     public boolean isValidApptDate() { // not working correctly failed : B 12/1/1999 John Doe 3/32/2022 9:45 SOMERSET
         Date today;
