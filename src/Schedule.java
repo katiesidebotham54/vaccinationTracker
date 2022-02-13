@@ -51,17 +51,11 @@ public class Schedule {
         }
         if(find(appt) == NOT_FOUND){
             for(int i = 0; i < numAppts; i++){
-                if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getLocation() == appt.getLocation()){
-                    if(appointments[i].getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
-                        addError = 3;
-                        return false;
-                    }
-                }// if the timeslots and locations of two appointments are the same, timeslot is already taken
-                else if(appointments[i].getPatient().compareTo(appt.getPatient()) != 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation() == appt.getLocation()){
+                if(appointments[i].getPatient().compareTo(appt.getPatient()) != 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation() == appt.getLocation()){
                     addError = 1;
                     return false;
                 }
-                else if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getSlot().getDate() == appt.getSlot().getDate() && appointments[i].getLocation() != appt.getLocation()){
+                else if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation() != appt.getLocation()){
                     addError = 2;
                     return false;
                 }
@@ -74,37 +68,33 @@ public class Schedule {
     }
 
     public boolean remove(Appointment appt) {
-            System.out.println(appt);
         if(find(appt) == NOT_FOUND){
             return false;
         } else{
-            for(int i = find(appt); i < appointments.length; i++){
-                appointments[find(appt)] = appointments[find(appt) +  1];
+            for(int i = find(appt); i < numAppts; i++){
+                appointments[find(appt)] = appointments[find(appt) + 1];
             }
             numAppts--;
-            System.out.println("NumAppts: " + numAppts);
-
             return true;
         }
     }
 
     public void print() {
-        for(Appointment a: appointments){
-            System.out.println(a);
+        for(int i = 0; i < numAppts; i++){
+            System.out.println(appointments[i]);
         }
     } //print all the appointments in current order
 
-    //insertion sort for appointment
     public void sortZip (Appointment[] appointments) {
+        System.out.println("Entering sortZip method");
         for(int i = 1; i < numAppts; i++) {
             int check = Integer.parseInt(appointments[i].getLocation().getZipCode());
             int j = i - 1;
 
             while(j >= 0 && Integer.parseInt(appointments[j].getLocation().getZipCode()) >= check) {
                 if(Integer.parseInt(appointments[j].getLocation().getZipCode()) == check) {
-                    if(Integer.parseInt(appointments[j].getSlot().toString()) < Integer.parseInt(appointments[i].getSlot().toString())){
+                    if(appointments[j].getSlot().compareTo(appointments[i].getSlot()) == -1){
                         continue;
-                        // revise here
                     }
                 }
                 appointments[j + 1] = appointments[j];
@@ -115,6 +105,7 @@ public class Schedule {
     }
 
     public void printByZip() {
+        System.out.println("Entering Print By Zip Method");
         sortZip(appointments);
         print();
     } //sort by zip codes and print

@@ -37,6 +37,8 @@ public class Kiosk {
 
     public void bookAppointment(Schedule schedule, String[] tokens) {
         if(checkLocation(tokens, schedule) && !checkEmptySchedule(tokens, schedule)) {
+//            System.out.println("checkAddError: " + checkAddError(tokens, schedule));
+            schedule.addError = 0;
             if(handleValidDate(tokens, schedule) && checkAddError(tokens, schedule)) {
                 addHelper(tokens, schedule);
             }
@@ -60,13 +62,13 @@ public class Kiosk {
     }
 
     public void cancel(Schedule schedule, String[] tokens){
-
-        if(checkLocation(tokens, schedule) && checkEmptySchedule(tokens, schedule) && handleValidDate(tokens, schedule)) {
+        if(checkLocation(tokens, schedule) && !checkEmptySchedule(tokens, schedule) && handleValidDate(tokens, schedule)) {
             removeHelper(tokens, schedule);
         }
     }
 
     public void removeHelper(String[] tokens, Schedule schedule) {
+
         Date dob = new Date(tokens[1]);
         Date apptDate = new Date(tokens[4]);
         Patient patient = new Patient(tokens[2], tokens[3],dob);
@@ -132,8 +134,7 @@ public class Kiosk {
         Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = Location.valueOf(tokens[6].toUpperCase());
         Appointment appt = new Appointment(patient, slot, location);
-        //System.out.println("addError: " + schedule.addError);
-        if(schedule.addError == 2 || schedule.addError == 3){
+        if(schedule.addError == 2){
             System.out.println("Same patient cannot book an appointment with the same date.");
             return false;
         }
