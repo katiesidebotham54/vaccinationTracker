@@ -24,13 +24,13 @@ public class Schedule {
         return NOT_FOUND;
     } //return the index, or NOT_FOUND
 
-    public int findPatient(Appointment appt){
+    public Appointment findPatient(Appointment appt){
         for(int i = 0; i < numAppts; i++){
             if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0){
-                return i;
+                return appointments[i];
             }
         }
-        return NOT_FOUND;
+        return null;
     }
 
     /**
@@ -144,17 +144,17 @@ public class Schedule {
      * @param appt the information for a specific patient within the appt
      * @return
      */
-    public boolean removeByPatient(Appointment appt){
-        if(findPatient(appt) == NOT_FOUND){
-            return false;
-        } else{
-            for(int i = findPatient(appt); i < numAppts; i++){
-                appointments[findPatient(appt)] = appointments[findPatient(appt) + 1];
-            }
-            numAppts--;
-            return true;
-        }
-    }
+//    public boolean removeByPatient(Appointment appt){
+//        if(findPatient(appt) == NOT_FOUND){
+//            return false;
+//        } else{
+//            for(int i = findPatient(appt); i < numAppts; i++){
+//                appointments[findPatient(appt)] = appointments[findPatient(appt) + 1];
+//            }
+//            numAppts--;
+//            return true;
+//        }
+//    }
 
     /**
      * When this method is called, it prints the schedule in the order it is in.

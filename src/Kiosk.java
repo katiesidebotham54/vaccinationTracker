@@ -119,17 +119,19 @@ public class Kiosk {
         Date dob = new Date(tokens[1]);
         Patient patient = new Patient(tokens[2], tokens[3], dob);
         Appointment appt = new Appointment(patient);
-        Appointment[] patientArr = new Appointment[];
-        for(int i = 0; i < schedule.getNumAppts(); i++){
-            if(schedule.findPatient(appt) != schedule.NOT_FOUND){
-                patientArr[i] = schedule.getAppt()
+        Appointment[] patientArr = new Appointment[schedule.getNumAppts()];
+        for(int i = 0; i < patientArr.length; i++){
+            if(schedule.findPatient(appt) != null){
+                patientArr[i] = schedule.findPatient(appt);
             }
         }
-        if(schedule.removeByPatient(appt)) {
-                System.out.println("All Appointments for " + patient.getFname() + " " + patient.getLname() + " DOB: " + patient.getDob() + " have been cancelled.");
-        } else {
-                System.out.println("Not cancelled, appointment(s) does not exist.");
+        for(int i = 0; i < patientArr.length; i++){
+            if(patientArr[i] == null){
+                break;
+            }
+            schedule.remove(patientArr[i]);
         }
+        System.out.println("All Appointments for " + patient.getFname() + " " + patient.getLname() + " DOB: " + patient.getDob() + " have been cancelled.");
     }
 
     /**
