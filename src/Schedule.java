@@ -8,7 +8,6 @@ public class Schedule {
     private int numAppts;
     public final int NOT_FOUND = -1;
     public int addError;
-    public int CURR = 0;
 
 
     /**
@@ -26,15 +25,16 @@ public class Schedule {
         return NOT_FOUND;
     } //return the index, or NOT_FOUND
 
-    public Appointment findPatient(Appointment appt){
-        for(int i = CURR; i < numAppts; i++){
+    public Appointment[] findPatients(Appointment appt){
+        Appointment[] patientArr = new Appointment[numAppts];
+        int j = 0;
+        for(int i = 0; i < numAppts; i++){
             if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0){
-                System.out.println(CURR);
-                CURR++;
-                return appointments[i];
+                patientArr[j] = appointments[i];
+                j++;
             }
         }
-        return null;
+        return patientArr;
     }
 
     /**
@@ -139,8 +139,16 @@ public class Schedule {
         }
     }
     public boolean removePatient(Appointment appt){
-        for(int i = find(appt); i < numAppts; i++){
-            appointments[find(appt)] = appointments[find(appt) + 1];
+        int found = 0;
+        for(int i = 0; i < numAppts; i++){
+            if(appointments[i].equals(appt)){
+                found = i;
+                break;
+            }
+        }
+        for(int i = found; i < numAppts; i++){
+            appointments[i] = appointments[i + 1];
+
         }
         numAppts--;
         return true;
@@ -149,23 +157,6 @@ public class Schedule {
     public Appointment[] getAppt(){
         return appointments;
     }
-
-    /**
-     *  has yet to be implemented
-     * @param appt the information for a specific patient within the appt
-     * @return
-     */
-//    public boolean removeByPatient(Appointment appt){
-//        if(findPatient(appt) == NOT_FOUND){
-//            return false;
-//        } else{
-//            for(int i = findPatient(appt); i < numAppts; i++){
-//                appointments[findPatient(appt)] = appointments[findPatient(appt) + 1];
-//            }
-//            numAppts--;
-//            return true;
-//        }
-//    }
 
     /**
      * When this method is called, it prints the schedule in the order it is in.

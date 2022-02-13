@@ -14,7 +14,7 @@ public class Kiosk {
         while(sc.hasNextLine()) {
             String line = sc.nextLine();
             String[] tokens = line.split(" ");
-            commandHelper(tokens, schedule);
+            commandHelper(tokens, schedule, sc);
         }
     }
     /**
@@ -33,7 +33,7 @@ public class Kiosk {
      * @param tokens the input commands along with the appointment information are stored in this array
      * @param schedule The schedule object that holds all appointments
      */
-    public void commandHelper(String[] tokens, Schedule schedule) {
+    public void commandHelper(String[] tokens, Schedule schedule, Scanner sc) {
         switch (tokens[0]) {
             case "P" -> {
                 if(checkEmptySchedule(tokens, schedule)){
@@ -60,7 +60,10 @@ public class Kiosk {
                 System.out.println("*end of list");
                 System.out.println();
             }
-            case "Q" -> System.out.println("Kiosk Session Ended");
+            case "Q" -> {
+                System.out.println("Kiosk Session Ended");
+                sc.close();
+            }
             case "C" -> cancel(schedule, tokens);
             case "CP" -> {
                 if(checkEmptySchedule(tokens, schedule) || tokens.length < CP_MIN_LENGTH){
@@ -119,17 +122,11 @@ public class Kiosk {
         Date dob = new Date(tokens[1]);
         Patient patient = new Patient(tokens[2], tokens[3], dob);
         Appointment appt = new Appointment(patient);
-        Appointment[] patientArr = new Appointment[schedule.getNumAppts()];
-        for(int i = 0; i < patientArr.length; i++){
-            if(schedule.findPatient(appt) != null){
-                patientArr[i] = schedule.findPatient(appt);
-                System.out.println(patientArr[i]);
-            }
-        }
+        Appointment[] patientArr = schedule.findPatients(appt);
         for(int i = 0; i < patientArr.length; i++){
             if(patientArr[i] != null){
                 schedule.removePatient(patientArr[i]);
-            } else break;
+            }
         }
         System.out.println("All Appointments for " + patient.getFname() + " " + patient.getLname() + " DOB: " + patient.getDob() + " have been cancelled.");
     }
