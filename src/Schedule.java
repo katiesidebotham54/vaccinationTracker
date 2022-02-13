@@ -107,21 +107,41 @@ public class Schedule {
     } //print all the appointments in current order
 
     public void sortZip (Appointment[] appointments) {
-        System.out.println("Entering sortZip method");
         // insertion sort implementation
-        for (int i = 1; i < numAppts; i++) {
-            String checkThis = appointments[i].getLocation().getZipCode();
-            int next = i - 1;
-            while (next >= 0 && appointments[next].getLocation().getZipCode().compareTo(checkThis) > 0) {
-                appointments[next + 1] = appointments[next];
-                next--;
-            }
-            if (appointments[next].getLocation().getZipCode().compareTo(checkThis) == 0 && appointments[next].getSlot().compareTo(appointments[i].getSlot()) > 0) {
-                continue;
-            } else {
-                appointments[next + 1] = appointments[i];
+        for (int i = 0; i < numAppts; i++)
+        {
+            for (int j = i + 1; j < numAppts; j++)
+            {
+                Appointment tmp;
+                if (Integer.parseInt(appointments[i].getLocation().getZipCode()) > Integer.parseInt(appointments[j].getLocation().getZipCode()))
+                {
+                    tmp = appointments[i];
+                    appointments[i] = appointments[j];
+                    appointments[j] = tmp;
+                } else if(Integer.parseInt(appointments[i].getLocation().getZipCode()) == Integer.parseInt(appointments[j].getLocation().getZipCode())){
+                    if(appointments[i].getSlot().compareTo(appointments[j].getSlot()) > 0){
+                        tmp = appointments[i];
+                        appointments[i] = appointments[j];
+                        appointments[j] = tmp;
+                    }
+                }
             }
         }
+//        for (int i = 1; i < numAppts; i++) {
+//            String checkThis = appointments[i].getLocation().getZipCode();
+//            System.out.println(checkThis);
+//            int next = i - 1;
+//            System.out.println("Next: " + next);
+//            while (next >= 0 && appointments[next].getLocation().getZipCode().compareTo(checkThis) > 0) {
+//                appointments[next + 1] = appointments[next];
+//                next--;
+//            }
+//            if (appointments[next + 1].getLocation().getZipCode().compareTo(checkThis) == 0 && appointments[next + 1].getSlot().compareTo(appointments[i].getSlot()) > 0) {
+//                continue;
+//            } else {
+//                appointments[next + 1] = appointments[i];
+//            }
+//        }
     }
 
     public void printByZip() {
