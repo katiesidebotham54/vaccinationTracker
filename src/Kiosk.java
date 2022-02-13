@@ -118,7 +118,13 @@ public class Kiosk {
     public void cancelByPatient(Schedule schedule, String[] tokens){
         Date dob = new Date(tokens[1]);
         Patient patient = new Patient(tokens[2], tokens[3], dob);
-        Appointment appt = new Appointment(patient); // issue maybe because were missing a lot of things here
+        Appointment appt = new Appointment(patient);
+        Appointment[] patientArr = new Appointment[];
+        for(int i = 0; i < schedule.getNumAppts(); i++){
+            if(schedule.findPatient(appt) != schedule.NOT_FOUND){
+                patientArr[i] = schedule.getAppt()
+            }
+        }
         if(schedule.removeByPatient(appt)) {
                 System.out.println("All Appointments for " + patient.getFname() + " " + patient.getLname() + " DOB: " + patient.getDob() + " have been cancelled.");
         } else {

@@ -41,6 +41,9 @@ public class Schedule {
     public boolean checkNumAppts(){
         return numAppts==0;
     }
+    public int getNumAppts(){
+        return numAppts;
+    }
 
     /**
      * This method takes in appt as the parameter. It will traverse through the numbers of appointments until the
@@ -132,6 +135,10 @@ public class Schedule {
         }
     }
 
+    public Appointment[] getAppt(){
+        return appointments;
+    }
+
     /**
      *  has yet to be implemented
      * @param appt the information for a specific patient within the appt
@@ -139,12 +146,9 @@ public class Schedule {
      */
     public boolean removeByPatient(Appointment appt){
         if(findPatient(appt) == NOT_FOUND){
-            System.out.println("not found ");
             return false;
         } else{
             for(int i = findPatient(appt); i < numAppts; i++){
-                System.out.println("appt "  + appointments[findPatient(appt)]);
-                System.out.println("appt +1 " + appointments[findPatient(appt) + 1]);
                 appointments[findPatient(appt)] = appointments[findPatient(appt) + 1];
             }
             numAppts--;
