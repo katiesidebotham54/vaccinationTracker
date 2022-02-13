@@ -4,11 +4,11 @@ authors: @kevinarbito @katiesidebotham
  */
 // Done
 public enum Location {
-    SOMERSET("Bridgewater", "08807", "Somerset County"),
-    MIDDLESEX("Piscataway", "08854", "Middlesex County"),
-    MERCER("Princeton", "08542", "Mercer County"),
-    MORRIS("Morristown", "07960", "Morris County"),
-    UNION("Union", "07083", "Union County");
+    SOMERSET("Bridgewater", "08807", "SOMERSET"),
+    MIDDLESEX("Piscataway", "08854", "MIDDLESEX"),
+    MERCER("Princeton", "08542", "MERCER"),
+    MORRIS("Morristown", "07960", "MORRIS"),
+    UNION("Union", "07083", "UNION");
 
     private final String city;
     private final String zipCode;

@@ -88,19 +88,11 @@ public class Schedule {
     public void sortZip (Appointment[] appointments) {
         System.out.println("Entering sortZip method");
         for(int i = 1; i < numAppts; i++) {
-            int check = Integer.parseInt(appointments[i].getLocation().getZipCode());
-            int j = i - 1;
-
-            while(j >= 0 && Integer.parseInt(appointments[j].getLocation().getZipCode()) >= check) {
-                if(Integer.parseInt(appointments[j].getLocation().getZipCode()) == check) {
-                    if(appointments[j].getSlot().compareTo(appointments[i].getSlot()) == -1){
-                        continue;
-                    }
-                }
-                appointments[j + 1] = appointments[j];
-                j = j - 1;
+            int current = Integer.parseInt(appointments[i].getLocation().getZipCode());
+            int next = i - 1;
+            while(next >= 0 && Integer.parseInt(appointments[next].getLocation().getZipCode()) > current) {
+                appointments[next + 1] = appointments[next];
             }
-            appointments[j + 1] = appointments[i];
         }
     }
 
