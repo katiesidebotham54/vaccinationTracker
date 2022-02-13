@@ -54,21 +54,21 @@ public class Patient implements Comparable<Patient> {
                     return 0;
                 } else {
                     if(this.dob.compareTo(patient.dob) > 0){
-                        return -1; //patient is bigger
+                        return 1; //patient is bigger
                     } else {
-                        return 1;// this is bigger
+                        return -1;// this is bigger
                     }
                 }
             } else {
                 if( this.fname.compareTo(patient.fname) > 0){
-                    return -1; //patient obj goes first
+                    return 1; //patient obj goes first
                 } else{
-                    return 1; //this obj goes first
+                    return -1; //this obj goes first
                 }
             }
         } else {
             if(this.lname.compareTo(patient.lname) > 0){
-                return 1; //this last name is bigger
+                return 1; //this last name is bigger // make somne changes here kevin
             } else {
                 return -1; //patient last name is bigger
             }

@@ -88,7 +88,7 @@ public class Kiosk {
             Appointment appt = new Appointment(patient);
             System.out.println(schedule.removeByPatient(appt));
             if(schedule.removeByPatient(appt)) {
-                System.out.println("All Appointments for " + patient.getFname() + " " + patient.getFname() + " DOB: " + patient.getDob() + " have been cancelled.");
+                System.out.println("All Appointments for " + patient.getFname() + " " + patient.getLname() + " DOB: " + patient.getDob() + " have been cancelled.");
             } else {
                 System.out.println("Not cancelled, appointment(s) does not exist.");
             }

@@ -91,7 +91,7 @@ public class Schedule {
         if(findPatient(appt) == NOT_FOUND){
             return false;
         } else{
-            for(int i = findPatient(appt); i< numAppts; i++){
+            for(int i = findPatient(appt); i < numAppts; i++){
                 appointments[findPatient(appt)] = appointments[findPatient(appt) + 1];
             }
             numAppts--;
@@ -130,18 +130,15 @@ public class Schedule {
     } //sort by zip codes and print
 
     public void printByPatient() {
-        for (int i = 0; i < numAppts; i++)
-        {
-            for (int j = i + 1; j < numAppts; j++)
-            {
-                Appointment tmp;
-                if (appointments[i].getPatient().compareTo(appointments[j].getPatient()) >= 0)
-                {
-                    tmp = appointments[i];
-                    appointments[i] = appointments[j];
-                    appointments[j] = tmp;
-                }
+        //System.out.println("HERE");
+        for(int i = 1; i < numAppts; i++) {
+            Appointment temp = appointments[i];
+            int j = i -1;
+            while(j >= 0 && appointments[j].getPatient().compareTo(temp.getPatient()) > 0) {
+                appointments[j + 1] = appointments[j];
+                j--;
             }
+            appointments[j + 1] = temp;
         }
         print();
     } //sort by patient and print
