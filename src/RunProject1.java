@@ -1,7 +1,7 @@
 /**
  * Method is used to initialize an instance of Kiosk and run a session. This method allows the user to begin entering
  * different commands and interact with the program.
-authors: @kevinarbitodelgado, @katherinesidebotham
+ * @author @kevinarbitodelgado, @katherinesidebotham
  */
 
 public class RunProject1 {
