@@ -13,8 +13,9 @@ public class Schedule {
 
 
     /**
-     * This method is used to traverse the entire array of appointments until the specific appointment that is being looked for
-     * is found. when it is found, it will return the index of where it was or if it is not, it will return NOT_FOUND.
+     * This method is used to traverse the entire array of appointments until the specific appointment that is being
+     * looked for is found. when it is found, it will return the index of where it was or if it is not, it will
+     * return NOT_FOUND.
      * @param appt the information for a specific appointment
      * @return index of where the appointment is found in the array if found, otherwise NOT_FOUND
      */
@@ -101,11 +102,15 @@ public class Schedule {
         }
         if(find(appt) == NOT_FOUND){
             for(int i = 0; i < NUM_APPTS; i++){
-                if(appointments[i].getPatient().compareTo(appt.getPatient()) != 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation() == appt.getLocation()){
+                if(appointments[i].getPatient().compareTo(appt.getPatient()) != 0
+                        && appointments[i].getSlot().compareTo(appt.getSlot()) == 0
+                        && appointments[i].getLocation() == appt.getLocation()){
                     ADD_ERROR = SAME_TIMESLOT;
                     return false;
                 }
-                else if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation() != appt.getLocation()){
+                else if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0
+                        && appointments[i].getSlot().compareTo(appt.getSlot()) == 0
+                        && appointments[i].getLocation() != appt.getLocation()){
                     ADD_ERROR = SAME_PATIENT;
                     return false;
                 }
@@ -146,7 +151,6 @@ public class Schedule {
         }
         for(int i = foundPatient; i < NUM_APPTS; i++){
             appointments[i] = appointments[i + 1];
-
         }
         NUM_APPTS--;
     }
@@ -170,12 +174,14 @@ public class Schedule {
             for (int j = i + 1; j < NUM_APPTS; j++)
             {
                 Appointment tempApptByZip;
-                if (Integer.parseInt(appointments[i].getLocation().getZipCode()) > Integer.parseInt(appointments[j].getLocation().getZipCode()))
+                if (Integer.parseInt(appointments[i].getLocation().getZipCode()) >
+                        Integer.parseInt(appointments[j].getLocation().getZipCode()))
                 {
                     tempApptByZip = appointments[i];
                     appointments[i] = appointments[j];
                     appointments[j] = tempApptByZip;
-                } else if(Integer.parseInt(appointments[i].getLocation().getZipCode()) == Integer.parseInt(appointments[j].getLocation().getZipCode())){
+                } else if(Integer.parseInt(appointments[i].getLocation().getZipCode()) ==
+                        Integer.parseInt(appointments[j].getLocation().getZipCode())){
                     if(appointments[i].getSlot().compareTo(appointments[j].getSlot()) > 0){
                         tempApptByZip = appointments[i];
                         appointments[i] = appointments[j];

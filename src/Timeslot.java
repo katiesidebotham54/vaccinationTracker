@@ -46,18 +46,12 @@ public class Timeslot implements Comparable<Timeslot> {
      */
     @Override
     public int compareTo(Timeslot slot) {
-        if(this == slot) {
-            return 0;
-        } else if(this.date.compareTo(slot.date) > 0) {
-            return 1;
-        } else if(this.date.compareTo(slot.date) < 0) {
-            return -1;
-        } else {
-            if(this.getTime().compareTo(slot.getTime()) < 0) {
-                return -1;
-            } else if(this.getTime().compareTo(slot.getTime()) > 0) {
-                return 1;
-            }
+        if(this == slot) return 0;
+        else if(this.date.compareTo(slot.date) > 0) return 1;
+        else if(this.date.compareTo(slot.date) < 0) return -1;
+        else {
+            if(this.getTime().compareTo(slot.getTime()) < 0) return -1;
+            else if(this.getTime().compareTo(slot.getTime()) > 0) return 1;
         }
         return 0;
     }

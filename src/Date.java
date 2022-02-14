@@ -135,9 +135,7 @@ public class Date implements Comparable<Date> {
                     return (this.day <= FEBRUARY_MIN);
                 }
             }
-        } else {
-            return false;
-        }
+        } else return false;
         return true;
     }
 

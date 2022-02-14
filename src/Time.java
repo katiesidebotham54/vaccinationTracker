@@ -35,9 +35,7 @@ public class Time implements Comparable<Time> {
             if(minute > OPENING_MINUTE) {
                 return false;
             } else return minute % TIME_INTERVAL == 0;
-        } else {
-            return false;
-        }
+        } else return false;
     }
 
     /**
@@ -58,17 +56,11 @@ public class Time implements Comparable<Time> {
      */
     @Override
     public int compareTo(Time time) {
-        if(this.equals(time)){
-            return 0;
-        } else if(this.hour > time.hour){
-           return 1;
-        } else if(this.hour == time.hour){
-           if(this.minute > time.minute){
-               return 1;
-           }
-        } else{
-            return -1;
-        }
+        if(this.equals(time)) return 0;
+        else if(this.hour > time.hour)return 1;
+        else if(this.hour == time.hour){
+           if(this.minute > time.minute) return 1;
+        } else return -1;
         return 0;
     }
 }
