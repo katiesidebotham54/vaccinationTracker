@@ -231,7 +231,7 @@ public class Kiosk {
             System.out.println("Date of birth invalid -> it is a future date");
             return false;
         }
-        if(slot.main()){
+        if(slot.isValidTime()){
             System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
             return false;
         }

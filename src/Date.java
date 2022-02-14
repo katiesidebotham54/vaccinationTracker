@@ -55,16 +55,6 @@ public class Date implements Comparable<Date> {
      * results from each conditional.
      * @return true if leap year, false otherwise.
      */
-    public main(){
-
-    }
-
-    /**
-     * isLeapYear() checks whether the year within the date is a leap year. It goes through checks by modding
-     * QUADRENNIAL, CENTENNIAL, and QUATERCENTENNIAL. It returns its boolean value true or false based on its
-     * results from each conditional.
-     * @return true if leap year, false otherwise.
-     */
     public boolean isLeapYear(){
             if(this.year % QUADRENNIAL == 0){
                 if(this.year % CENTENNIAL == 0) {
@@ -199,8 +189,18 @@ public class Date implements Comparable<Date> {
         Date dateEleven = new Date("02/13/2022");
         Date dateTwelve =  new Date("04/22/2022");
 
-        System.out.println("Testcase 1: " + dateOne.toString() + " Ouput: " + dateOne.isValidDate()); //Test case 1,
-
+        System.out.println("Testcase 1: " + dateOne.toString() + " Ouput: " + dateOne.isValidDate()); //Test case 1, check valid format
+        System.out.println("Testcase 2: " + dateTwo.toString() + " Ouput: " + dateTwo.isValidDate()); //Test case 2, check greater than 31 days
+        System.out.println("Testcase 3: " + dateThree.toString() + " Ouput: " + dateThree.isValidDate()); //Test case 3, check less than 1 day
+        System.out.println("Testcase 4: " + dateFour.toString() + " Ouput: " + dateFour.isValidDate()); //Test case 4, check month greater than 12
+        System.out.println("Testcase 5: " + dateFive.toString() + " Ouput: " + dateFive.isValidDate()); //Test case 5, check month less than 1
+        System.out.println("Testcase 6: " + dateSix.toString() + " Ouput: " + dateSix.isValidDate()); //Test case 6, check year greater than current year
+        System.out.println("Testcase 7: " + dateSeven.toString() + " Ouput: " + dateSeven.isValidDate()); //Test case 7, check year less than 1800
+        System.out.println("Testcase 8: " + dateEight.toString() + " Ouput: " + dateEight.isValidDate()); //Test case 8, check appt date is today
+        System.out.println("Testcase 9: " + dateNine.toString() + " Ouput: " + dateNine.isValidDate()); //Test case 9, check appt date is day before today
+        System.out.println("Testcase 10: " + dateTen.toString() + " Ouput: " + dateTen.isValidDate()); //Test case 10, check appt date beyond this year
+        System.out.println("Testcase 11: " + dateEleven.toString() + " Ouput: " + dateEleven.isValidDate()); //Test case 11, check dob is today
+        System.out.println("Testcase 12: " + dateTwelve.toString() + " Ouput: " + dateTwelve.isValidDate()); //Test case 12, check dob is future date
 
     }
 }

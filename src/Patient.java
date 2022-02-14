@@ -1,5 +1,9 @@
-/*
-
+/**
+ *the patient class is responsible for holding all the finrosmtuon regarding the patient. Patient contains a constructed
+ * for the object that holds the contents of the object -> first name, last name, and date of birth. It includes 3
+ * getters for everything inside patient object. This class also checks if date of birth is valid, and checks whether
+ * a patient is less than, greater than, or equal to another patient based off of alphabetical last, & first name as
+ * numerically by date of birth. this class is used in many other classes in order to correctly build the schedule.
 authors: @katiesidebotham @kevinarbito
  */
 public class Patient implements Comparable<Patient> {

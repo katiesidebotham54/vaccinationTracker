@@ -1,5 +1,11 @@
 
 /**
+ * The appointment class is used to keep track of the contents of the appointment object. the constructed holds
+ * patient, slot, and location. there is an additional constructed that holds one parameter (patient).
+ * Within the class, there are 3 getters, for all the contents of appointment, the equals method that returns whether
+ * an appointment are equal, before, or after a different appointment and a toString method that returns the
+ * appointment in the correct string format. this class is widely used by other classes and is vital to schedule
+ * and kiosk in order to create appointments and compare them.
  * @author kevinarbito, katiesidebotham
  */
 public class Appointment {
