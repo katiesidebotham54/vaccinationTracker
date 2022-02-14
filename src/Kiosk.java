@@ -5,7 +5,9 @@ import java.util.Scanner;
  * @author kevinarbito, katiesidebotham
  */
 public class Kiosk {
+    public static final int MIN_INPUT_LENGTH = 1;
     public static final int CP_MIN_LENGTH = 4;
+    public static final int SAME_APPT = -1;
     public void run() {
         System.out.print("Kiosk running. Ready to process transactions.");
         System.out.println();
@@ -87,7 +89,7 @@ public class Kiosk {
      */
     public void bookAppointment(Schedule schedule, String[] tokens) {
         if(isValidLocation(tokens) && !isEmptySchedule(tokens, schedule)) {
-            schedule.ADDERROR = 0;
+            schedule.ADD_ERROR = 0;
             if(isValidDate(tokens) && isValidAdd(tokens, schedule)) {
                 Date dob = new Date(tokens[1]);
                 Date apptDate = new Date(tokens[4]);
@@ -154,14 +156,14 @@ public class Kiosk {
 
     /**
      * This method takes in the tokens, and schedule parameters in order to check whether there was only one command and
-     * to check whow many appointments are in the schedule by calling boolean schedule.checkNumAppts().
+     * to check how many appointments are in the schedule by calling boolean schedule.checkNumAppts().
      * this function will return true to wherever it may have been called from if the length of tokens is 1 and checkNumAppts() returns true.
      * @param tokens The command and appointment information are stored in tokens in order to create objects and to execute other methods
      * @param schedule The schedule object that holds all appointments
      * @return boolean true or false, true if schedule is empty & tokens length is 1, false if not empty or tokens length is not 1
      */
     public boolean isEmptySchedule(String[] tokens, Schedule schedule){
-         return tokens.length == 1 && schedule.noAppointments();
+         return tokens.length == MIN_INPUT_LENGTH && schedule.noAppointments();
     }
 
     /**
@@ -234,15 +236,15 @@ public class Kiosk {
         Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = Location.valueOf(tokens[6].toUpperCase());
         Appointment appt = new Appointment(patient, slot, location);
-        if(schedule.ADDERROR == 2){
+        if(schedule.ADD_ERROR == schedule.SAME_PATIENT){
             System.out.println("Same patient cannot book an appointment with the same date.");
             return false;
         }
-        if(schedule.appointmentExists(appt) != -1){
+        if(schedule.appointmentExists(appt) != SAME_APPT){
             System.out.println("Same appointment exists in the schedule.");
             return false;
         }
-        if(schedule.ADDERROR == 1){
+        if(schedule.ADD_ERROR == schedule.SAME_TIMESLOT){
             System.out.println("Time slot has been taken at this location.");
             return false;
         }

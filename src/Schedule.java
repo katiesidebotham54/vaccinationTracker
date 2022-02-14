@@ -5,9 +5,11 @@
 public class Schedule {
 
     private Appointment [] appointments;
-    private int NUMAPPTS;
+    private int NUM_APPTS;
     public final int NOT_FOUND = -1;
-    public int ADDERROR;
+    public int ADD_ERROR;
+    public final int SAME_TIMESLOT = 1;
+    public final int SAME_PATIENT = 2;
 
 
     /**
@@ -17,7 +19,7 @@ public class Schedule {
      * @return index of where the appointment is found in the array if found, otherwise NOT_FOUND
      */
     private int find(Appointment appt) {
-        for(int i = 0; i < NUMAPPTS; i++){
+        for(int i = 0; i < NUM_APPTS; i++){
             if(appointments[i].equals(appt)){
                 return i;
             }
@@ -26,9 +28,9 @@ public class Schedule {
     } //return the index, or NOT_FOUND
 
     public Appointment[] samePatientArray(Appointment appt){
-        Appointment[] patientArr = new Appointment[NUMAPPTS];
+        Appointment[] patientArr = new Appointment[NUM_APPTS];
         int j = 0;
-        for(int i = 0; i < NUMAPPTS; i++){
+        for(int i = 0; i < NUM_APPTS; i++){
             if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0){
                 patientArr[j] = appointments[i];
                 j++;
@@ -43,7 +45,7 @@ public class Schedule {
      * @return Boolean: true if number of appointments is 0, false if not.
      */
     public boolean noAppointments(){
-        return NUMAPPTS == 0;
+        return NUM_APPTS == 0;
     }
     /**
      * This method takes in appt as the parameter. It will traverse through the numbers of appointments until the
@@ -52,7 +54,7 @@ public class Schedule {
      * @return Index of appointment if found, NOT_FOUND otherwise
      */
     public int appointmentExists(Appointment appt) {
-        for(int i = 0; i < NUMAPPTS; i++){
+        for(int i = 0; i < NUM_APPTS; i++){
             if(appointments[i].equals(appt)){
                 return i;
             }
@@ -66,8 +68,8 @@ public class Schedule {
      * and make the new array the original array.
      */
     private void grow() {
-        Appointment[] newArray = new Appointment[NUMAPPTS + 4];
-        for(int i = 0; i < NUMAPPTS; i++)
+        Appointment[] newArray = new Appointment[NUM_APPTS + 4];
+        for(int i = 0; i < NUM_APPTS; i++)
         {
             newArray[i] = appointments[i];
         }
@@ -90,28 +92,28 @@ public class Schedule {
     public boolean add(Appointment appt) {
         if(appointments == null) {
             appointments = new Appointment[4];
-            appointments[NUMAPPTS] = appt;
-            NUMAPPTS++;
+            appointments[NUM_APPTS] = appt;
+            NUM_APPTS++;
             return true;
         }
-        if(NUMAPPTS == appointments.length){
+        if(NUM_APPTS == appointments.length){
             grow();
         }
         if(find(appt) == NOT_FOUND){
-            for(int i = 0; i < NUMAPPTS; i++){
+            for(int i = 0; i < NUM_APPTS; i++){
                 if(appointments[i].getPatient().compareTo(appt.getPatient()) != 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation() == appt.getLocation()){
-                    ADDERROR = 1;
+                    ADD_ERROR = SAME_TIMESLOT;
                     return false;
                 }
                 else if(appointments[i].getPatient().compareTo(appt.getPatient()) == 0 && appointments[i].getSlot().compareTo(appt.getSlot()) == 0 && appointments[i].getLocation() != appt.getLocation()){
-                    ADDERROR = 2;
+                    ADD_ERROR = SAME_PATIENT;
                     return false;
                 }
 
             }
         }
-        appointments[NUMAPPTS] = appt;
-        NUMAPPTS++;
+        appointments[NUM_APPTS] = appt;
+        NUM_APPTS++;
         return true;
     }
 
@@ -127,33 +129,33 @@ public class Schedule {
         if(find(appt) == NOT_FOUND){
             return false;
         } else{
-            for(int i = find(appt); i < NUMAPPTS; i++){
+            for(int i = find(appt); i < NUM_APPTS; i++){
                 appointments[find(appt)] = appointments[find(appt) + 1];
             }
-            NUMAPPTS--;
+            NUM_APPTS--;
             return true;
         }
     }
     public void removePatient(Appointment appt){
         int foundPatient = 0;
-        for(int i = 0; i < NUMAPPTS; i++){
+        for(int i = 0; i < NUM_APPTS; i++){
             if(appointments[i].equals(appt)){
                 foundPatient = i;
                 break;
             }
         }
-        for(int i = foundPatient; i < NUMAPPTS; i++){
+        for(int i = foundPatient; i < NUM_APPTS; i++){
             appointments[i] = appointments[i + 1];
 
         }
-        NUMAPPTS--;
+        NUM_APPTS--;
     }
 
     /**
      * When this method is called, it prints the schedule in the order it is in.
      */
     public void print() {
-        for(int i = 0; i < NUMAPPTS; i++){
+        for(int i = 0; i < NUM_APPTS; i++){
             System.out.println(appointments[i]);
         }
     }
@@ -163,9 +165,9 @@ public class Schedule {
      * to print the schedule after it has been sorted.
      */
     public void printByZip() {
-        for (int i = 0; i < NUMAPPTS; i++)
+        for (int i = 0; i < NUM_APPTS; i++)
         {
-            for (int j = i + 1; j < NUMAPPTS; j++)
+            for (int j = i + 1; j < NUM_APPTS; j++)
             {
                 Appointment tempApptByZip;
                 if (Integer.parseInt(appointments[i].getLocation().getZipCode()) > Integer.parseInt(appointments[j].getLocation().getZipCode()))
@@ -191,7 +193,7 @@ public class Schedule {
      * complete, print() is called in order to print the schedule.
      */
     public void printByPatient() {
-        for(int i = 1; i < NUMAPPTS; i++) {
+        for(int i = 1; i < NUM_APPTS; i++) {
             Appointment tempApptByPatient = appointments[i];
             int j = i -1;
             while(j >= 0 && appointments[j].getPatient().compareTo(tempApptByPatient.getPatient()) > 0) {

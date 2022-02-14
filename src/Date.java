@@ -15,6 +15,13 @@ public class Date implements Comparable<Date> {
     public static final int MAX_DAYS_IN_MONTH = 31;
     public static final int FEBRUARY_MAX = 29;
     public static final int FEBRUARY_MIN= 28;
+    public static final int MAX_YEAR = 2022;
+    public static final int MIN_YEAR = 1800;
+    public static final int MAX_MONTH = 12;
+    public static final int MIN_MONTH = 1;
+    public static final int MAX_DAYS = 31;
+    public static final int MIN_DAYS = 1;
+
 
     /**
      * This constructor takes in string format of date and creates the Date object using integers.
@@ -112,20 +119,20 @@ public class Date implements Comparable<Date> {
      */
     public boolean isValidDate() {
         if(this.toString().matches("\\d{1}/\\d{1}/\\d{4}") || this.toString().matches("\\d{2}/\\d{2}/\\d{4}") || this.toString().matches("\\d{1}/\\d{2}/\\d{4}") || this.toString().matches("\\d{2}/\\d{1}/\\d{4}") ) {
-            if (this.year > 2022 || this.year < 1800) {
+            if (this.year > MAX_YEAR || this.year < MIN_YEAR) {
                 return false;
             }
-            if (this.month > 12 || this.month < 1) {
+            if (this.month > MAX_MONTH || this.month < MIN_MONTH) {
                 return false;
             }
-            if (this.day < 1 || this.day > 31) {
+            if (this.day > MAX_DAYS || this.day < MIN_DAYS) {
                 return false;
             }
-            if (this.month == 1) {
+            if (this.month == MIN_MONTH) {
                 if (isLeapYear()) {
-                    return (this.day <= 29);
+                    return (this.day <= FEBRUARY_MAX);
                 } else {
-                    return (this.day <= 28);
+                    return (this.day <= FEBRUARY_MIN);
                 }
             }
         } else {
