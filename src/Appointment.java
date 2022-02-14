@@ -34,8 +34,7 @@ public class Appointment {
      * @return true if the appointment date is valid, false otherwise.
      */
     public boolean isValidApptDate() {
-        Date today;
-        today = new Date();
+        Date today = new Date();
         if (this.slot.getDate().getYear() == today.getYear() && this.slot.getDate().getMonth() == today.getMonth() && this.slot.getDate().getDay() == today.getDay()) {
             return false;
         } else if (this.slot.getDate().getYear() == today.getYear() && this.slot.getDate().getMonth() == today.getMonth() && this.slot.getDate().getDay() - 1 == today.getDay() - 1) {

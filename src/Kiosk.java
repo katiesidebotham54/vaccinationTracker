@@ -41,7 +41,7 @@ public class Kiosk {
     public void handleCommand(String[] tokens, Schedule schedule) {
         switch (tokens[0]) {
             case "P" -> {
-                if(checkEmptySchedule(tokens, schedule)){
+                if(isEmptySchedule(tokens, schedule)){
                     System.out.println("Invalid command");
                 } else{
                     System.out.println();
@@ -67,11 +67,8 @@ public class Kiosk {
             }
             case "C" -> cancelAppointment(schedule, tokens);
             case "CP" -> {
-                if(checkEmptySchedule(tokens, schedule) || tokens.length < CP_MIN_LENGTH){
-                    System.out.println("Invalid command");
-                } else{
-                    cancelByPatient(schedule, tokens);
-                }
+                if(isEmptySchedule(tokens, schedule) || tokens.length < CP_MIN_LENGTH) System.out.println("Invalid command");
+                else cancelByPatient(schedule, tokens);
             }
             case "B" -> bookAppointment(schedule, tokens);
             default -> System.out.println("Invalid Command");
@@ -89,9 +86,9 @@ public class Kiosk {
      * @param tokens the command and appointment information are stored in tokens in order to create objects and to execute other methods
      */
     public void bookAppointment(Schedule schedule, String[] tokens) {
-        if(checkLocation(tokens) && !checkEmptySchedule(tokens, schedule)) {
+        if(isValidLocation(tokens) && !isEmptySchedule(tokens, schedule)) {
             schedule.ADDERROR = 0;
-            if(handleValidDate(tokens) && checkAddError(tokens, schedule)) {
+            if(isValidDate(tokens) && isValidAdd(tokens, schedule)) {
                 Date dob = new Date(tokens[1]);
                 Date apptDate = new Date(tokens[4]);
                 Patient patient = new Patient(tokens[2], tokens[3],dob);
@@ -102,7 +99,7 @@ public class Kiosk {
                 if(schedule.add(appt)) {
                     System.out.println("Appointment booked and added to the schedule.");
                 } else {
-                    checkAddError(tokens, schedule);
+                    isValidAdd(tokens, schedule);
                 }
             }
         }
@@ -121,7 +118,7 @@ public class Kiosk {
         Date dob = new Date(tokens[1]);
         Patient patient = new Patient(tokens[2], tokens[3], dob);
         Appointment appt = new Appointment(patient);
-        Appointment[] patientArr = schedule.findPatients(appt);
+        Appointment[] patientArr = schedule.samePatientArray(appt);
         for (Appointment appointment : patientArr) {
             if (appointment != null) {
                 schedule.removePatient(appointment);
@@ -139,7 +136,7 @@ public class Kiosk {
      * @param tokens the command and appointment information are stored in tokens in order to create objects and to execute other methods
      */
     public void cancelAppointment(Schedule schedule, String[] tokens){
-        if(checkLocation(tokens) && !checkEmptySchedule(tokens, schedule) && handleValidDate(tokens)) {
+        if(isValidLocation(tokens) && !isEmptySchedule(tokens, schedule) && isValidDate(tokens)) {
             Date dob = new Date(tokens[1]);
             Date apptDate = new Date(tokens[4]);
             Patient patient = new Patient(tokens[2], tokens[3],dob);
@@ -163,8 +160,8 @@ public class Kiosk {
      * @param schedule The schedule object that holds all appointments
      * @return boolean true or false, true if schedule is empty & tokens length is 1, false if not empty or tokens length is not 1
      */
-    public boolean checkEmptySchedule(String[] tokens, Schedule schedule){
-         return tokens.length == 1 && schedule.checkNumAppts();
+    public boolean isEmptySchedule(String[] tokens, Schedule schedule){
+         return tokens.length == 1 && schedule.noAppointments();
     }
 
     /**
@@ -173,7 +170,7 @@ public class Kiosk {
      * @param tokens The command and appointment information are stored in tokens in order to create objects and to execute other methods
      * @return boolean true or false: true if valid location, false if not valid location.
      */
-    public boolean checkLocation(String[] tokens){
+    public boolean isValidLocation(String[] tokens){
         if(!tokens[6].equalsIgnoreCase("MORRIS") && !tokens[6].equalsIgnoreCase("SOMERSET") && !tokens[6].equalsIgnoreCase("UNION")  && !tokens[6].equalsIgnoreCase("MIDDLESEX")
         && !tokens[6].equalsIgnoreCase("MERCER")) {
             System.out.println("Invalid location!");
@@ -189,7 +186,7 @@ public class Kiosk {
      * @param tokens The command and appointment information are stored in tokens in order to create objects and to execute other methods
      * @return boolean true or false: true if conditions tested return true, false otherwise.
      */
-    public boolean handleValidDate(String[] tokens){
+    public boolean isValidDate(String[] tokens){
         Date dob = new Date(tokens[1]);
         Date apptDate = new Date(tokens[4]);
         Time apptTime = new Time(tokens[5]);
@@ -197,11 +194,11 @@ public class Kiosk {
         Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = Location.valueOf(tokens[6].toUpperCase());
         Appointment appt = new Appointment(patient, slot, location);
-        if(!dob.isValid() || !dob.checkDays()){
+        if(!dob.isValidDate() || !dob.isValidDays()){
             System.out.println("Invalid date of birth!");
             return false;
         }
-        if(!apptDate.isValid() || !apptDate.checkDays()){
+        if(!apptDate.isValidDate() || !apptDate.isValidDays()){
             System.out.println("Invalid appointment date!");
             return false;
         }
@@ -213,7 +210,7 @@ public class Kiosk {
             System.out.println("Date of birth invalid -> it is a future date");
             return false;
         }
-        if(!apptTime.isValid()){
+        if(!apptTime.isValidTime()){
             System.out.println("Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.");
             return false;
         }
@@ -229,7 +226,7 @@ public class Kiosk {
      * @param schedule The schedule object that holds all appointments
      * @return boolean true or false: true if there are no errors, false otherwise.
      */
-    public boolean checkAddError(String[] tokens,Schedule schedule){
+    public boolean isValidAdd(String[] tokens, Schedule schedule){
         Date dob = new Date(tokens[1]);
         Date apptDate = new Date(tokens[4]);
         Time apptTime = new Time(tokens[5]);
@@ -241,7 +238,7 @@ public class Kiosk {
             System.out.println("Same patient cannot book an appointment with the same date.");
             return false;
         }
-        if(schedule.checkIfExist(appt) != -1){
+        if(schedule.appointmentExists(appt) != -1){
             System.out.println("Same appointment exists in the schedule.");
             return false;
         }

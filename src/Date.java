@@ -22,10 +22,10 @@ public class Date implements Comparable<Date> {
      * @param date date needed to create object
      */
     public Date(String date) {
-        String[] parts = date.split("/");
-        this.month = Integer.parseInt(parts[0]);
-        this.day = Integer.parseInt(parts[1]);
-        this.year = Integer.parseInt(parts[2]);
+        String[] dateParts = date.split("/");
+        this.month = Integer.parseInt(dateParts[0]);
+        this.day = Integer.parseInt(dateParts[1]);
+        this.year = Integer.parseInt(dateParts[2]);
     }
 
     /**
@@ -33,10 +33,10 @@ public class Date implements Comparable<Date> {
      * today's date within the object.
      */
     public Date() {
-        Calendar c = Calendar.getInstance();
-        this.month = c.get(Calendar.MONTH);
-        this.day = c.get(Calendar.DATE);
-        this.year = c.get(Calendar.YEAR);
+        Calendar cal = Calendar.getInstance();
+        this.month = cal.get(Calendar.MONTH);
+        this.day = cal.get(Calendar.DATE);
+        this.year = cal.get(Calendar.YEAR);
     }
 
     /**
@@ -73,7 +73,7 @@ public class Date implements Comparable<Date> {
      * and within range, it will return true, false otherwise.
      * @return true if date is within the correct range, false otherwise
      */
-    public boolean checkDays(){
+    public boolean isValidDays(){
         switch(this.month){
             case 1, 3, 5, 7, 8, 10, 12 -> {
                 if(this.day <= MAX_DAYS_IN_MONTH) return true;
@@ -110,9 +110,8 @@ public class Date implements Comparable<Date> {
      * range provided, true otherwise.
      * @return Boolean: true if the months, days, and year is within the range, false otherwise.
      */
-    public boolean isValid() {
-        //check if valid input (mm/dd/yyyy)
-        if(this.toString().matches("\\d{1}/\\d{1}/\\d{4}") || this.toString().matches("\\d{2}/\\d{2}/\\d{4}") || this.toString().matches("\\d{1}/\\d{2}/\\d{4}") || this.toString().matches("\\d{2}/\\d{1}/\\d{4}") ) { // has to check for m/m/yyyy because it is // in integer form
+    public boolean isValidDate() {
+        if(this.toString().matches("\\d{1}/\\d{1}/\\d{4}") || this.toString().matches("\\d{2}/\\d{2}/\\d{4}") || this.toString().matches("\\d{1}/\\d{2}/\\d{4}") || this.toString().matches("\\d{2}/\\d{1}/\\d{4}") ) {
             if (this.year > 2022 || this.year < 1800) {
                 return false;
             }
@@ -122,8 +121,7 @@ public class Date implements Comparable<Date> {
             if (this.day < 1 || this.day > 31) {
                 return false;
             }
-
-            if (this.month == 1) { // may not work since feb is 1 in enum class
+            if (this.month == 1) {
                 if (isLeapYear()) {
                     return (this.day <= 29);
                 } else {

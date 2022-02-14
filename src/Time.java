@@ -16,9 +16,9 @@ public class Time implements Comparable<Time> {
      * @param time The time that must be formatted correctly and used to make a Time object.
      */
     public Time(String time) {
-        String[] parts = time.split(":");
-        int hour =  Integer.parseInt(parts[0]);
-        int minute = Integer.parseInt(parts[1]);
+        String[] timeParts = time.split(":");
+        int hour =  Integer.parseInt(timeParts[0]);
+        int minute = Integer.parseInt(timeParts[1]);
         int check = Integer.parseInt(String.format("%02d", minute));
         this.hour = hour;
         this.minute = check;
@@ -30,7 +30,7 @@ public class Time implements Comparable<Time> {
      * it checks that the minute is intervals of 15.
      * @return Boolean: true if hour and minute are valid, false otherwise.
      */
-    public boolean isValid() {
+    public boolean isValidTime() {
         if((hour >= OPENING_HOUR && hour <= CLOSING_HOUR)) {
             if(minute > OPENING_MINUTE) {
                 return false;

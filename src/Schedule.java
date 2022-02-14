@@ -25,7 +25,7 @@ public class Schedule {
         return NOT_FOUND;
     } //return the index, or NOT_FOUND
 
-    public Appointment[] findPatients(Appointment appt){
+    public Appointment[] samePatientArray(Appointment appt){
         Appointment[] patientArr = new Appointment[NUMAPPTS];
         int j = 0;
         for(int i = 0; i < NUMAPPTS; i++){
@@ -42,8 +42,8 @@ public class Schedule {
      * it will return false.
      * @return Boolean: true if number of appointments is 0, false if not.
      */
-    public boolean checkNumAppts(){
-        return NUMAPPTS==0;
+    public boolean noAppointments(){
+        return NUMAPPTS == 0;
     }
     /**
      * This method takes in appt as the parameter. It will traverse through the numbers of appointments until the
@@ -51,7 +51,7 @@ public class Schedule {
      * @param appt the information for a specific appointment
      * @return Index of appointment if found, NOT_FOUND otherwise
      */
-    public int checkIfExist(Appointment appt) {
+    public int appointmentExists(Appointment appt) {
         for(int i = 0; i < NUMAPPTS; i++){
             if(appointments[i].equals(appt)){
                 return i;
@@ -66,12 +66,12 @@ public class Schedule {
      * and make the new array the original array.
      */
     private void grow() {
-        Appointment[] newArr = new Appointment[NUMAPPTS + 4];
+        Appointment[] newArray = new Appointment[NUMAPPTS + 4];
         for(int i = 0; i < NUMAPPTS; i++)
         {
-            newArr[i] = appointments[i];
+            newArray[i] = appointments[i];
         }
-        appointments = newArr;
+        appointments = newArray;
     }
 
     /**
@@ -135,14 +135,14 @@ public class Schedule {
         }
     }
     public void removePatient(Appointment appt){
-        int found = 0;
+        int foundPatient = 0;
         for(int i = 0; i < NUMAPPTS; i++){
             if(appointments[i].equals(appt)){
-                found = i;
+                foundPatient = i;
                 break;
             }
         }
-        for(int i = found; i < NUMAPPTS; i++){
+        for(int i = foundPatient; i < NUMAPPTS; i++){
             appointments[i] = appointments[i + 1];
 
         }
@@ -167,17 +167,17 @@ public class Schedule {
         {
             for (int j = i + 1; j < NUMAPPTS; j++)
             {
-                Appointment tmp;
+                Appointment tempApptByZip;
                 if (Integer.parseInt(appointments[i].getLocation().getZipCode()) > Integer.parseInt(appointments[j].getLocation().getZipCode()))
                 {
-                    tmp = appointments[i];
+                    tempApptByZip = appointments[i];
                     appointments[i] = appointments[j];
-                    appointments[j] = tmp;
+                    appointments[j] = tempApptByZip;
                 } else if(Integer.parseInt(appointments[i].getLocation().getZipCode()) == Integer.parseInt(appointments[j].getLocation().getZipCode())){
                     if(appointments[i].getSlot().compareTo(appointments[j].getSlot()) > 0){
-                        tmp = appointments[i];
+                        tempApptByZip = appointments[i];
                         appointments[i] = appointments[j];
-                        appointments[j] = tmp;
+                        appointments[j] = tempApptByZip;
                     }
                 }
             }
@@ -192,13 +192,13 @@ public class Schedule {
      */
     public void printByPatient() {
         for(int i = 1; i < NUMAPPTS; i++) {
-            Appointment temp = appointments[i];
+            Appointment tempApptByPatient = appointments[i];
             int j = i -1;
-            while(j >= 0 && appointments[j].getPatient().compareTo(temp.getPatient()) > 0) {
+            while(j >= 0 && appointments[j].getPatient().compareTo(tempApptByPatient.getPatient()) > 0) {
                 appointments[j + 1] = appointments[j];
                 j--;
             }
-            appointments[j + 1] = temp;
+            appointments[j + 1] = tempApptByPatient;
         }
         print();
     }
