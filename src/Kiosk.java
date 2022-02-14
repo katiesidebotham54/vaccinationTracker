@@ -14,8 +14,13 @@ public class Kiosk {
         while(sc.hasNextLine()) {
             String line = sc.nextLine();
             String[] tokens = line.split(" ");
-            commandHelper(tokens, schedule, sc);
+            if(tokens[0].equals("Q")){
+                System.out.println("Kiosk session ended.");
+                break;
+            }
+            handleCommand(tokens, schedule);
         }
+        sc.close();
     }
     /**
      * Handles commands that are read in through the console and displays the output in the console.
@@ -33,7 +38,7 @@ public class Kiosk {
      * @param tokens the input commands along with the appointment information are stored in this array
      * @param schedule The schedule object that holds all appointments
      */
-    public void commandHelper(String[] tokens, Schedule schedule, Scanner sc) {
+    public void handleCommand(String[] tokens, Schedule schedule) {
         switch (tokens[0]) {
             case "P" -> {
                 if(checkEmptySchedule(tokens, schedule)){
@@ -60,11 +65,7 @@ public class Kiosk {
                 System.out.println("*end of list");
                 System.out.println();
             }
-            case "Q" -> {
-                System.out.println("Kiosk Session Ended");
-                sc.close();
-            }
-            case "C" -> cancel(schedule, tokens);
+            case "C" -> cancelAppointment(schedule, tokens);
             case "CP" -> {
                 if(checkEmptySchedule(tokens, schedule) || tokens.length < CP_MIN_LENGTH){
                     System.out.println("Invalid command");
@@ -89,8 +90,7 @@ public class Kiosk {
      */
     public void bookAppointment(Schedule schedule, String[] tokens) {
         if(checkLocation(tokens) && !checkEmptySchedule(tokens, schedule)) {
-//            System.out.println("checkAddError: " + checkAddError(tokens, schedule));
-            schedule.addError = 0;
+            schedule.ADDERROR = 0;
             if(handleValidDate(tokens) && checkAddError(tokens, schedule)) {
                 Date dob = new Date(tokens[1]);
                 Date apptDate = new Date(tokens[4]);
@@ -139,7 +139,7 @@ public class Kiosk {
      * @param schedule The schedule object that holds all appointments
      * @param tokens the command and appointment information are stored in tokens in order to create objects and to execute other methods
      */
-    public void cancel(Schedule schedule, String[] tokens){
+    public void cancelAppointment(Schedule schedule, String[] tokens){
         if(checkLocation(tokens) && !checkEmptySchedule(tokens, schedule) && handleValidDate(tokens)) {
             Date dob = new Date(tokens[1]);
             Date apptDate = new Date(tokens[4]);
@@ -238,7 +238,7 @@ public class Kiosk {
         Timeslot slot = new Timeslot(apptDate, apptTime);
         Location location = Location.valueOf(tokens[6].toUpperCase());
         Appointment appt = new Appointment(patient, slot, location);
-        if(schedule.addError == 2){
+        if(schedule.ADDERROR == 2){
             System.out.println("Same patient cannot book an appointment with the same date.");
             return false;
         }
@@ -246,7 +246,7 @@ public class Kiosk {
             System.out.println("Same appointment exists in the schedule.");
             return false;
         }
-        if(schedule.addError == 1){
+        if(schedule.ADDERROR == 1){
             System.out.println("Time slot has been taken at this location.");
             return false;
         }

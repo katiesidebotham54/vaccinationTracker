@@ -29,16 +29,10 @@ public enum Location {
         this.county = county;
     }
 
-    // Getter for city
     public String getCity() { return city; }
 
-    // Getter for zipCode
     public String getZipCode() { return zipCode; }
 
-    // Getter for county
     public String getCounty() { return county; }
 
 }
-/*
-public s
- */

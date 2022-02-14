@@ -11,18 +11,10 @@ public class Date implements Comparable<Date> {
     public static final int QUADRENNIAL = 4;
     public static final int CENTENNIAL = 100;
     public static final int QUATERCENTENNIAL = 400;
-    //public static final int FIRSTDAYOFMONTH = 1;
     public static final int MIN_DAYS_IN_MONTH = 30;
     public static final int MAX_DAYS_IN_MONTH = 31;
     public static final int FEBRUARY_MAX = 29;
     public static final int FEBRUARY_MIN= 28;
-
-
-    Date(int year, int month, int day) {
-        this.year = year;
-        this.month = month;
-        this.day = day;
-    }
 
     /**
      * This constructor takes in string format of date and creates the Date object using integers.
@@ -34,7 +26,7 @@ public class Date implements Comparable<Date> {
         this.month = Integer.parseInt(parts[0]);
         this.day = Integer.parseInt(parts[1]);
         this.year = Integer.parseInt(parts[2]);
-    } //take “mm/dd/yyyy” and create a Date object
+    }
 
     /**
      * This constructor takes in no parameters, it simply gets today's date using calendar class and stores
@@ -45,7 +37,7 @@ public class Date implements Comparable<Date> {
         this.month = c.get(Calendar.MONTH);
         this.day = c.get(Calendar.DATE);
         this.year = c.get(Calendar.YEAR);
-    } //create an object with today’s date (see Calendar class)
+    }
 
     /**
      * isLeapYear() checks whether the year within the date is a leap year. It goes through checks by modding
@@ -64,17 +56,14 @@ public class Date implements Comparable<Date> {
             return false;
     }
 
-    // Getter for year
     public int getYear(){
         return this.year;
     }
 
-    // Getter for day
     public int getDay() {
         return this.day;
     }
 
-    // Getter for month
     public int getMonth() {return this.month;}
 
 

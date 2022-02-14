@@ -5,11 +5,10 @@
 public class Time implements Comparable<Time> {
     private int hour;
     private int minute;
-
-    public Time(int hour, int minute) { // unecessary?
-        this.hour = hour;
-        this.minute = minute;
-    }
+    private static int OPENING_HOUR = 9;
+    private static int CLOSING_HOUR = 16;
+    private static int OPENING_MINUTE = 45;
+    private static int TIME_INTERVAL = 15;
 
     /**
      * This constructor takes in time as a string and splits it up into integers. it formats it, so it is in HH:MM time.
@@ -23,7 +22,7 @@ public class Time implements Comparable<Time> {
         int check = Integer.parseInt(String.format("%02d", minute));
         this.hour = hour;
         this.minute = check;
-    } //take “hh:mm” and create a Time object
+    }
 
     /**
      * This method is called in order to check whether the time is valid.
@@ -32,10 +31,10 @@ public class Time implements Comparable<Time> {
      * @return Boolean: true if hour and minute are valid, false otherwise.
      */
     public boolean isValid() {
-        if((hour >= 9 && hour <= 16)) {
-            if(minute > 45) {
+        if((hour >= OPENING_HOUR && hour <= CLOSING_HOUR)) {
+            if(minute > OPENING_MINUTE) {
                 return false;
-            } else return minute % 15 == 0;
+            } else return minute % TIME_INTERVAL == 0;
         } else {
             return false;
         }
