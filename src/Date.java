@@ -82,13 +82,13 @@ public class Date implements Comparable<Date> {
      */
     public boolean isValidDays(){
         switch(this.month){
-            case 1, 3, 5, 7, 8, 10, 12 -> {
+            case Month.JANUARY, Month.MARCH, Month.MAY, Month.JULY, Month.AUGUST, Month.OCTOBER, Month.DECEMBER -> {
                 if(this.day <= MAX_DAYS_IN_MONTH) return true;
             }
-            case 4, 6, 9, 11 -> {
+            case Month.APRIL, Month.JUNE, Month.SEPTEMBER, Month.NOVEMBER -> {
                 if(this.day <= MIN_DAYS_IN_MONTH) return true;
             }
-            case 2 -> {
+            case Month.FEBRUARY -> {
                 if(this.isLeapYear()){
                     if(this.day <= FEBRUARY_MAX) return true;
                 } else{
