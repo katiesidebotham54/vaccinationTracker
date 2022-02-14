@@ -134,7 +134,7 @@ public class Schedule {
             return true;
         }
     }
-    public boolean removePatient(Appointment appt){
+    public void removePatient(Appointment appt){
         int found = 0;
         for(int i = 0; i < NUMAPPTS; i++){
             if(appointments[i].equals(appt)){
@@ -147,11 +147,6 @@ public class Schedule {
 
         }
         NUMAPPTS--;
-        return true;
-    }
-
-    public Appointment[] getAppt(){
-        return appointments;
     }
 
     /**

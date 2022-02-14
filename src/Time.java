@@ -5,10 +5,10 @@
 public class Time implements Comparable<Time> {
     private int hour;
     private int minute;
-    private static int OPENING_HOUR = 9;
-    private static int CLOSING_HOUR = 16;
-    private static int OPENING_MINUTE = 45;
-    private static int TIME_INTERVAL = 15;
+    private static final int OPENING_HOUR = 9;
+    private static final int CLOSING_HOUR = 16;
+    private static final int OPENING_MINUTE = 45;
+    private static final int TIME_INTERVAL = 15;
 
     /**
      * This constructor takes in time as a string and splits it up into integers. it formats it, so it is in HH:MM time.

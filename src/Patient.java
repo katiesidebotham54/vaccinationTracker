@@ -44,10 +44,7 @@ public class Patient implements Comparable<Patient> {
     public boolean isValidDOB(){
         //check if date of birth is today or future date
         Date today = new Date();
-        if(this.dob.compareTo(today) >= 0){
-            return false;
-        }
-        return true;
+        return this.dob.compareTo(today) < 0;
     }
 
     /**
@@ -70,9 +67,7 @@ public class Patient implements Comparable<Patient> {
     public int compareTo(Patient patient) {
         if(this.lname.compareTo(patient.lname) == 0){
             if(this.fname.compareTo(patient.fname) == 0){
-                if(this.dob.compareTo(patient.dob) == 0)  return 0;
-                else if(this.dob.compareTo(patient.dob) > 0) return 1;
-                else return -1;
+                return Integer.compare(this.dob.compareTo(patient.dob), 0);
             } else if(this.fname.compareTo(patient.fname) > 0) return 1;
             else return -1;
         } else if(this.lname.compareTo(patient.lname) > 0) return 1;

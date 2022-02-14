@@ -106,7 +106,6 @@ public class Kiosk {
                 }
             }
         }
-        return;
     }
 
     /**
@@ -123,9 +122,9 @@ public class Kiosk {
         Patient patient = new Patient(tokens[2], tokens[3], dob);
         Appointment appt = new Appointment(patient);
         Appointment[] patientArr = schedule.findPatients(appt);
-        for(int i = 0; i < patientArr.length; i++){
-            if(patientArr[i] != null){
-                schedule.removePatient(patientArr[i]);
+        for (Appointment appointment : patientArr) {
+            if (appointment != null) {
+                schedule.removePatient(appointment);
             }
         }
         System.out.println("All Appointments for " + patient.getFname() + " " + patient.getLname() + " DOB: " + patient.getDob() + " have been cancelled.");
