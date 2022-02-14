@@ -1,8 +1,9 @@
 /**
- * Method is used to initilized an instance of Kiosk and runs a session
-authors: @katiesidebotham @kevinarbito
+ * Method is used to initialize an instance of Kiosk and run a session. This method allows the user to begin entering
+ * different commands and interact with the program.
+authors: @kevinarbitodelgado, @katherinesidebotham
  */
-//done
+
 public class RunProject1 {
     public static void main(String[] args) {
         new Kiosk().run();

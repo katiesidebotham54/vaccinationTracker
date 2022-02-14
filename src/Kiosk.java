@@ -1,8 +1,15 @@
 import java.util.Scanner;
 
 /**
- *
- * @author kevinarbito, katiesidebotham
+ *Kiosk contains everything that is required to make vaccination appointments in 5 specific locations. This is the main
+ * class that is called to handle calls from the console and executes commands based on the user input. Kiosk
+ * is a software that handles transactions for vaccination appointments. This utilizes standard input and reads
+ * commands and passes along information in order to make, cancel, and display appointments in regular or specific
+ * orders. Commands are case-sensitive and will print whether information is incorrect in a variety of ways.
+ * The kiosk will handle incorrect commands and tell the user that it is an invalid command. Kiosk checks for invalid
+ * information as well. Then kiosk will print errors that correspond with its failure.
+ * Q is entered to quit the kiosk at which point the session will end.
+ * @author @kevinarbitodelgado, @katherinesidebotham
  */
 public class Kiosk {
     public static final int MIN_INPUT_LENGTH = 1;
@@ -81,12 +88,12 @@ public class Kiosk {
 
     /**
      * This executes the command "B" in order to book an appointment.
-     * This method will always check whether the location, dates that were entered are valid and
-     * whether the schedule is not empty, in order to prevent errors.
-     * Inside the body of this method, it creates objects, dob, appointmentDate, appointmentTime, slot, location,
-     * and appt to be passed through the parameters of others to create objects and to execute the add-in schedule.
+     * This method will always check whether the location, dates that were entered are valid, and
+     * whether the schedule is not empty in order to prevent errors.
+     * Inside the body of this method, it creates the objects, dob, appointmentDate, appointmentTime, slot, location,
+     * and appt to be passed through the parameters of other methods to create objects and to execute the add-in schedule.
      * if schedule.add() is successful, it returns that it was added, if it is not, it will execute the error message
-     * in checkAddError().
+     * in isValidAdd().
      * @param schedule The schedule object that holds all appointments
      * @param tokens the command and appointment information are stored in tokens in order to create objects and to
      * execute other methods
@@ -115,10 +122,9 @@ public class Kiosk {
      * This is executed if the command was "CP" in order to cancel all appointments for a specific patient
      * (First name, Last name, DOB)
      * This method will create the dob, patient, and appt objects and pass the appt through the
-     * schedule.removeByPatient in order to remove all of the appointments that correspond to the specific patient
+     * schedule.removeByPatient in order to remove all appointments that correspond to the specific patient
      * that was put in through the console. When schedule.removeByPatient is called, it will immediately display
-     * whether all appointments were cancelled or whether the appoinment of a specific patient does not exist
-     * based on returning boolean value (true or false)
+     * the message stating all appointments of a specific patient were cancelled
      * @param schedule The schedule object that holds all appointments
      * @param tokens the command and appointment information are stored in tokens in order to create objects and to
      * execute other methods
@@ -165,10 +171,9 @@ public class Kiosk {
     }
 
     /**
-     * This method takes in the tokens, and schedule parameters in order to check whether there was only one command and
+     * This method takes in the tokens and schedule parameters to check whether there was only one command and
      * to check how many appointments are in the schedule by calling boolean schedule.checkNumAppts().
-     * this function will return true to wherever it may have been called from if the length of tokens is 1 and
-     * checkNumAppts() returns true.
+     * this function will return true if the length of tokens is 1 and noAppointments() returns true.
      * @param tokens The command and appointment information are stored in tokens in order to create objects and
      * to execute other methods
      * @param schedule The schedule object that holds all appointments
@@ -200,9 +205,9 @@ public class Kiosk {
     }
 
     /**
-     * This method takes in tokens in order to check whether the date that was put into the console is a valid date.
-     * handleValidDate will create objects dob, apptDate, apptTime, patient, slot, location, and appt.
-     * This will return immedialty if the date does not return true for the condtions that it is being tested for.
+     * This method takes in tokens to check whether the date entered is a valid date to be entered.
+     * isValidDate() will create objects dob, apptDate, apptTime, patient, slot, location, and appt.
+     * This will return immediately if the date does not return true for the conditions that it is being tested for.
      * @param tokens The command and appointment information are stored in tokens in order to create objects and to
      * execute other methods
      * @return boolean true or false: true if conditions tested return true, false otherwise.
@@ -239,8 +244,8 @@ public class Kiosk {
     }
 
     /**
-     * This method takes in tokens and schedule in order to check for errors that may occur while when adding an
-     * appointment. checkAddError creates objects dob, apptDate, apptTime, patient, slot, location, and appt in order
+     * This method takes in tokens and schedule to check for errors that may occur when adding an
+     * appointment. isValidAdd() creates objects dob, apptDate, apptTime, patient, slot, location, and appt in order
      * to pass these through other methods that returns an integer to specify what error occurred while adding.
      * This method will print the error depending on what integer was returned
      * and ultimately return false if an error was ran into, otherwise true.

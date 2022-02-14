@@ -1,3 +1,8 @@
+/**
+ *The Month class is used to access the corresponding number for each month. It is used in the Date class in order to
+ * confirm the user's entered month with the number corresponding to the calendar.
+ authors: @kevinarbitodelgado, @katherinesidebotham
+ */
 public class Month {
     public static final int JANUARY = 1;
     public static final int FEBRUARY = 2;

@@ -2,11 +2,11 @@ import java.util.Calendar;
 
 /**
  *The date class is responsible for creating date objects and holding constants that are necessary to test for
- * valid dates within each appointment & is the date of birth of each patient. Date class creates Date objects which
- * hold the year, month, and dat. it can also generate today’s date in order to compare to each date to see if it is
- * a date before today, today’s date, or a future date. Data is utilized to make sure kiosk generates the correct
- * output for each command and is used in many other classes.
- * @author kevinarbito, katiesidebotham
+ * valid dates within each appointment and the date of birth of each patient. Date class creates Date objects which
+ * hold the year, month, and day. It can also generate today’s date which may be compared to a specific date to check if
+ * a date is before today, today’s date, or a future date. Data is utilized to ensure that kiosk generates the correct
+ * output for each command.
+ * @author @kevinarbitodelgado, @katherinesidebotham
  */
 public class Date implements Comparable<Date> {
     private int year;
@@ -32,6 +32,12 @@ public class Date implements Comparable<Date> {
      * @param date date needed to create object
      */
     public Date(String date) {
+        if(!date.matches("\\d{1}/\\d{1}/\\d{4}")
+                || this.toString().matches("\\d{2}/\\d{2}/\\d{4}")
+                || this.toString().matches("\\d{1}/\\d{2}/\\d{4}")
+                || this.toString().matches("\\d{2}/\\d{1}/\\d{4}")){
+            return;
+        }
         String[] dateParts = date.split("/");
         this.month = Integer.parseInt(dateParts[0]);
         this.day = Integer.parseInt(dateParts[1]);
@@ -65,15 +71,24 @@ public class Date implements Comparable<Date> {
             }
             return false;
     }
-
+    /**
+     * Retrieves the year for patient from date
+     * @return returns the patient object to where it was called from.
+     */
     public int getYear(){
         return this.year;
     }
-
+    /**
+     * Retrieves the day for patient from date
+     * @return returns the patient object to where it was called from.
+     */
     public int getDay() {
         return this.day;
     }
-
+    /**
+     * Retrieves the month for patient from date
+     * @return returns the patient object to where it was called from.
+     */
     public int getMonth() {return this.month;}
 
 
@@ -121,7 +136,10 @@ public class Date implements Comparable<Date> {
      * @return Boolean: true if the months, days, and year is within the range, false otherwise.
      */
     public boolean isValidDate() {
-        if(this.toString().matches("\\d{1}/\\d{1}/\\d{4}") || this.toString().matches("\\d{2}/\\d{2}/\\d{4}") || this.toString().matches("\\d{1}/\\d{2}/\\d{4}") || this.toString().matches("\\d{2}/\\d{1}/\\d{4}") ) {
+        if(this.toString().matches("\\d{1}/\\d{1}/\\d{4}")
+                || this.toString().matches("\\d{2}/\\d{2}/\\d{4}")
+                || this.toString().matches("\\d{1}/\\d{2}/\\d{4}")
+                || this.toString().matches("\\d{2}/\\d{1}/\\d{4}") ) {
             if (this.year > MAX_YEAR || this.year < MIN_YEAR) {
                 return false;
             }
@@ -188,19 +206,30 @@ public class Date implements Comparable<Date> {
         Date dateTen =  new Date("01/02/2023");
         Date dateEleven = new Date("02/13/2022");
         Date dateTwelve =  new Date("04/22/2022");
-
-        System.out.println("Testcase 1: " + dateOne.toString() + " Ouput: " + dateOne.isValidDate()); //Test case 1, check valid format
-        System.out.println("Testcase 2: " + dateTwo.toString() + " Ouput: " + dateTwo.isValidDate()); //Test case 2, check greater than 31 days
-        System.out.println("Testcase 3: " + dateThree.toString() + " Ouput: " + dateThree.isValidDate()); //Test case 3, check less than 1 day
-        System.out.println("Testcase 4: " + dateFour.toString() + " Ouput: " + dateFour.isValidDate()); //Test case 4, check month greater than 12
-        System.out.println("Testcase 5: " + dateFive.toString() + " Ouput: " + dateFive.isValidDate()); //Test case 5, check month less than 1
-        System.out.println("Testcase 6: " + dateSix.toString() + " Ouput: " + dateSix.isValidDate()); //Test case 6, check year greater than current year
-        System.out.println("Testcase 7: " + dateSeven.toString() + " Ouput: " + dateSeven.isValidDate()); //Test case 7, check year less than 1800
-        System.out.println("Testcase 8: " + dateEight.toString() + " Ouput: " + dateEight.isValidDate()); //Test case 8, check appt date is today
-        System.out.println("Testcase 9: " + dateNine.toString() + " Ouput: " + dateNine.isValidDate()); //Test case 9, check appt date is day before today
-        System.out.println("Testcase 10: " + dateTen.toString() + " Ouput: " + dateTen.isValidDate()); //Test case 10, check appt date beyond this year
-        System.out.println("Testcase 11: " + dateEleven.toString() + " Ouput: " + dateEleven.isValidDate()); //Test case 11, check dob is today
-        System.out.println("Testcase 12: " + dateTwelve.toString() + " Ouput: " + dateTwelve.isValidDate()); //Test case 12, check dob is future date
+        //Test case 1, check valid format
+        System.out.println("Testcase 1: " + dateOne + " Output: " + dateOne.isValidDate());
+        //Test case 2, check greater than 31 days
+        System.out.println("Testcase 2: " + dateTwo + " Output: " + dateTwo.isValidDate());
+        //Test case 3, check less than 1 day
+        System.out.println("Testcase 3: " + dateThree + " Output: " + dateThree.isValidDate());
+        //Test case 4, check month greater than 12
+        System.out.println("Testcase 4: " + dateFour + " Output: " + dateFour.isValidDate());
+        //Test case 5, check month less than 1
+        System.out.println("Testcase 5: " + dateFive + " Output: " + dateFive.isValidDate());
+        //Test case 6, check year greater than current year
+        System.out.println("Testcase 6: " + dateSix + " Output: " + dateSix.isValidDate());
+        //Test case 7, check year less than 1800
+        System.out.println("Testcase 7: " + dateSeven + " Output: " + dateSeven.isValidDate());
+        //Test case 8, check appt date is today
+        System.out.println("Testcase 8: " + dateEight + " Output: " + dateEight.isValidDate());
+        //Test case 9, check appt date is day before today
+        System.out.println("Testcase 9: " + dateNine + " Output: " + dateNine.isValidDate());
+        //Test case 10, check appt date beyond this year
+        System.out.println("Testcase 10: " + dateTen + " Output: " + dateTen.isValidDate());
+        //Test case 11, check dob is today
+        System.out.println("Testcase 11: " + dateEleven + " Output: " + dateEleven.isValidDate());
+        //Test case 12, check dob is future date
+        System.out.println("Testcase 12: " + dateTwelve + " Output: " + dateTwelve.isValidDate());
 
     }
 }

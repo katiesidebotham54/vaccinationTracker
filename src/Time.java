@@ -1,20 +1,17 @@
 /**
- *The time class is used to make Time object. the constructyer  take in the hour and minute of the inputs and check
- * whether the time is in range and a possible time. the compareTo checks if the time is less than, greater than, or
- * equal to the time it is being compared to. Time also in clues a method that returns the time in string HH:MM format.
- * @author kevinarbito, katiesidebotham
+ *The time class is used to make Time object. The constructor takes in the hour and minute of the inputs and check
+ * whether the time is in range and an available time. The compareTo() checks if the time is less than, greater than, or
+ * equal to another time. Time also includes a method that returns the time in string HH:MM format.
+ * @author @kevinarbitodelgado, @katherinesidebotham
  */
 public class Time implements Comparable<Time> {
     private int hour;
     private int minute;
-    private static final int OPENING_HOUR = 9;
-    private static final int CLOSING_HOUR = 16;
-    private static final int OPENING_MINUTE = 45;
-    private static final int TIME_INTERVAL = 15;
+
 
     /**
-     * This constructor takes in time as a string and splits it up into integers. it formats it, so it is in HH:MM time.
-     * it creates the time object within this constructor.
+     * This constructor takes in time as a string and splits it up into integers. The output uses HH:MM format.
+     * Tt creates the time object within this constructor.
      * @param time The time that must be formatted correctly and used to make a Time object.
      */
     public Time(String time) {
@@ -26,19 +23,18 @@ public class Time implements Comparable<Time> {
         this.minute = check;
     }
     /**
-     * This method is called in order to check whether the time is valid.
-     * It makes sure that the hour is within the window provided.
-     * it checks that the minute is intervals of 15.
-     * @return Boolean: true if hour and minute are valid, false otherwise.
+     * Retrieves the hour for patient from time
+     * @return returns the patient object to where it was called from.
      */
-    public boolean isValidTime() {
-        if((hour >= OPENING_HOUR && hour <= CLOSING_HOUR)) {
-            if(minute > OPENING_MINUTE) {
-                return false;
-            } else return minute % TIME_INTERVAL == 0;
-        } else {
-            return false;
-        }
+    public int getHour(){
+        return hour;
+    }
+    /**
+     * Retrieves the minute for patient from time
+     * @return returns the patient object to where it was called from.
+     */
+    public int getMinute(){
+        return minute;
     }
 
     /**

@@ -1,10 +1,10 @@
 /**
- *the patient class is responsible for holding all the finrosmtuon regarding the patient. Patient contains a constructed
+ * The patient class is responsible for holding all information regarding the patient. Patient contains a constructor
  * for the object that holds the contents of the object -> first name, last name, and date of birth. It includes 3
- * getters for everything inside patient object. This class also checks if date of birth is valid, and checks whether
- * a patient is less than, greater than, or equal to another patient based off of alphabetical last, & first name as
- * numerically by date of birth. this class is used in many other classes in order to correctly build the schedule.
-authors: @katiesidebotham @kevinarbito
+ * getters for retrieving information from the patient object. This class also checks if date of birth is valid,
+ * and checks whether a patient is less than, greater than, or equal to another patient based off of alphabetical last,
+ * & first name as numerically by date of birth.
+authors: @kevinarbitodelgado, @katherinesidebotham
  */
 public class Patient implements Comparable<Patient> {
     private String fname;
@@ -25,17 +25,26 @@ public class Patient implements Comparable<Patient> {
         this.dob = dob;
     }
 
-    // Getter for date of birth
+    /**
+     * Retrieves the date of birth for patient from Patient
+     * @return returns the patient object to where it was called from.
+     */
     public Date getDob() {
         return this.dob;
     }
 
-    // Getter for first name
+    /**
+     * Retrieves the first name for patient from Patient
+     * @return returns the patient object to where it was called from.
+     */
     public String getFname(){
         return this.fname;
     }
 
-    //Getter for last name
+    /**
+     * Retrieves the last name for patient from Patient
+     * @return returns the patient object to where it was called from.
+     */
     public String getLname(){
         return this.lname;
     }
@@ -62,8 +71,9 @@ public class Patient implements Comparable<Patient> {
 
     /**
      * This method takes in the parameter patient and compares the patients name in order to see whether the name
-     * is the same, greater than, or less than in the alphabet. It compares whether the date of birth is the same,
-     * greater than, or less than and returns an integer value based on the condition that was met.
+     * is the same, greater than, or less than another patient alphabetically.
+     * It compares whether the date of birth is the same, greater than, or less than another patient and returns an
+     * integer value based on the condition that was met.
      * @param patient information of the patient that is to be compared.
      * @return integer value based on whether one of the conditions are met, (-1 = less, 0 = equals, 1 = greater)
      */

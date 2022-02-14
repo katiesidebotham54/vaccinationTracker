@@ -2,7 +2,7 @@
  * This enum class holds different information for the 5 valid locations which are the enum types.
  * Each on holds, their city, zip code, and county name. This was used in order to keep track and to validate
  * locations that were inputted through the console. This was also for easy access to the information of each location.
- * @author kevinarbito, katiesidebotham
+ * @author @kevinarbitodelgado, @katherinesidebotham
  */
 public enum Location {
     SOMERSET("Bridgewater", "08807", "SOMERSET"),
@@ -28,11 +28,22 @@ public enum Location {
         this.zipCode = zipCode;
         this.county = county;
     }
-
+    /**
+     * Retrieves the city for patient from Location
+     * @return returns the patient object to where it was called from.
+     */
     public String getCity() { return city; }
 
+    /**
+     * Retrieves the zipcode for patient from Location
+     * @return returns the patient object to where it was called from.
+     */
     public String getZipCode() { return zipCode; }
 
+    /**
+     * Retrieves the county for patient from Location
+     * @return returns the patient object to where it was called from.
+     */
     public String getCounty() { return county; }
 
 }

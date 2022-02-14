@@ -5,7 +5,7 @@
  * it reaches capacity, adding and deleting appointments based on patient, or literal appointment. It is also
  * responsible for sorting by zip code & time slot as well as by patient. all printing commands are executed within
  * this class as well.
- * @author kevinarbito, katiesidebotham
+ * @author @kevinarbitodelgado, @katherinesidebotham
  */
 public class Schedule {
 
@@ -19,8 +19,8 @@ public class Schedule {
 
     /**
      * This method is used to traverse the entire array of appointments until the specific appointment that is being
-     * looked for is found. when it is found, it will return the index of where it was or if it is not, it will
-     * return NOT_FOUND.
+     * searched for is found. When found, it will return the index of the located appointment; if it is not found, it
+     * will return NOT_FOUND.
      * @param appt the information for a specific appointment
      * @return index of where the appointment is found in the array if found, otherwise NOT_FOUND
      */
@@ -46,7 +46,7 @@ public class Schedule {
     }
 
     /**
-     * This method checks whether the number of appointments is 0, if it is 0, it will return true, otherwise
+     * This method checks whether the number of appointments is 0; if it is 0, it will return true, otherwise
      * it will return false.
      * @return Boolean: true if number of appointments is 0, false if not.
      */
@@ -55,7 +55,7 @@ public class Schedule {
     }
     /**
      * This method takes in appt as the parameter. It will traverse through the numbers of appointments until the
-     * information appointments array matches the information tha was provided in appt.
+     * information of entered appointment (appt) matches one in the appointments array.
      * @param appt the information for a specific appointment
      * @return Index of appointment if found, NOT_FOUND otherwise
      */
@@ -70,7 +70,7 @@ public class Schedule {
 
     /**
      * This method is called when the number of appointments equals the length of the appointment array. This will
-     * create a new appointments array but with a size of +4 in comparison to the original. it will copy over the data
+     * create a new appointments array with a size of +4 in comparison to the original. It will copy over the data
      * and make the new array the original array.
      */
     private void grow() {
@@ -84,13 +84,13 @@ public class Schedule {
 
     /**
      * This method is called when it is time to add a new appointment, and it has gone through all the checks to
-     * make sure that it can actually be added. It takes in appt in the parameter which has the appt that has to be
-     * added to the schedule. It will check whether it is null, if so, it'll allocate space and put the new appointment
+     * make sure that it can be added. It takes in appt in the parameter which is the appt that must be
+     * added to the schedule. It will check whether it is null; if so, it will allocate space and put the new appointment
      * inside the array. If the appointment length equals the number of appointments (numAppts) it will call grow() and
      * the size will increase by 4. if the appointment does not already exist in the schedule, it will check whether
-     * the slot and the location are the same, if so, it will make the addError 1 and return false. It will also
+     * the slot and the location are the same, if so, it will make the ADDERROR 1 and return false. It will also
      * check whether the patient has already scheduled an appointment for that day at a different location, if so, it
-     * will make addError 2 and return false. otherwise, it will add the appointment and increase the number of
+     * will make ADDERROR 2 and return false. otherwise, it will add the appointment and increase the number of
      * appointments (numAppts) by 1 and return true.
      * @param appt the information for a specific appointment to add
      * @return true if added successfully, false if there was an error and could not be added otherwise
@@ -170,7 +170,7 @@ public class Schedule {
     }
 
     /**
-     * when this method is called, it sorts the appointments by zip code and timeslot then calls print() in order
+     * When this method is called, it sorts the appointments by zip code and timeslot then calls print() in order
      * to print the schedule after it has been sorted.
      */
     public void printByZip() {
@@ -200,7 +200,7 @@ public class Schedule {
 
     /**
      * This method is called when it is time to print by patient order. It sorts the patients by last name, first name,
-     * and dob. This insertion sort, sorts the patients in place without creating an additional array. Once the sort is
+     * and dob. This insertion sort sorts the patients in place without creating an additional array. Once the sort is
      * complete, print() is called in order to print the schedule.
      */
     public void printByPatient() {
