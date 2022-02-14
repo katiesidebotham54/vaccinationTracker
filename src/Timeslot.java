@@ -6,6 +6,11 @@
 public class Timeslot implements Comparable<Timeslot> {
     private Date date;
     private Time time;
+    private static final int OPENING_HOUR = 9;
+    private static final int CLOSING_HOUR = 16;
+    private static final int OPENING_MINUTE = 45;
+    private static final int TIME_INTERVAL = 15;
+
 
     /**
      * Constructor for Timeslot takes in the objects date and time as parameters.
@@ -28,10 +33,25 @@ public class Timeslot implements Comparable<Timeslot> {
         return this.time;
     }
 
+
+    /**
+     * This method is called in order to check whether the time is valid.
+     * It makes sure that the hour is within the window provided.
+     * it checks that the minute is intervals of 15.
+     * @return Boolean: true if hour and minute are valid, false otherwise.
+     */
+    public boolean isValidTime() {
+        if((this.time.getHour() >= OPENING_HOUR && this.time.getHour() <= CLOSING_HOUR)) {
+            if(this.time.getMinute()> OPENING_MINUTE) {
+                return false;
+            } else return this.time.getMinute() % TIME_INTERVAL == 0;
+        } else return false;
+    }
     /**
      * This method overrides and returns time slot in string format MM/DD/YYYY HH:MM.
      * @return
      */
+
     @Override
     public String toString() { // check if correct format or not
         return this.date + " " + this.time;
@@ -54,5 +74,12 @@ public class Timeslot implements Comparable<Timeslot> {
             else if(this.getTime().compareTo(slot.getTime()) > 0) return 1;
         }
         return 0;
+    }
+    /**
+     * Testbed main
+     * Testing cases from Test Design doc; commented numbers correspond to specific test case
+     */
+    public static void main(String[] args){
+
     }
 }

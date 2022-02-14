@@ -1,7 +1,11 @@
 import java.util.Calendar;
 
 /**
- *
+ *The date class is responsible for creating date objects and holding constants that are necessary to test for
+ * valid dates within each appointment & is the date of birth of each patient. Date class creates Date objects which
+ * hold the year, month, and dat. it can also generate today’s date in order to compare to each date to see if it is
+ * a date before today, today’s date, or a future date. Data is utilized to make sure kiosk generates the correct
+ * output for each command and is used in many other classes.
  * @author kevinarbito, katiesidebotham
  */
 public class Date implements Comparable<Date> {
@@ -21,7 +25,6 @@ public class Date implements Comparable<Date> {
     public static final int MIN_MONTH = 1;
     public static final int MAX_DAYS = 31;
     public static final int MIN_DAYS = 1;
-
 
     /**
      * This constructor takes in string format of date and creates the Date object using integers.
@@ -44,6 +47,16 @@ public class Date implements Comparable<Date> {
         this.month = cal.get(Calendar.MONTH);
         this.day = cal.get(Calendar.DATE);
         this.year = cal.get(Calendar.YEAR);
+    }
+
+    /**
+     * isLeapYear() checks whether the year within the date is a leap year. It goes through checks by modding
+     * QUADRENNIAL, CENTENNIAL, and QUATERCENTENNIAL. It returns its boolean value true or false based on its
+     * results from each conditional.
+     * @return true if leap year, false otherwise.
+     */
+    public main(){
+
     }
 
     /**
@@ -167,5 +180,27 @@ public class Date implements Comparable<Date> {
             }
         }
         return 0;
+    }
+    /**
+     * Testbed main
+     * Testing cases from Test Design doc; commented numbers correspond to specific test case
+     */
+    public static void main(String[] args){
+        Date dateOne = new Date("04-20-2022");
+        Date dateTwo = new Date("12/40/2022");
+        Date dateThree = new Date("1/0/2022");
+        Date dateFour = new Date("13/9/2022");
+        Date dateFive =  new Date("0/2/2022");
+        Date dateSix = new Date("12/9/2044");
+        Date dateSeven = new Date("1/2/1778");
+        Date dateEight = new Date("02/13/2022");
+        Date dateNine = new Date("02/12/2022");
+        Date dateTen =  new Date("01/02/2023");
+        Date dateEleven = new Date("02/13/2022");
+        Date dateTwelve =  new Date("04/22/2022");
+
+        System.out.println("Testcase 1: " + dateOne.toString() + " Ouput: " + dateOne.isValidDate()); //Test case 1,
+
+
     }
 }

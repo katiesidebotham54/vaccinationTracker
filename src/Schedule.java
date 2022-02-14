@@ -1,5 +1,10 @@
 /**
- *
+ *The schedule class handles everything when a command is out through the console within the kiosk.
+ * It is responsible for holding an array of appointments. Within this class, the appointment can be searched for
+ * by matching patients, or the actual appointment. It is also responsible for resizing the appointment array when
+ * it reaches capacity, adding and deleting appointments based on patient, or literal appointment. It is also
+ * responsible for sorting by zip code & time slot as well as by patient. all printing commands are executed within
+ * this class as well.
  * @author kevinarbito, katiesidebotham
  */
 public class Schedule {
