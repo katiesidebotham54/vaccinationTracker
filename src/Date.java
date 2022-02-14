@@ -192,6 +192,7 @@ public class Date implements Comparable<Date> {
     /**
      * Testbed main
      * Testing cases from Test Design doc; commented numbers correspond to specific test case
+     * @param args to test commands from console
      */
     public static void main(String[] args){
         Date dateOne = new Date("04-20-2022");

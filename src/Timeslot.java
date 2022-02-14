@@ -86,6 +86,7 @@ public class Timeslot implements Comparable<Timeslot> {
     /**
      * Testbed main
      * Testing cases from Test Design doc; commented numbers correspond to specific test case
+     * @param args to test commands from console
      */
     public static void main(String[] args){
         Date testDate = new Date("01/23/2002");
